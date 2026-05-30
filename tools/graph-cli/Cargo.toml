@@ -1,25 +1,24 @@
 [package]
-name = "sqlrustgo-gate"
+name = "graph-cli"
 version = "0.1.0"
 edition = "2021"
 
 [[bin]]
-name = "graph-gate"
-path = "src/bin/graph-gate.rs"
+name = "gate"
+path = "src/main.rs"
 
 [[bin]]
-name = "graph-ingest"
-path = "src/bin/graph-ingest.rs"
+name = "ingest"
+path = "src/ingest.rs"
 
 [dependencies]
 evidence-graph = { path = "../../crates/evidence-graph" }
 clap = { version = "4.4", features = ["derive"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
-rusqlite = { version = "0.39", features = ["bundled"] }
 anyhow = "1.0"
-chrono = { version = "0.4", features = ["serde"] }
 dirs = "5.0"
+chrono = { version = "0.4", features = ["serde"] }
 
 [profile.release]
 opt-level = 3
