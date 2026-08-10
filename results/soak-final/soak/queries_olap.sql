@@ -1,0 +1,2 @@
+SELECT AVG(v) FROM t1
+SELECT MIN(v), MAX(v) FROM t1
