@@ -1,0 +1,3 @@
+UPDATE t1 SET v = 1 WHERE id = 1
+UPDATE t1 SET v = 2 WHERE id = 2
+UPDATE t1 SET v = 3 WHERE id = 3
