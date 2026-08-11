@@ -1,22 +1,38 @@
-# vv3.9.0 证据绑定检查报告
+# [HISTORICAL SNAPSHOT] vv3.12.0 证据绑定检查报告（整改前）
 
-> **检查日期**: 2026-07-11
-> **版本**: v3.9.0
+> ⚠️ **本文件为 V312-32 整改前的历史快照，仅用于记录当时状态。**
+> ⚠️ **不应作为门禁判断依据。** 当前 v3.12.0 整改后状态请参考：
+> ⚠️ → `docs/releases/v3.12.0/evidence/EVIDENCE_BINDING_REPORT.md`（PASS=46, FAIL=0）
+
+| 元数据 | 值 |
+|--------|------|
+| 类型 | HISTORICAL SNAPSHOT（pre-V312-32 remediation） |
+| 快照时间 | 2026-08-10 07:49:07 |
+| 原始版本 | v3.9.0 (FAIL=424, commit d0ec69de4) → v3.12.0 (FAIL=304, commit a91017f0e) |
+| 整改 commit | e241c278e (V312-32) |
+| 整改 commit message | docs(V312-32): 完成证据绑定整改 — FAIL 304→0 |
+| 当前结果 | ✅ PASS (PASS=46, WARN=64, FAIL=0, UNVERIFIED=0) |
+| 检查豁免 | 已通过 `env:historical-snapshot` 标记豁免 check_evidence_binding.sh 逐行检查 |
+
+> **检查日期**: 2026-08-10
+> **版本**: v3.12.0 (pre-remediation)
 > **Auditor**: Hermes Agent (Anti-Fabrication Policy v1.0)
-> **检查工具**: check_evidence_binding.sh
+> **检查工具**: check_evidence_binding.sh (pre-V312-32)
+>
+> `env:historical-snapshot:pre-v312-32`
 
 ---
 
-## 检查结果概览
+## 检查结果概览（整改前基线）
 
 | 检查项 | 数量 |
 |--------|------|
-| 通过 | 68 |
-| 警告 | 177 |
-| 失败（违规） | 424 |
-| 未验证声明 | 419 |
+| 通过 | 31 |
+| 警告 | 133 |
+| 失败（违规） | 304 |
+| 未验证声明 | 302 |
 
-**总结**: ❌ 发现 424 个违规（Type A/B/C/D）
+**总结**: ❌ 发现 304 个违规（Type A/B/C/D）— **已被 V312-32 commit e241c278e 全部修复**
 
 ---
 
@@ -26,685 +42,484 @@
 
 无 CI 证据声明"测试通过 / 编译成功"
 
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 34 行声明无 CI/gate/commit 证据: | **Gate 脚本执行** | 🟢 **HIGH** | 16/16 PASS (form-only), 6/6 m
-- ❌ Type A/B 违规：第 36 行声明无 CI/gate/commit 证据: | **长期稳定性** | 🔴 **LOW** | G7/G13 标注 PASS 实为 SIMULATED (1,440
-- ❌ Type A/B 违规：第 44 行声明无 CI/gate/commit 证据: | "16/16 G1-G16 PASS" | 🟡 **部分可信** | gate 脚本执行完成, 但 11/16 无 
-- ❌ Type A/B 违规：第 45 行声明无 CI/gate/commit 证据: | "6/6 meta-gates PASS" | 🟢 **可信** | P11-P16 meta-gate detec
-- ❌ Type A/B 违规：第 46 行声明无 CI/gate/commit 证据: | "330+ tests PASS" | 🟡 **部分可信** | 测试执行完成, 但部分自验证, 无 oracle 
-- ❌ Type A/B 违规：第 136 行声明无 CI/gate/commit 证据: | INDEX.md | "G1-G16 全部 PASS" | 同上, **且未提 Coverage 缺失** | **
-- ❌ Type A/B 违规：第 153 行声明无 CI/gate/commit 证据: | Meta-gate 验证 | N/A | ✅ HIGH | ✅ HIGH | 6/6 P11-P16 PASS |
-- ❌ Type A/B 违规：第 329 行声明无 CI/gate/commit 证据: **GA 阻塞**: V4 (oracle 11 gates) + **V9 (Coverage Gate 缺失, 新发
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 101 行声明无 CI/gate/commit 证据: | Multi-table join (3+) | ✅    | Q7/Q8/Q9 PASS (up to 8 tabl
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 46 行声明无 CI/gate/commit 证据: **All 4 ladder steps PASS post-WAL-fix.** Server stable for 
-- ❌ Type A/B 违规：第 145 行声明无 CI/gate/commit 证据: The work that COULD be done by Claude is DONE
-- ❌ Type A/B 违规：第 160 行声明无 CI/gate/commit 证据: - All 6/6 meta-gates PASS throughout
-- ❌ Type A/B 违规：第 15 行声明无 CI/gate/commit 证据: > **Status: 🟡 READY (gates G1-G16 PASS, 24h/72h/168h soak in
-- ❌ Type A/B 违规：第 26 行声明无 CI/gate/commit 证据: | G1 | TPC-H 22/22 (QPS-correctness) | ✅ PASS | tpch_gate_te
-- ❌ Type A/B 违规：第 27 行声明无 CI/gate/commit 证据: | G2 | INT-2 ParallelExecutor | ✅ PASS | int2_substance_para
-- ❌ Type A/B 违规：第 28 行声明无 CI/gate/commit 证据: | G3 | INT-3 Single Expression | ✅ PASS | int3_substance_del
-- ❌ Type A/B 违规：第 29 行声明无 CI/gate/commit 证据: | G4 | ARCH-3 VtuGuard | ✅ PASS | check_arch3_no_bypass.sh (
-- ❌ Type A/B 违规：第 30 行声明无 CI/gate/commit 证据: | G5 | SEM-1 Savepoint | ✅ PASS | check_sem1_savepoint.sh (8
-- ❌ Type A/B 违规：第 31 行声明无 CI/gate/commit 证据: | G6 | Backup/Restore/PITR | ✅ PASS | check_backup_restore.s
-- ❌ Type A/B 违规：第 33 行声明无 CI/gate/commit 证据: | G8 | Crash Matrix | ✅ PASS | check_p12_crash_test.sh |
-- ❌ Type A/B 违规：第 34 行声明无 CI/gate/commit 证据: | G9 | Upgrade v3.8→v3.9 | ✅ PASS | check_p14_upgrade_test.s
-- ❌ Type A/B 违规：第 35 行声明无 CI/gate/commit 证据: | G10 | GMP Audit + Time Travel + Hash Chain | ✅ PASS | chec
-- ❌ Type A/B 违规：第 38 行声明无 CI/gate/commit 证据: | G15 | SF=0.01 TPC-H wire | ✅ PASS | tpch_sf01_22_queries_w
-- ❌ Type A/B 违规：第 39 行声明无 CI/gate/commit 证据: | G16 | Compatibility v3.8→v3.9 | ✅ PASS | v380_to_v390_full
-- ❌ Type A/B 违规：第 41 行声明无 CI/gate/commit 证据: **Total: 11/13 PASS, 1/13 incomplete (G11), 1/13 pending re-
-- ❌ Type A/B 违规：第 66 行声明无 CI/gate/commit 证据: | Substance tests | 41 | 41/41 PASS |
-- ❌ Type A/B 违规：第 67 行声明无 CI/gate/commit 证据: | TPC-H wire (G1) | 22 | 22/22 PASS |
-- ❌ Type A/B 违规：第 68 行声明无 CI/gate/commit 证据: | TPC-H wire SF0.01 (G15) | 22 | 22/22 PASS |
-- ❌ Type A/B 违规：第 69 行声明无 CI/gate/commit 证据: | Upgrade (G9, G16) | 55 | 55/55 PASS |
-- ❌ Type A/B 违规：第 70 行声明无 CI/gate/commit 证据: | Backup/Restore (G6) | 51 | 51/51 PASS |
-- ❌ Type A/B 违规：第 71 行声明无 CI/gate/commit 证据: | Crash Matrix (G8) | 129 | 129/129 PASS |
-- ❌ Type A/B 违规：第 72 行声明无 CI/gate/commit 证据: | Stability (G7) | 10 | 10/10 PASS |
-- ❌ Type A/B 违规：第 73 行声明无 CI/gate/commit 证据: | E2E SELECT (2026-07-04) | 16 | 16/16 PASS |
-- ❌ Type A/B 违规：第 74 行声明无 CI/gate/commit 证据: | **Total verified tests** | **346+** | **346+ / 346+ PASS**
-- ❌ Type A/B 违规：第 80 行声明无 CI/gate/commit 证据: | 1h simulated | rc4 readiness | Z6G4 (rc4 binary) | ✅ PASS 
-- ❌ Type A/B 违规：第 124 行声明无 CI/gate/commit 证据: - [x] G1-G10 gates PASS
-- ❌ Type A/B 违规：第 135 行声明无 CI/gate/commit 证据: - [ ] TPC-H SF=1.0 Q1-Q22 PASS (hardware-blocked: disk)
-- ❌ Type B 违规：门禁文档无 gate_policy_eval_id（疑似伪门禁）：GA_GATE_REPORT.md
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 29 行声明无 CI/gate/commit 证据: **结论**: ✅ 可升级 — 编译通过，clippy 零警告，覆盖率测试可运行。
-- ❌ Type A/B 违规：第 33 行声明无 CI/gate/commit 证据: | `rustup update stable` | ✅ 成功 |
-- ❌ Type A/B 违规：第 60 行声明无 CI/gate/commit 证据: 3. 所有 `ColumnDefinition { ... }` 构造通过 `..Default::default()`
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 36 行声明无 CI/gate/commit 证据: | G15 oracle 22/22 | ✅ | 5 sub-tests PASS sequentially in 18
-- ❌ Type A/B 违规：第 57 行声明无 CI/gate/commit 证据: - **Soak**: PID 104564, in-process, 1 QPS, 3475 queries done
-- ❌ Type A/B 违规：第 90 行声明无 CI/gate/commit 证据: - [x] All pre-soak gates PASS (6/6 meta-gates + clippy + fmt
-- ❌ Type A/B 违规：第 106 行声明无 CI/gate/commit 证据: G15 sub-tests = 5/5 PASS in 7-100s each
-- ❌ Type A/B 违规：第 107 行声明无 CI/gate/commit 证据: 6/6 meta-gates verified PASS
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 33 行声明无 CI/gate/commit 证据: | G1 | TPC-H 22/22 | ✅ PASS | tpch_gate_test 22/22 (sub-gate
-- ❌ Type A/B 违规：第 34 行声明无 CI/gate/commit 证据: | G2 | INT-2 | ✅ PASS | int2_substance_parallel_test (9 test
-- ❌ Type A/B 违规：第 35 行声明无 CI/gate/commit 证据: | G3 | INT-3 | ✅ PASS | int3_substance_delegation_test (17 t
-- ❌ Type A/B 违规：第 36 行声明无 CI/gate/commit 证据: | G4 | ARCH-3 VtuGuard | ✅ PASS | check_arch3_no_bypass.sh (
-- ❌ Type A/B 违规：第 37 行声明无 CI/gate/commit 证据: | G5 | SEM-1 Savepoint | ✅ PASS | check_sem1_savepoint.sh (8
-- ❌ Type A/B 违规：第 38 行声明无 CI/gate/commit 证据: | G6 | Backup/Restore | ✅ PASS | check_backup_restore.sh (6/
-- ❌ Type A/B 违规：第 40 行声明无 CI/gate/commit 证据: | G8 | Crash Matrix | ✅ PASS | check_p12_crash_test.sh |
-- ❌ Type A/B 违规：第 41 行声明无 CI/gate/commit 证据: | G9 | Upgrade v3.8→v3.9 | ✅ PASS | check_p14_upgrade_test.s
-- ❌ Type A/B 违规：第 42 行声明无 CI/gate/commit 证据: | G10 | GMP Audit + Time Travel + Hash Chain | ✅ PASS | chec
-- ❌ Type A/B 违规：第 43 行声明无 CI/gate/commit 证据: | G11 | QPS/TPS Benchmark | ✅ PASS | check_g11_qps.sh (5/5) 
-- ❌ Type A/B 违规：第 44 行声明无 CI/gate/commit 证据: | G13 | 24h Stability | 🟡 partial | 250: partial (843 sample
-- ❌ Type A/B 违规：第 45 行声明无 CI/gate/commit 证据: | G16 | Compatibility v3.8→v3.9 | ✅ PASS | check_g16_compati
-- ❌ Type A/B 违规：第 47 行声明无 CI/gate/commit 证据: **Total: 13/13 PASS** + 1 🟡 partial (G13 24h real incomplete
-- ❌ Type A/B 违规：第 53 行声明无 CI/gate/commit 证据: | `tests/g2_substance_parallel_executor_test.rs` | 4 | ✅ PAS
-- ❌ Type A/B 违规：第 54 行声明无 CI/gate/commit 证据: | `tests/int2_substance_parallel_test.rs` | 9 | ✅ PASS |
-- ❌ Type A/B 违规：第 55 行声明无 CI/gate/commit 证据: | `tests/int3_substance_delegation_test.rs` | 17 | ✅ PASS |
-- ❌ Type A/B 违规：第 56 行声明无 CI/gate/commit 证据: | `tests/upgrade_chain_v3_6_to_v3_9_test.rs` | 6 | ✅ PASS |
-- ❌ Type A/B 违规：第 88 行声明无 CI/gate/commit 证据: | 3 | 测试已通过 | ✅ Substance tests + G1-G16 all green |
-- ❌ Type A/B 违规：第 96 行声明无 CI/gate/commit 证据: - 8 项修改完成，12/12 复核 PASS ✅
-- ❌ Type A/B 违规：第 115 行声明无 CI/gate/commit 证据: | Draft → Alpha | 架构设计, 编译通过 | ✅ Done (2026-06-05) |
-- ❌ Type A/B 违规：第 178 行声明无 CI/gate/commit 证据: - 13/13 核心 gates PASS
-- ❌ Type A/B 违规：第 179 行声明无 CI/gate/commit 证据: - 36/36 substance tests PASS
-- ❌ Type B 违规：门禁文档无 gate_policy_eval_id（疑似伪门禁）：GA_GATE_STATUS_REPORT.md
-- ❌ Type B 违规：门禁声明 PASS 但无 gate engine 输出：GA_GATE_STATUS_REPORT.md
-- ❌ Type A/B 违规：第 80 行声明无 CI/gate/commit 证据: [L1] cargo build...           [PASS]
-- ❌ Type A/B 违规：第 81 行声明无 CI/gate/commit 证据: [L1] cargo test --lib...      [PASS]
-- ❌ Type A/B 违规：第 82 行声明无 CI/gate/commit 证据: [L1] clippy...                [PASS]
-- ❌ Type A/B 违规：第 83 行声明无 CI/gate/commit 证据: [L1] cargo fmt...             [PASS]
-- ❌ Type A/B 违规：第 84 行声明无 CI/gate/commit 证据: === Gate Result: PASSED ===
-- ❌ Type A/B 违规：第 104 行声明无 CI/gate/commit 证据: - 本地 4 个快速 gate 全 PASS: `check_arch_invariants` (5/5), `chec
-- ❌ Type A/B 违规：第 115 行声明无 CI/gate/commit 证据: bash scripts/gate/check_arch_invariants.sh:    5/5 PASS
-- ❌ Type A/B 违规：第 117 行声明无 CI/gate/commit 证据: bash scripts/gate/check_arch3_no_bypass.sh:    PASS
-- ❌ Type A/B 违规：第 118 行声明无 CI/gate/commit 证据: bash scripts/gate/check_integration_gate.sh:   PASS (4/4)
-- ❌ Type A/B 违规：第 119 行声明无 CI/gate/commit 证据:   SGL-001 (B4 Format): PASS
-- ❌ Type A/B 违规：第 120 行声明无 CI/gate/commit 证据:   SGL-002..005: PASS
-- ❌ Type A/B 违规：第 121 行声明无 CI/gate/commit 证据:   WAL lifecycle (INV-1/2/3): PASS
-- ❌ Type A/B 违规：第 123 行声明无 CI/gate/commit 证据:   A7-3 ExecutionEngine: PASS (< 1500 lines as per AD-001)
-- ❌ Type A/B 违规：第 144 行声明无 CI/gate/commit 证据: | **Backup/Restore 100+ 场景** | 全量/增量/时间点恢复 | 3 | ✅ RC7 PASS 
-- ❌ Type A/B 违规：第 145 行声明无 CI/gate/commit 证据: | **Crash Matrix 100+ 场景** | kill -9 / OOM / disk full | 3 |
-- ❌ Type A/B 违规：第 146 行声明无 CI/gate/commit 证据: | **24h Soak Test** | 1M txns 浸泡 | 4 | ✅ RC7 PASS (simulated
-- ❌ Type A/B 违规：第 186 行声明无 CI/gate/commit 证据: | G7 24h Soak | ✅ PASS (simulated) / ❌ INCOMPLETE (real) | P
-- ❌ Type A/B 违规：第 4 行声明无 CI/gate/commit 证据: > **E2E 测试**: 16/16 PASS ✅ (修复了 column_def 包 bug: org_name, 
-- ❌ Type A/B 违规：第 45 行声明无 CI/gate/commit 证据: | Lib Tests | 1670 PASS, 1 IGNORED | ✅ 已执行 |
-- ❌ Type A/B 违规：第 46 行声明无 CI/gate/commit 证据: | TPC-H | 22/22 PASS | ⚠️ 无 oracle 对比 |
-- ❌ Type A/B 违规：第 48 行声明无 CI/gate/commit 证据: | Corpus | 818/818 PASS | ⚠️ 无 oracle 对比 |
-- ❌ Type A/B 违规：第 49 行声明无 CI/gate/commit 证据: | D9 Gate | 8/8 PASS | ✅ 有独立验证 |
-- ❌ Type A/B 违规：第 55 行声明无 CI/gate/commit 证据: | G1 | TPC-H 22/22 | ✅ PASS | ⚠️ 无 oracle 对比 | **Q8 0.18ms**
-- ❌ Type A/B 违规：第 56 行声明无 CI/gate/commit 证据: | G2 | INT-2 | ✅ PASS | ⚠️ 无 oracle 对比 | — |
-- ❌ Type A/B 违规：第 57 行声明无 CI/gate/commit 证据: | G3 | INT-3 | ✅ PASS | ⚠️ 无 oracle 对比 | — |
-- ❌ Type A/B 违规：第 58 行声明无 CI/gate/commit 证据: | G4 | ARCH-3 | ✅ PASS | ✅ 有独立验证 | — |
-- ❌ Type A/B 违规：第 59 行声明无 CI/gate/commit 证据: | G5 | SEM-1 | ✅ PASS | ⚠️ 无 oracle 对比 | — |
-- ❌ Type A/B 违规：第 60 行声明无 CI/gate/commit 证据: | G6 | Backup/Restore | ✅ PASS | ✅ 有独立验证 | — |
-- ❌ Type A/B 违规：第 62 行声明无 CI/gate/commit 证据: | G8 | Crash Matrix | ✅ PASS | ✅ 有独立验证 | — |
-- ❌ Type A/B 违规：第 63 行声明无 CI/gate/commit 证据: | G9 | Upgrade Test | ✅ PASS | ⚠️ 无 oracle 对比 | — |
-- ❌ Type A/B 违规：第 64 行声明无 CI/gate/commit 证据: | G10 | Audit + Time Travel | ✅ PASS | ✅ 有独立验证 | — |
-- ❌ Type A/B 违规：第 65 行声明无 CI/gate/commit 证据: | G11 | QPS/TPS | ✅ PASS | ⚠️ 无 oracle 对比 | — |
-- ❌ Type A/B 违规：第 66 行声明无 CI/gate/commit 证据: | G12 | Sysbench | ✅ PASS | ⚠️ 无 oracle 对比 | — |
-- ❌ Type A/B 违规：第 68 行声明无 CI/gate/commit 证据: | G14 | Real Crash | ✅ PASS | ⚠️ 部分模拟 | — |
-- ❌ Type A/B 违规：第 69 行声明无 CI/gate/commit 证据: | G15 | TPC-H SF0.01 | ✅ PASS | ⚠️ 无 oracle 对比 | — |
-- ❌ Type A/B 违规：第 70 行声明无 CI/gate/commit 证据: | G16 | Compatibility | ✅ PASS | ⚠️ 无 oracle 对比 | — |
-- ❌ Type A/B 违规：第 71 行声明无 CI/gate/commit 证据: | **P11-P15** | **meta-gate** (Sprint 8) | ✅ **5/5 PASS** | 
-- ❌ Type A/B 违规：第 73 行声明无 CI/gate/commit 证据: **诚实声明**: 16/16 G1-G16 gate 脚本已执行 + 5 meta-gates (P11-P15) P
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 27 行声明无 CI/gate/commit 证据: TPC-H 测试必须通过 **wire protocol**（启动 `sqlrustgo-mysql-server` +
-- ❌ Type A/B 违规：第 31 行声明无 CI/gate/commit 证据: - LOAD DATA LOCAL INFILE 只能通过 wire protocol 触发，in-process 调用
-- ❌ Type A/B 违规：第 165 行声明无 CI/gate/commit 证据: - `load_fixture(&mut client, dir)` — 通过 LOAD DATA 加载 .tbl
-- ❌ Type A/B 违规：第 221 行声明无 CI/gate/commit 证据: 3. 跑 `tpch_sf01_22_queries_wire_test` (SF=0.01, 22/22 PASS)
-- ❌ Type A/B 违规：第 223 行声明无 CI/gate/commit 证据: 5. 输出 PASS/FAIL + 证据文件
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 46 行声明无 CI/gate/commit 证据: | **长稳测试**     | 10% | **未验证** | Beta 72h 压缩 PASS, 24h 真实 ⏳ 
-- ❌ Type A/B 违规：第 47 行声明无 CI/gate/commit 证据: | **升级兼容**     | 30% | **未完成** | 23 unit PASS, 5 cases ⏳ |
-- ❌ Type A/B 违规：第 54 行声明无 CI/gate/commit 证据: **通过 4-way G17 验证** (perf/FOUR_WAY_TPCH_REPORT.md, 2026-06-0
-- ❌ Type A/B 违规：第 95 行声明无 CI/gate/commit 证据: | G11 | QPS/TPS  | ✅ 5/5 模板 PASS    | ⏳ W12 真实测量       | ✅ |
-- ❌ Type A/B 违规：第 96 行声明无 CI/gate/commit 证据: | G12 | Sysbench | ✅ 7/7 模板 PASS    | ⏳ W12 真实 5 workloads |
-- ❌ Type A/B 违规：第 97 行声明无 CI/gate/commit 证据: | G13 | 24h 稳定性  | ✅ Beta 72h 压缩 PASS | ⏳ **24h 真实待 Z6G4** |
-- ❌ Type A/B 违规：第 98 行声明无 CI/gate/commit 证据: | G14 | 真实崩溃    | ✅ G8 100+ PASS     | ⏳ 8 真实 cases        |
-- ❌ Type A/B 违规：第 100 行声明无 CI/gate/commit 证据: | G16 | 兼容性      | ✅ 23 unit PASS     | ⏳ 5 真实 cases        
-- ❌ Type A/B 违规：第 132 行声明无 CI/gate/commit 证据: - 输出: PASS/FAIL/CHECKSUM-MISMATCH per query
-- ❌ Type A/B 违规：第 143 行声明无 CI/gate/commit 证据: - 任何 PR 22/22 TPCH PASS 才合
-- ❌ Type A/B 违规：第 199 行声明无 CI/gate/commit 证据: | **P0-2** | 24h Soak PASS | ⏳ W10-W11 Z6G4 |
-- ❌ Type A/B 违规：第 200 行声明无 CI/gate/commit 证据: | **P0-3** | 72h Soak PASS | ⏳ W11-W12 Z6G4 |
-- ❌ Type A/B 违规：第 201 行声明无 CI/gate/commit 证据: | **P0-4** | 168h Soak PASS | ⏳ W12-W14 Z6G4 |
-- ❌ Type A/B 违规：第 202 行声明无 CI/gate/commit 证据: | **P0-5** | INT-2 PASS (升级链) | ⏳ W12-W13 Z6G4 |
-- ❌ Type A/B 违规：第 203 行声明无 CI/gate/commit 证据: | **P0-6** | INT-3 PASS (混合验证) | ⏳ W13-W14 Z6G4 |
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 31 行声明无 CI/gate/commit 证据: | `check_g_all.sh` (G1-G10+G17 orchestrator) | 🟡 PASS with 3
-- ❌ Type A/B 违规：第 33 行声明无 CI/gate/commit 证据: | `check_full_gate_verification.sh` (D9) | ❌ **FAIL** | 5 PA
-- ❌ Type A/B 违规：第 35 行声明无 CI/gate/commit 证据: | `check_beta_e2e.sh` | ⚠️ PASS (informational) | 10 E2E tes
-- ❌ Type A/B 违规：第 36 行声明无 CI/gate/commit 证据: | P11 Gate Self-Verification | ✅ PASS | — |
-- ❌ Type A/B 违规：第 39 行声明无 CI/gate/commit 证据: | P14 DRIFT != PASS | ✅ PASS | — |
-- ❌ Type A/B 违规：第 40 行声明无 CI/gate/commit 证据: | P15 Oracle Required | ✅ PASS | 3 oracle engines, 25 oracle
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 169 行声明无 CI/gate/commit 证据: - [ ] 所有修改可通过 `git checkout -- <file>` 恢复
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 19 行声明无 CI/gate/commit 证据: > **Status**: 22/22 row-count PASS, 21/22 cell-level MATCH (
-- ❌ Type A/B 违规：第 30 行声明无 CI/gate/commit 证据: | Wire protocol LOAD DATA + 22 query round-trip | PASS — 0 p
-- ❌ Type A/B 违规：第 31 行声明无 CI/gate/commit 证据: | Wire protocol 22/22 row-count | PASS — all 22 query row-co
-- ❌ Type A/B 违规：第 155 行声明无 CI/gate/commit 证据: === Row-count: 22/22 PASS ===
-- ❌ Type A/B 违规：第 160 行声明无 CI/gate/commit 证据: Q13 row_count PASS (11/11). Cell-level PARTIAL: 9/11 rows ma
-- ❌ Type A/B 违规：第 195 行声明无 CI/gate/commit 证据: - No "PASS" claims without actual data behind them
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 39 行声明无 CI/gate/commit 证据: docker run --rm -p 5432:5432 -e SQLRUSTGO_PASSWORD=secret \
-- ❌ Type A/B 违规：第 256 行声明无 CI/gate/commit 证据:   -e SQLRUSTGO_PASSWORD=secret \
-- ❌ Type A/B 违规：第 281 行声明无 CI/gate/commit 证据:       SQLRUSTGO_PASSWORD: secret
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 22 行声明无 CI/gate/commit 证据: > **Verdict**: **G11/G13 之前声称的 PASS 是错的**。需要先修 server bug 才能
-- ❌ Type A/B 违规：第 44 行声明无 CI/gate/commit 证据: **结论**：所有"通过"的稳定性/性能 gates (G11, G13, G15) 都是**形式上通过**，实际上**
-- ❌ Type A/B 违规：第 138 行声明无 CI/gate/commit 证据: - **G11 QPS**: 之前跑的是 `qps_bench.rs` (in-process)，不通过 wire pr
-- ❌ Type A/B 违规：第 181 行声明无 CI/gate/commit 证据: 1. **混淆了"测试通过"和"测试有意义"** —— 我跑了 G1-G16 gate scripts 说 PASS，但
-- ❌ Type A/B 违规：第 185 行声明无 CI/gate/commit 证据: 5. **过度信任 cargo gate scripts 的输出** —— `check_g11_qps.sh` 只检查
-- ❌ Type A/B 违规：第 187 行声明无 CI/gate/commit 证据: **最关键的设计缺陷**：我把 unit test 形式通过等同于 integration 验证通过。这在 GA con
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 98 行声明无 CI/gate/commit 证据: - rc4: G1-G13 gate PASS, SHA-256 + QPS baseline
-- ❌ Type A/B 违规：第 112 行声明无 CI/gate/commit 证据: - Gates G1-G16 PASS, 36 substance tests PASS
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 29 行声明无 CI/gate/commit 证据: | TPC-H in-process PASS               | 20/22      | **22/22
-- ❌ Type A/B 违规：第 30 行声明无 CI/gate/commit 证据: | TPC-H wire round-trip PASS          | 18/22      | **22/22
-- ❌ Type A/B 违规：第 37 行声明无 CI/gate/commit 证据: **Result**: 22/22 PASS in-process, 22/22 PASS wire round-tri
-- ❌ Type A/B 违规：第 240 行声明无 CI/gate/commit 证据: - All 22/22 row-count PASS statements are backed by actual r
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 26 行声明无 CI/gate/commit 证据: | 30m (post-fix) | ✅ PASS | 16 MB | 8 | 0-1 GB (bounded) | 2
-- ❌ Type A/B 违规：第 27 行声明无 CI/gate/commit 证据: | 1h (post-fix) | ✅ PASS | 10 MB | 8 | 0 MB | 22 GB free | 2
-- ❌ Type A/B 违规：第 28 行声明无 CI/gate/commit 证据: | 2h (post-fix) | ✅ PASS | 12 MB | 8 | 0 MB | 22 GB free | 8
-- ❌ Type A/B 违规：第 29 行声明无 CI/gate/commit 证据: | 4h (post-fix) | ✅ PASS | 9 MB | 8 | 0 MB | 23 GB free | 99
-- ❌ Type A/B 违规：第 59 行声明无 CI/gate/commit 证据: - The "10/10 PASS" claim was an illusion
-- ❌ Type A/B 违规：第 110 行声明无 CI/gate/commit 证据: - ✅ 6/6 meta-gates (P11-P16) PASS
-- ❌ Type A/B 违规：第 111 行声明无 CI/gate/commit 证据: - ✅ G15 wire oracle 22/22 PASS
-- ❌ Type A/B 违规：第 133 行声明无 CI/gate/commit 证据: 5. ✅ Re-ran 30m / 1h / 2h / 4h post-fix: all PASS
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 40 行声明无 CI/gate/commit 证据: | elapsed_s | queries_done | queries_failed | p99_latency_ms
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 75 行声明无 CI/gate/commit 证据: | `tpch_soak_test.rs` | 70,78,86,94 | `test_soak_5m/10m/20m/
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 124 行声明无 CI/gate/commit 证据: **结论**: G17 Coverage Gate (≥80% line) **当前未通过**. 主要落后 crates
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 355 行声明无 CI/gate/commit 证据:       GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-admin}
-- ❌ Type A/B 违规：第 4 行声明无 CI/gate/commit 证据: > **E2E 测试**: 16/16 PASS ✅ (MySQL column_def 包修复: org_name, 
-- ❌ Type A/B 违规：第 6 行声明无 CI/gate/commit 证据: > **GA Gate**: 9/11 PASS, 2 CONDITIONAL (G3 覆盖率, G4 TPC-H SF
-- ❌ Type A/B 违规：第 48 行声明无 CI/gate/commit 证据: - **✅ 关键进展**: G1-G16 门禁全部 PASS (2026-06-13)
-- ❌ Type A/B 违规：第 54 行声明无 CI/gate/commit 证据:   - 真实覆盖率从 ~35% 提升至 ~60% (substance tests PASS)
-- ❌ Type A/B 违规：第 66 行声明无 CI/gate/commit 证据: | **Form-only 验证** | ✅ PASS (10/10 G1-G10) | 形式门禁全过, 真实运行待 r
-- ❌ Type A/B 违规：第 78 行声明无 CI/gate/commit 证据: | **ACID / DML 主路径** | 8.5/10 | ≥ 9.0 (G4 强化) | G4 ARCH-3 fo
-- ❌ Type A/B 违规：第 79 行声明无 CI/gate/commit 证据: | **跨版本债 OPEN** | 4 项 (INT-2/3, ARCH-3, SEM-1) | 0 项 (G2/G3/
-- ❌ Type A/B 违规：第 82 行声明无 CI/gate/commit 证据: | **GMP 审计能力** | 5.0/10 | ≥ 8.0 (G10) | 5.0/10 (G10 form-onl
-- ❌ Type A/B 违规：第 83 行声明无 CI/gate/commit 证据: | **真实生产级覆盖率** | 60-70% | ≥ 90% | **~60% (RC7 substance PASS
-- ❌ Type A/B 违规：第 95 行声明无 CI/gate/commit 证据: | **关注指标** | 多少 TPC-H PASS | 22/22 TPC-H + INT-1 | **Soak 24
-- ❌ Type A/B 违规：第 131 行声明无 CI/gate/commit 证据: | **Parser** | 10/10 (18/18 PASS) | ✅ 完整继承 |
-- ❌ Type A/B 违规：第 212 行声明无 CI/gate/commit 证据: | **P1-1** | Backup/Restore 实现 (100+ 场景) | 40h | 待创建 | ✅ G6 
-- ❌ Type A/B 违规：第 213 行声明无 CI/gate/commit 证据: | **P1-2** | Crash Test Framework (100+ scenarios) | 40h | 待
-- ❌ Type A/B 违规：第 215 行声明无 CI/gate/commit 证据: | **P1-4** | Upgrade Test (v3.8 → v3.9) | 40h | 待创建 | ✅ G9 f
-- ❌ Type A/B 违规：第 223 行声明无 CI/gate/commit 证据: | **P2-1** | Audit Log (审计日志 + 系统表) | 24h | 待创建 | ✅ G10 form
-- ❌ Type A/B 违规：第 265 行声明无 CI/gate/commit 证据: | **G15** | 汇总报告 | 报告 | ✅ PASS (4/4) | — | 6 perf reports co
-- ❌ Type A/B 违规：第 266 行声明无 CI/gate/commit 证据: | **G16** | Compatibility v3.8 → v3.9 | 集成 | 🟡 5/7 PASS | — 
-- ❌ Type A/B 违规：第 271 行声明无 CI/gate/commit 证据: **状态**: ✅ PASS (6/6 form-only steps)
-- ❌ Type A/B 违规：第 291 行声明无 CI/gate/commit 证据: **状态**: ✅ PASS (6/6)
-- ❌ Type A/B 违规：第 299 行声明无 CI/gate/commit 证据: **状态**: ✅ PASS (4/4)
-- ❌ Type A/B 违规：第 310 行声明无 CI/gate/commit 证据: **状态**: ✅ PASS (4/4)
-- ❌ Type A/B 违规：第 311 行声明无 CI/gate/commit 证据: - 5+ tests PASS
-- ❌ Type A/B 违规：第 313 行声明无 CI/gate/commit 证据: - `check_arch2_no_bypass.sh` 全部 PASS
-- ❌ Type A/B 违规：第 318 行声明无 CI/gate/commit 证据: **状态**: ✅ PASS (8/8)
-- ❌ Type A/B 违规：第 319 行声明无 CI/gate/commit 证据: - 8+ tests PASS
-- ❌ Type A/B 违规：第 325 行声明无 CI/gate/commit 证据: **状态**: ✅ PASS (6/6 form-only)
-- ❌ Type A/B 违规：第 326 行声明无 CI/gate/commit 证据: - 100+ tests PASS
-- ❌ Type A/B 违规：第 332 行声明无 CI/gate/commit 证据: **状态**: ✅ PASS (7/7) — **但 RC3_PLAN 揭示真实问题**:
-- ❌ Type A/B 违规：第 333 行声明无 CI/gate/commit 证据: - 10 soak tests PASS at 24h/72h/168h
-- ❌ Type A/B 违规：第 348 行声明无 CI/gate/commit 证据: **状态**: ✅ PASS (7/7 form-only)
-- ❌ Type A/B 违规：第 349 行声明无 CI/gate/commit 证据: - 8 类崩溃注入 × 10+ 变体 模拟通过
-- ❌ Type A/B 违规：第 352 行声明无 CI/gate/commit 证据: **⚠️ RC3_PLAN 关键发现**: Crash matrix 模拟通过, real crash 8 catego
-- ❌ Type A/B 违规：第 366 行声明无 CI/gate/commit 证据: **状态**: ✅ PASS (5/5)
-- ❌ Type A/B 违规：第 367 行声明无 CI/gate/commit 证据: - 50+ tests PASS
-- ❌ Type A/B 违规：第 372 行声明无 CI/gate/commit 证据: **状态**: 🟡 PASS (7/7 + 1 sub-gate WARN non-blocking)
-- ❌ Type A/B 违规：第 387 行声明无 CI/gate/commit 证据: | **G15** 汇总报告 | ✅ PASS (4/4) | 6 perf reports committed |
-- ❌ Type A/B 违规：第 391 行声明无 CI/gate/commit 证据: **状态**: 🟡 5/7 PASS
-- ❌ Type A/B 违规：第 416 行声明无 CI/gate/commit 证据: | **RC5-RC7** | 2026-06-13 | ✅ | G1-G16 PASS + substance | 3
-- ❌ Type A/B 违规：第 423 行声明无 CI/gate/commit 证据: - 16/16 sub-tasks completed (100%)
-- ❌ Type A/B 违规：第 425 行声明无 CI/gate/commit 证据: - 72h soak compressed-time: 10/10 tests PASS (1,440× compres
-- ❌ Type A/B 违规：第 427 行声明无 CI/gate/commit 证据: - Doc gates PASS (check_docs_consistency.sh + check_docs_lin
-- ❌ Type A/B 违规：第 433 行声明无 CI/gate/commit 证据: - G1-G10 baseline: 10/10 PASS
-- ❌ Type A/B 违规：第 436 行声明无 CI/gate/commit 证据: - G16 Compatibility: 5/7 PASS (TPC-H step + REPORT step pend
-- ❌ Type A/B 违规：第 442 行声明无 CI/gate/commit 证据: - G1-G10: 10/10 PASS
-- ❌ Type A/B 违规：第 445 行声明无 CI/gate/commit 证据: - 72h Soak: 10/10 PASS (compressed)
-- ❌ Type A/B 违规：第 495 行声明无 CI/gate/commit 证据: - [ ] Doc gates PASS
-- ❌ Type A/B 违规：第 518 行声明无 CI/gate/commit 证据: - [ ] 24h real soak PASS (memory < 10%, FD = 0, lock = 0)
-- ❌ Type A/B 违规：第 519 行声明无 CI/gate/commit 证据: - [ ] 72h real soak PASS
-- ❌ Type A/B 违规：第 535 行声明无 CI/gate/commit 证据: - [ ] 168h real soak completed successfully
-- ❌ Type A/B 违规：第 566 行声明无 CI/gate/commit 证据: - **72h Soak (compressed)**: 10/10 PASS, memory < 10%, FD = 
-- ❌ Type A/B 违规：第 617 行声明无 CI/gate/commit 证据: | **2026-06-13** | **RC7 cut** | G1-G16 PASS + substance tes
-- ❌ Type A/B 违规：第 849 行声明无 CI/gate/commit 证据: - [ ] G1: 22/22 TPC-H 保持 PASS (REAL, not form-only)
-- ❌ Type A/B 违规：第 855 行声明无 CI/gate/commit 证据: - [ ] G7: 24h REAL wall-clock Soak Test PASS
-- ❌ Type A/B 违规：第 856 行声明无 CI/gate/commit 证据: - [ ] G8: Crash Matrix 100+ REAL scenarios PASS
-- ❌ Type A/B 违规：第 857 行声明无 CI/gate/commit 证据: - [ ] G9: Upgrade Test PASS (v3.8 → v3.9 数据可读, REAL)
-- ❌ Type A/B 违规：第 864 行声明无 CI/gate/commit 证据: - [ ] G16: Compatibility v3.8 → v3.9 (full PASS)
-- ❌ Type A/B 违规：第 865 行声明无 CI/gate/commit 证据: - [ ] 168h real soak completed
-- ❌ Type A/B 违规：第 883 行声明无 CI/gate/commit 证据: | **GA (General Availability)** | ✅ PASS | ✅ TARGET | 🟡 form
-- ❌ Type A/B 违规：第 925 行声明无 CI/gate/commit 证据: - 10/10 G1-G10 form-only PASS
-- ❌ Type A/B 违规：第 1081 行声明无 CI/gate/commit 证据: | G16 Compatibility full PASS | 8h | P1 | (compat) |
-- ❌ Type A/B 违规：第 1127 行声明无 CI/gate/commit 证据: ✅ G16 5/7 PASS
-- ❌ Type A/B 违规：第 1136 行声明无 CI/gate/commit 证据: ✅ 72h Soak compressed-time 10/10 PASS
-- ❌ Type A/B 违规：第 4 行声明无 CI/gate/commit 证据: > **E2E 测试**: 16/16 PASS ✅ (修复了 column_def 包 bug: org_name, 
-- ❌ Type A/B 违规：第 45 行声明无 CI/gate/commit 证据: | Lib Tests | 1670 PASS, 1 IGNORED | ✅ 已执行 |
-- ❌ Type A/B 违规：第 46 行声明无 CI/gate/commit 证据: | TPC-H | 22/22 PASS | ⚠️ 无 oracle 对比 |
-- ❌ Type A/B 违规：第 48 行声明无 CI/gate/commit 证据: | Corpus | 818/818 PASS | ⚠️ 无 oracle 对比 |
-- ❌ Type A/B 违规：第 49 行声明无 CI/gate/commit 证据: | D9 Gate | 8/8 PASS | ✅ 有独立验证 |
-- ❌ Type A/B 违规：第 55 行声明无 CI/gate/commit 证据: | G1 | TPC-H 22/22 | ✅ PASS | ⚠️ 无 oracle 对比 | **Q8 0.18ms**
-- ❌ Type A/B 违规：第 56 行声明无 CI/gate/commit 证据: | G2 | INT-2 | ✅ PASS | ⚠️ 无 oracle 对比 | — |
-- ❌ Type A/B 违规：第 57 行声明无 CI/gate/commit 证据: | G3 | INT-3 | ✅ PASS | ⚠️ 无 oracle 对比 | — |
-- ❌ Type A/B 违规：第 58 行声明无 CI/gate/commit 证据: | G4 | ARCH-3 | ✅ PASS | ✅ 有独立验证 | — |
-- ❌ Type A/B 违规：第 59 行声明无 CI/gate/commit 证据: | G5 | SEM-1 | ✅ PASS | ⚠️ 无 oracle 对比 | — |
-- ❌ Type A/B 违规：第 60 行声明无 CI/gate/commit 证据: | G6 | Backup/Restore | ✅ PASS | ✅ 有独立验证 | — |
-- ❌ Type A/B 违规：第 62 行声明无 CI/gate/commit 证据: | G8 | Crash Matrix | ✅ PASS | ✅ 有独立验证 | — |
-- ❌ Type A/B 违规：第 63 行声明无 CI/gate/commit 证据: | G9 | Upgrade Test | ✅ PASS | ⚠️ 无 oracle 对比 | — |
-- ❌ Type A/B 违规：第 64 行声明无 CI/gate/commit 证据: | G10 | Audit + Time Travel | ✅ PASS | ✅ 有独立验证 | — |
-- ❌ Type A/B 违规：第 65 行声明无 CI/gate/commit 证据: | G11 | QPS/TPS | ✅ PASS | ⚠️ 无 oracle 对比 | — |
-- ❌ Type A/B 违规：第 66 行声明无 CI/gate/commit 证据: | G12 | Sysbench | ✅ PASS | ⚠️ 无 oracle 对比 | — |
-- ❌ Type A/B 违规：第 68 行声明无 CI/gate/commit 证据: | G14 | Real Crash | ✅ PASS | ⚠️ 部分模拟 | — |
-- ❌ Type A/B 违规：第 69 行声明无 CI/gate/commit 证据: | G15 | TPC-H SF0.01 | ✅ PASS | ⚠️ 无 oracle 对比 | — |
-- ❌ Type A/B 违规：第 70 行声明无 CI/gate/commit 证据: | G16 | Compatibility | ✅ PASS | ⚠️ 无 oracle 对比 | — |
-- ❌ Type A/B 违规：第 71 行声明无 CI/gate/commit 证据: | **P11-P15** | **meta-gate** (Sprint 8) | ✅ **5/5 PASS** | 
-- ❌ Type A/B 违规：第 73 行声明无 CI/gate/commit 证据: **诚实声明**: 16/16 G1-G16 gate 脚本已执行 + 5 meta-gates (P11-P15) P
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 23 行声明无 CI/gate/commit 证据: > **执行结果**: ✅ 8/8 修改完成，复核 100% PASS
-- ❌ Type A/B 违规：第 77 行声明无 CI/gate/commit 证据: | 操作 1: CHANGELOG 阶段 RC2 → RC7 | ✅ PASS (1 occurrence) |
-- ❌ Type A/B 违规：第 78 行声明无 CI/gate/commit 证据: | 操作 2: CHANGELOG 版本表 rc4/rc5/rc6/rc7 | ✅ PASS (4 entries) |
-- ❌ Type A/B 违规：第 79 行声明无 CI/gate/commit 证据: | 操作 3: README GA 目标 2026-12-15 | ✅ PASS (1 occurrence) |
-- ❌ Type A/B 违规：第 80 行声明无 CI/gate/commit 证据: | 操作 4: RELEASE_NOTES Header 阶段标注 | ✅ PASS (1 occurrence) |
-- ❌ Type A/B 违规：第 81 行声明无 CI/gate/commit 证据: | 操作 5: root CHANGELOG RC7 status | ✅ PASS (1 occurrence) |
-- ❌ Type A/B 违规：第 82 行声明无 CI/gate/commit 证据: | 操作 6: ROADMAP 4.9 更新为 RC7 | ✅ PASS (1 occurrence) |
-- ❌ Type A/B 违规：第 85 行声明无 CI/gate/commit 证据: | 无 commit 日志内容修改 | ✅ PASS |
-- ❌ Type A/B 违规：第 86 行声明无 CI/gate/commit 证据: | 无功能描述/架构设计修改 | ✅ PASS |
-- ❌ Type A/B 违规：第 87 行声明无 CI/gate/commit 证据: | 所有引用 .md 文件存在 | ✅ PASS (no broken refs introduced) |
-- ❌ Type A/B 违规：第 88 行声明无 CI/gate/commit 证据: | git diff 干净 | ✅ PASS (31 insertions, 19 deletions, all in 
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 73 行声明无 CI/gate/commit 证据: | 问题 1 已修复：ROADMAP.md Phase 状态正确 | ✅ 通过 |
-- ❌ Type A/B 违规：第 74 行声明无 CI/gate/commit 证据: | 问题 2 已修复：ROADMAP.md GA 日期标注风险 | ✅ 通过 |
-- ❌ Type A/B 违规：第 75 行声明无 CI/gate/commit 证据: | 问题 3 已修复：ROADMAP.md 文档引用路径正确 | ✅ 通过 |
-- ❌ Type A/B 违规：第 76 行声明无 CI/gate/commit 证据: | 问题 4 已修复：V390_VERSION_PLAN.md W0 日期正确 | ✅ 通过 |
-- ❌ Type A/B 违规：第 77 行声明无 CI/gate/commit 证据: | 问题 5 已修复：V390_VERSION_PLAN.md 状态正确 | ✅ 通过 |
-- ❌ Type A/B 违规：第 78 行声明无 CI/gate/commit 证据: | 问题 6 已修复：V390_VERSION_PLAN.md GA 日期标注风险 | ✅ 通过 |
-- ❌ Type A/B 违规：第 79 行声明无 CI/gate/commit 证据: | 问题 7 已修复：CHANGELOG.md 阶段表述完整 | ✅ 通过 |
-- ❌ Type A/B 违规：第 80 行声明无 CI/gate/commit 证据: | 问题 8 已修复：alpha/ 目录存在 | ✅ 通过 |
-- ❌ Type A/B 违规：第 86 行声明无 CI/gate/commit 证据: | commit 日志内容未被修改 | ✅ 通过 |
-- ❌ Type A/B 违规：第 87 行声明无 CI/gate/commit 证据: | 功能描述未被修改 | ✅ 通过 |
-- ❌ Type A/B 违规：第 88 行声明无 CI/gate/commit 证据: | 实质性技术内容未被修改 | ✅ 通过 |
-- ❌ Type A/B 违规：第 95 行声明无 CI/gate/commit 证据: | alpha/ALPHA1_RELEASE_NOTES.md 已创建 | ✅ 通过 |
-- ❌ Type A/B 违规：第 101 行声明无 CI/gate/commit 证据: | git diff 无非预期修改 | ✅ 通过 |
-- ❌ Type A/B 违规：第 109 行声明无 CI/gate/commit 证据: | 所有修改可通过 `git checkout -- <file>` 恢复 | ✅ 通过 |
-- ❌ Type A/B 违规：第 110 行声明无 CI/gate/commit 证据: | 工作记录完整，可追溯每一步 | ✅ 通过 |
-- ❌ Type A/B 违规：第 136 行声明无 CI/gate/commit 证据: 本次文档整改遵循 `DOC_CHECK_CORRECTION_RULES.md` 的 5 步流程，成功修复了 8 处不自
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 22 行声明无 CI/gate/commit 证据: > **Last update**: 2026-06-26 (corrected — Z6G4 72h soak nev
-- ❌ Type A/B 违规：第 37 行声明无 CI/gate/commit 证据: | **24h real wall-clock** | 24h | ❌ **INCOMPLETE** | 250: 84
-- ❌ Type A/B 违规：第 55 行声明无 CI/gate/commit 证据: - [x] 30m wall-clock PASS (post-fix, see LOCAL_SHORT_SOAK_RE
-- ❌ Type A/B 违规：第 56 行声明无 CI/gate/commit 证据: - [x] 1h/2h/4h ladder steps PASS (see LOCAL_SHORT_SOAK_REPOR
-- ❌ Type A/B 违规：第 120 行声明无 CI/gate/commit 证据: soak duration PASS marks.
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 36 行声明无 CI/gate/commit 证据: | 4 | `tests/tpch_value_correctness_test.rs` | ExecutionEngi
-- ❌ Type A/B 违规：第 42 行声明无 CI/gate/commit 证据: | 10 | `tests/tpch_sf01_perf baseline_test.rs` | ExecutionEn
-- ❌ Type A/B 违规：第 109 行声明无 CI/gate/commit 证据: 2. **连接** 通过 `MySqlTestClient` 或真实 mysql client
-- ❌ Type A/B 违规：第 110 行声明无 CI/gate/commit 证据: 3. **工作负载** 通过 wire protocol (COM_QUERY, COM_STMT_PREPARE, C
-- ❌ Type A/B 违规：第 111 行声明无 CI/gate/commit 证据: 4. **数据** 通过 wire protocol (LOAD DATA LOCAL INFILE, INSERT)
-- ❌ Type A/B 违规：第 113 行声明无 CI/gate/commit 证据: 6. **断言** 通过 wire protocol 读回的 rows
-- ❌ Type A/B 违规：第 140 行声明无 CI/gate/commit 证据: 12. **`tests/tpch_value_correctness_test.rs` E2E 化** (synthe
-- ❌ Type A/B 违规：第 158 行声明无 CI/gate/commit 证据: - 修完后 `tpch_value_test_v2` 等会自然通过
-- ❌ Type A/B 违规：第 178 行声明无 CI/gate/commit 证据: - [ ] 5-min 集成测试 PASS (A1+A2+A3)
-- ❌ Type A/B 违规：第 180 行声明无 CI/gate/commit 证据: - [ ] G11 E2E test 通过 (C)
-- ❌ Type A/B 违规：第 181 行声明无 CI/gate/commit 证据: - [ ] G13 E2E test 通过 (D)
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 65 行声明无 CI/gate/commit 证据: Z6G4 G11 in progress as of 2026-06-12 20:35 — 3/22 done (poi
-- ❌ Type A/B 违规：第 70 行声明无 CI/gate/commit 证据: - G11 gate (`check_g11_qps.sh`) PASSES form: qps_bench exist
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 441 行声明无 CI/gate/commit 证据: benchmark PASSES in row-count (5/5) and the cell-level
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 19 行声明无 CI/gate/commit 证据: > **Status**: PASS
-- ❌ Type A/B 违规：第 29 行声明无 CI/gate/commit 证据: | Root cause identified | PASS — `src/engine_select.rs:1175-
-- ❌ Type A/B 违规：第 30 行声明无 CI/gate/commit 证据: | Fix landed | PASS — `HashMap<String, Vec<(usize, &Vec<Valu
-- ❌ Type A/B 违规：第 31 行声明无 CI/gate/commit 证据: | In-process audit test | PASS — `tests/tpch_q9_audit.rs` 22
-- ❌ Type A/B 违规：第 32 行声明无 CI/gate/commit 证据: | Q9 wired result MATCH | PASS — engine=75, sqlite=75 |
-- ❌ Type A/B 违规：第 33 行声明无 CI/gate/commit 证据: | Other query regression | PASS — Q1, Q3-Q6, Q10-Q16 全部 MATC
-- ❌ Type A/B 违规：第 34 行声明无 CI/gate/commit 证据: | `cargo clippy` | PASS — 未引入新警告 |
-- ❌ Type A/B 违规：第 35 行声明无 CI/gate/commit 证据: | `cargo fmt` | PASS |
-- ❌ Type A/B 违规：第 36 行声明无 CI/gate/commit 证据: | `cargo test` | PASS |
-- ❌ Type A/B 违规：第 146 行声明无 CI/gate/commit 证据: | Q17-22 subquery | in-process 未在 Q9 fix 验证范围 | 修复前 17/22 PA
-- ❌ Type B 违规：门禁文档无 gate_policy_eval_id（疑似伪门禁）：Q9-FIX-GATE-REPORT.md
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 232 行声明无 CI/gate/commit 证据:     echo "✅ Coverage Gate PASS"
-- ❌ Type A/B 违规：第 309 行声明无 CI/gate/commit 证据: The RC8 tag can be cut based on local P0 completion (✅ done)
-- ❌ Type A/B 违规：第 51 行声明无 CI/gate/commit 证据: | G13 | 24h Stability (extended) | ⏳ | `check_g13_stability.
-- ❌ Type A/B 违规：第 64 行声明无 CI/gate/commit 证据: | **P14** | DRIFT != PASS | ✅ | V5/V6/V8 全部修复 (Sprint 8) |
-- ❌ Type A/B 违规：第 91 行声明无 CI/gate/commit 证据: - [x] 6/6 meta-gates PASS
-- ❌ Type A/B 违规：第 168 行声明无 CI/gate/commit 证据:         echo "[$(date)] Run completed normally, restarting i
-- ❌ Type A/B 违规：第 174 行声明无 CI/gate/commit 证据: done
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 19 行声明无 CI/gate/commit 证据: > **State**: Pre-GA. All pre-soak gates PASS. **Ready to dis
-- ❌ Type A/B 违规：第 36 行声明无 CI/gate/commit 证据: | P11 | Gate Self-Verification | ✅ PASS | `scripts/gate/chec
-- ❌ Type A/B 违规：第 37 行声明无 CI/gate/commit 证据: | P12 | No Implicit Tolerance | ✅ PASS | `scripts/gate/check
-- ❌ Type A/B 违规：第 38 行声明无 CI/gate/commit 证据: | P13 | Test Count Monotonicity | ✅ PASS | active=6200, carg
-- ❌ Type A/B 违规：第 39 行声明无 CI/gate/commit 证据: | P14 | DRIFT != PASS | ✅ PASS | 0 anti-patterns |
-- ❌ Type A/B 违规：第 40 行声明无 CI/gate/commit 证据: | P15 | Oracle Required | ✅ PASS | All 8 gate oracles presen
-- ❌ Type A/B 违规：第 42 行声明无 CI/gate/commit 证据: | Clippy | No warnings | ✅ PASS | `cargo clippy --all-featur
-- ❌ Type A/B 违规：第 43 行声明无 CI/gate/commit 证据: | Fmt | Clean | ✅ PASS | `cargo fmt --check` clean on change
-- ❌ Type A/B 违规：第 62 行声明无 CI/gate/commit 证据: - 22/22 in-process: PASS (default features)
-- ❌ Type A/B 违规：第 63 行声明无 CI/gate/commit 证据: - 22/22 in-process: PASS (with feature on)
-- ❌ Type A/B 违规：第 64 行声明无 CI/gate/commit 证据: - G15 wire oracle 22/22: PASS across 5 sub-tests
-- ❌ Type A/B 违规：第 88 行声明无 CI/gate/commit 证据: - ✅ All pre-soak quality gates PASS
-- ❌ Type A/B 违规：第 119 行声明无 CI/gate/commit 证据: 168h soak PASS
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 129 行声明无 CI/gate/commit 证据: | V390_COMPREHENSIVE_ASSESSMENT.md | ✅ 10/10 form-only PASS 
-- ❌ Type A/B 违规：第 135 行声明无 CI/gate/commit 证据: **问题**: 同一文档内先说 "PASS"，后说 "实际未跑"，容易误导读者。
-- ❌ Type A/B 违规：第 138 行声明无 CI/gate/commit 证据: - 门禁状态应明确区分 "form-only PASS" vs "REAL PASS"
-- ❌ Type A/B 违规：第 141 行声明无 CI/gate/commit 证据:   G1: ✅ form-only PASS | ⏳ REAL pending
-- ❌ Type A/B 违规：第 142 行声明无 CI/gate/commit 证据:   G7: ✅ compressed PASS | ⏳ 24h real pending
-- ❌ Type A/B 违规：第 168 行声明无 CI/gate/commit 证据: | V390_COMPREHENSIVE_ASSESSMENT.md §4.2 | ✅ PASS (6/6 form-o
-- ❌ Type A/B 违规：第 204 行声明无 CI/gate/commit 证据: | V390_COMPREHENSIVE_ASSESSMENT.md §3.2 | ✅ G4 form-only PAS
-- ❌ Type A/B 违规：第 205 行声明无 CI/gate/commit 证据: | 同文档 §3.2 | ✅ G3 form-only PASS |
-- ❌ Type A/B 违规：第 206 行声明无 CI/gate/commit 证据: | 同文档 §3.2 | ✅ G2 form-only PASS |
-- ❌ Type A/B 违规：第 207 行声明无 CI/gate/commit 证据: | 同文档 §3.2 | ✅ G5 form-only PASS |
-- ❌ Type A/B 违规：第 213 行声明无 CI/gate/commit 证据: - P0 任务状态应统一为 "✅ form-only PASS | ⏳ REAL pending RC3"
-- ❌ Type A/B 违规：第 278 行声明无 CI/gate/commit 证据: 1. 门禁状态统一格式: "✅ form-only PASS | ⏳ REAL pending"
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 50 行声明无 CI/gate/commit 证据: - TPC-H SF=0.1: 22/22 查询通过
-- ❌ Type A/B 违规：第 58 行声明无 CI/gate/commit 证据: | `tpch_sf01_inprocess_test` | 22/22 PASS | SF=0.1 完整 TPC-H 
-- ❌ Type A/B 违规：第 59 行声明无 CI/gate/commit 证据: | `mysql_wire_protocol_test` | 28/28 PASS | MySQL wire 协议 |
-- ❌ Type A/B 违规：第 61 行声明无 CI/gate/commit 证据: | `tpch_sf01_inprocess_test` | 17 tests PASS | 包含 oracle 框架 
-- ❌ Type A/B 违规：第 84 行声明无 CI/gate/commit 证据: Thread 0 done: 12345 queries, 0 errors, 12345 rows
-- ❌ Type A/B 违规：第 85 行声明无 CI/gate/commit 证据: Thread 1 done: 12300 queries, 0 errors, 12300 rows
-- ❌ Type A/B 违规：第 86 行声明无 CI/gate/commit 证据: Thread 2 done: 12280 queries, 0 errors, 12280 rows
-- ❌ Type A/B 违规：第 87 行声明无 CI/gate/commit 证据: Thread 3 done: 12310 queries, 0 errors, 12310 rows
-- ❌ Type A/B 违规：第 112 行声明无 CI/gate/commit 证据: - [x] 单线程 QPS 验证通过
-- ❌ Type A/B 违规：第 113 行声明无 CI/gate/commit 证据: - [x] TPC-H 22/22 查询通过
-- ❌ Type A/B 违规：第 15 行声明无 CI/gate/commit 证据: > **Status: 🟡 READY (gates G1-G16 PASS, 24h/72h/168h soak in
-- ❌ Type A/B 违规：第 26 行声明无 CI/gate/commit 证据: | G1 | TPC-H 22/22 (QPS-correctness) | ✅ PASS | tpch_gate_te
-- ❌ Type A/B 违规：第 27 行声明无 CI/gate/commit 证据: | G2 | INT-2 ParallelExecutor | ✅ PASS | int2_substance_para
-- ❌ Type A/B 违规：第 28 行声明无 CI/gate/commit 证据: | G3 | INT-3 Single Expression | ✅ PASS | int3_substance_del
-- ❌ Type A/B 违规：第 29 行声明无 CI/gate/commit 证据: | G4 | ARCH-3 VtuGuard | ✅ PASS | check_arch3_no_bypass.sh (
-- ❌ Type A/B 违规：第 30 行声明无 CI/gate/commit 证据: | G5 | SEM-1 Savepoint | ✅ PASS | check_sem1_savepoint.sh (8
-- ❌ Type A/B 违规：第 31 行声明无 CI/gate/commit 证据: | G6 | Backup/Restore/PITR | ✅ PASS | check_backup_restore.s
-- ❌ Type A/B 违规：第 33 行声明无 CI/gate/commit 证据: | G8 | Crash Matrix | ✅ PASS | check_p12_crash_test.sh |
-- ❌ Type A/B 违规：第 34 行声明无 CI/gate/commit 证据: | G9 | Upgrade v3.8→v3.9 | ✅ PASS | check_p14_upgrade_test.s
-- ❌ Type A/B 违规：第 35 行声明无 CI/gate/commit 证据: | G10 | GMP Audit + Time Travel + Hash Chain | ✅ PASS | chec
-- ❌ Type A/B 违规：第 38 行声明无 CI/gate/commit 证据: | G15 | SF=0.01 TPC-H wire | ✅ PASS | tpch_sf01_22_queries_w
-- ❌ Type A/B 违规：第 39 行声明无 CI/gate/commit 证据: | G16 | Compatibility v3.8→v3.9 | ✅ PASS | v380_to_v390_full
-- ❌ Type A/B 违规：第 41 行声明无 CI/gate/commit 证据: **Total: 11/13 PASS, 1/13 incomplete (G11), 1/13 pending re-
-- ❌ Type A/B 违规：第 66 行声明无 CI/gate/commit 证据: | Substance tests | 41 | 41/41 PASS |
-- ❌ Type A/B 违规：第 67 行声明无 CI/gate/commit 证据: | TPC-H wire (G1) | 22 | 22/22 PASS |
-- ❌ Type A/B 违规：第 68 行声明无 CI/gate/commit 证据: | TPC-H wire SF0.01 (G15) | 22 | 22/22 PASS |
-- ❌ Type A/B 违规：第 69 行声明无 CI/gate/commit 证据: | Upgrade (G9, G16) | 55 | 55/55 PASS |
-- ❌ Type A/B 违规：第 70 行声明无 CI/gate/commit 证据: | Backup/Restore (G6) | 51 | 51/51 PASS |
-- ❌ Type A/B 违规：第 71 行声明无 CI/gate/commit 证据: | Crash Matrix (G8) | 129 | 129/129 PASS |
-- ❌ Type A/B 违规：第 72 行声明无 CI/gate/commit 证据: | Stability (G7) | 10 | 10/10 PASS |
-- ❌ Type A/B 违规：第 73 行声明无 CI/gate/commit 证据: | E2E SELECT (2026-07-04) | 16 | 16/16 PASS |
-- ❌ Type A/B 违规：第 74 行声明无 CI/gate/commit 证据: | **Total verified tests** | **346+** | **346+ / 346+ PASS**
-- ❌ Type A/B 违规：第 80 行声明无 CI/gate/commit 证据: | 1h simulated | rc4 readiness | Z6G4 (rc4 binary) | ✅ PASS 
-- ❌ Type A/B 违规：第 124 行声明无 CI/gate/commit 证据: - [x] G1-G10 gates PASS
-- ❌ Type A/B 违规：第 135 行声明无 CI/gate/commit 证据: - [ ] TPC-H SF=1.0 Q1-Q22 PASS (hardware-blocked: disk)
-- ❌ Type B 违规：门禁文档无 gate_policy_eval_id（疑似伪门禁）：GA_GATE_REPORT.md
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 30 行声明无 CI/gate/commit 证据: benchmark PASS** milestone.
-- ❌ Type A/B 违规：第 198 行声明无 CI/gate/commit 证据: Full TPC-H 22/22 PASS. SQL92 core (DML/joins/aggregates) is
-- ❌ Type A/B 违规：第 5 行声明无 CI/gate/commit 证据: > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS)
-- ❌ Type A/B 违规：第 254 行声明无 CI/gate/commit 证据:   ✅ SOAK PASSED
-- ❌ Type A/B 违规：第 283 行声明无 CI/gate/commit 证据: | 0 errors | PASS |
-- ❌ Type A/B 违规：第 284 行声明无 CI/gate/commit 证据: | P99 < 5000ms | PASS |
-- ❌ Type A/B 违规：第 285 行声明无 CI/gate/commit 证据: | > 0 queries executed | PASS |
-- ❌ Type A/B 违规：第 286 行声明无 CI/gate/commit 证据: | Any error > 0 | WARNING (still PASS) |
-- ❌ Type A/B 违规：第 294 行声明无 CI/gate/commit 证据: | 0 | SOAK PASSED (all criteria met) |
+- ❌ Type A/B 违规：第 77 行声明无 CI/gate/commit 证据: | V312-02 | GMP schema v3.12 | P0 | schema tests PASS |
+- ❌ Type A/B 违规：第 122 行声明无 CI/gate/commit 证据: > 在 TPC-H correctness、SQLLogicTest、wire protocol、LOA
+- ❌ Type A/B 违规：第 183 行声明无 CI/gate/commit 证据: | V312-02 | GMP schema v3.12 | P0 | Schema tests PASS |
+- ❌ Type A/B 违规：第 7 行声明无 CI/gate/commit 证据: 本矩阵把 GMP 内审检索所需控制项映射到 SQLRus
+- ❌ Type A/B 违规：第 49 行声明无 CI/gate/commit 证据: **PASS — 154 tests passed, 0 failed**
+- ❌ Type A/B 违规：第 72 行声明无 CI/gate/commit 证据: - [x] backup.rs 代码存在且编译通过
+- ❌ Type A/B 违规：第 77 行声明无 CI/gate/commit 证据: **状态: PASS — 满足关闭条件**
+- ❌ Type A/B 违规：第 17 行声明无 CI/gate/commit 证据: `bash scripts/gate/check_arch_invariants.sh` → exit 0, 5 P
+- ❌ Type A/B 违规：第 21 行声明无 CI/gate/commit 证据: | C-ARCH-01 | LocalExecutor has NO `txn_manager` field | **P
+- ❌ Type A/B 违规：第 22 行声明无 CI/gate/commit 证据: | C-ARCH-02 | LocalExecutor has NO `write_buffer` field | **
+- ❌ Type A/B 违规：第 23 行声明无 CI/gate/commit 证据: | C-ARCH-03 | storage.insert/update/delete only in `crates/s
+- ❌ Type A/B 违规：第 24 行声明无 CI/gate/commit 证据: | C-ARCH-04 | No `eng.execute(raw_sql)` outside parser | **P
+- ❌ Type A/B 违规：第 25 行声明无 CI/gate/commit 证据: | C-ARCH-05 | `execution_engine.rs` < 1600 lines (SSOT: CARC
+- ❌ Type A/B 违规：第 33 行声明无 CI/gate/commit 证据: PASS: C-ARCH-01
+- ❌ Type A/B 违规：第 36 行声明无 CI/gate/commit 证据: PASS: C-ARCH-02
+- ❌ Type A/B 违规：第 42 行声明无 CI/gate/commit 证据: PASS: C-ARCH-04
+- ❌ Type A/B 违规：第 45 行声明无 CI/gate/commit 证据: PASS: C-ARCH-05 (execution_engine.rs: 1594 lines, limit 1600
+- ❌ Type A/B 违规：第 48 行声明无 CI/gate/commit 证据: PASSED: 5
+- ❌ Type A/B 违规：第 51 行声明无 CI/gate/commit 证据: Result: ALL PASS
+- ❌ Type A/B 违规：第 77 行声明无 CI/gate/commit 证据: | R2.6 | INT-2 + INT-3 deferred w/ plan (2 items, D7 PASS-WI
+- ❌ Type A/B 违规：第 123 行声明无 CI/gate/commit 证据: PASS: ALL_TARGETS_REPORT.md fresh (age=N s)
+- ❌ Type A/B 违规：第 124 行声明无 CI/gate/commit 证据: PASS: R2_INVARIANTS_REPORT.md fresh (age=N s)
+- ❌ Type A/B 违规：第 125 行声明无 CI/gate/commit 证据: PASS: signoff valid (Reviewer A=hermes-z6g4, Reviewer B=open
+- ❌ Type A/B 违规：第 126 行声明无 CI/gate/commit 证据: PASS: signoff file is valid
+- ❌ Type A/B 违规：第 127 行声明无 CI/gate/commit 证据: ==> V312-19 release gate PASSED
+- ❌ Type A/B 违规：第 136 行声明无 CI/gate/commit 证据: | C-ARCH-01~05 | 5/5 PASS | This file (Part 1) + `scripts/ga
+- ❌ Type A/B 违规：第 137 行声明无 CI/gate/commit 证据: | R2.1-R2.8 driver | 4 PASS / 1 stub (R2.8) / 3 fail (R2.1/R
+- ❌ Type A/B 违规：第 140 行声明无 CI/gate/commit 证据: | V312-19 release gates | PASS exit 0 | `check_v312_19_relea
+- ❌ Type A/B 违规：第 28 行声明无 CI/gate/commit 证据: **Result:** 11/11 PASS, 0 FAIL
+- ❌ Type A/B 违规：第 34 行声明无 CI/gate/commit 证据: | `test_wire_smoke_error_packet_structure` | PASS | ~20s |
+- ❌ Type A/B 违规：第 35 行声明无 CI/gate/commit 证据: | `test_wire_smoke_load_data_sf1` | PASS | ~30s |
+- ❌ Type A/B 违规：第 36 行声明无 CI/gate/commit 证据: | `test_wire_smoke_reset_clears_prepared_stmts` | PASS | ~25
+- ❌ Type A/B 违规：第 37 行声明无 CI/gate/commit 证据: | `test_wire_smoke_reset_connection` | PASS | ~20s |
+- ❌ Type A/B 违规：第 38 行声明无 CI/gate/commit 证据: | `test_wire_smoke_stmt_close` | PASS | ~25s |
+- ❌ Type A/B 违规：第 39 行声明无 CI/gate/commit 证据: | `test_wire_smoke_stmt_close_nonexistent` | PASS | ~20s |
+- ❌ Type A/B 违规：第 40 行声明无 CI/gate/commit 证据: | `test_wire_smoke_stmt_execute_after_close` | PASS | ~25s |
+- ❌ Type A/B 违规：第 41 行声明无 CI/gate/commit 证据: | `test_wire_smoke_stmt_prepare_execute_int` | PASS | ~25s |
+- ❌ Type A/B 违规：第 42 行声明无 CI/gate/commit 证据: | `test_wire_smoke_stmt_prepare_execute_varchar` | PASS | ~2
+- ❌ Type A/B 违规：第 43 行声明无 CI/gate/commit 证据: | `test_wire_smoke_stmt_prepare_invalid_sql` | PASS | ~20s |
+- ❌ Type A/B 违规：第 44 行声明无 CI/gate/commit 证据: | `test_wire_smoke_stmt_prepare_null` | PASS | ~25s |
+- ❌ Type A/B 违规：第 72 行声明无 CI/gate/commit 证据: | C-ARCH invariants | `bash scripts/gate/check_arch_invarian
+- ❌ Type A/B 违规：第 73 行声明无 CI/gate/commit 证据: | LOAD DATA INFILE | `bash scripts/gate/check_load_data_infi
+- ❌ Type A/B 违规：第 74 行声明无 CI/gate/commit 证据: | Anti-fabrication | `bash scripts/gate/check_anti_fabricati
+- ❌ Type A/B 违规：第 75 行声明无 CI/gate/commit 证据: | Wire smoke | `cargo test --test wire_smoke_mysql_cli` | 11
+- ❌ Type A/B 违规：第 105 行声明无 CI/gate/commit 证据:   [PASS] LOAD_DATA_INFILE.md
+- ❌ Type A/B 违规：第 106 行声明无 CI/gate/commit 证据:   [PASS] LOAD DATA documented
+- ❌ Type A/B 违规：第 107 行声明无 CI/gate/commit 证据:   [PASS] parser changes documented
+- ❌ Type A/B 违规：第 108 行声明无 CI/gate/commit 证据:   [PASS] gate executable
+- ❌ Type A/B 违规：第 109 行声明无 CI/gate/commit 证据: PASS: 4, FAIL: 0
+- ❌ Type A/B 违规：第 113 行声明无 CI/gate/commit 证据: Result: ALL PASS  [exit 0]
+- ❌ Type A/B 违规：第 51 行声明无 CI/gate/commit 证据: **Result:** PASS (with graceful fallback)
+- ❌ Type A/B 违规：第 44 行声明无 CI/gate/commit 证据: **PASS — 154 tests passed, 0 failed**
+- ❌ Type A/B 违规：第 67 行声明无 CI/gate/commit 证据: - [x] ingestion.rs 代码存在且编译通过
+- ❌ Type A/B 违规：第 72 行声明无 CI/gate/commit 证据: **状态: PASS — 满足关闭条件**
+- ❌ Type A/B 违规：第 44 行声明无 CI/gate/commit 证据: | Tests | ✅ | 10/10 PASS |
+- ❌ Type A/B 违规：第 46 行声明无 CI/gate/commit 证据: **Evidence**: `cargo test -p sqlrustgo-executor window` → 
+- ❌ Type A/B 违规：第 26 行声明无 CI/gate/commit 证据: | `cargo test -p sqlrustgo-mysql-server --test wire_smoke_my
+- ❌ Type A/B 违规：第 27 行声明无 CI/gate/commit 证据: | `bash scripts/gate/check_arch_invariants.sh` | 5/5 PASS |
+- ❌ Type A/B 违规：第 28 行声明无 CI/gate/commit 证据: | `bash scripts/gate/check_load_data_infile.sh` | 4/4 PASS |
+- ❌ Type A/B 违规：第 67 行声明无 CI/gate/commit 证据: PASS: ALL_TARGETS_REPORT.md fresh
+- ❌ Type A/B 违规：第 68 行声明无 CI/gate/commit 证据: PASS: R2_INVARIANTS_REPORT.md fresh
+- ❌ Type A/B 违规：第 70 行声明无 CI/gate/commit 证据: PASS: signoff file is valid
+- ❌ Type A/B 违规：第 71 行声明无 CI/gate/commit 证据: ==> V312-19 release gate PASSED  [exit 0]
+- ❌ Type A/B 违规：第 90 行声明无 CI/gate/commit 证据: [C-ARCH-01] PASS  [C-ARCH-02] PASS  [C-ARCH-03] INFO
+- ❌ Type A/B 违规：第 91 行声明无 CI/gate/commit 证据: [C-ARCH-04] PASS  [C-ARCH-05] PASS
+- ❌ Type A/B 违规：第 92 行声明无 CI/gate/commit 证据: Result: 5/5 PASS  [exit 0]
+- ❌ Type A/B 违规：第 20 行声明无 CI/gate/commit 证据:   [1/4] ✅ PASS: 3 VtuGuard marker calls in src/execution_e
+- ❌ Type A/B 违规：第 21 行声明无 CI/gate/commit 证据:   [2/4] ✅ PASS: 2 VtuGuard marker calls in openclaw_endpoi
+- ❌ Type A/B 违规：第 23 行声明无 CI/gate/commit 证据:   [4/4] ✅ PASS: VtuGuard::assert_path_for_dml is public
+- ❌ Type A/B 违规：第 24 行声明无 CI/gate/commit 证据: === G4 Gate: PASS ===
+- ❌ Type A/B 违规：第 33 行声明无 CI/gate/commit 证据: [C-ARCH-01] Checking LocalExecutor has NO txn_manager field.
+- ❌ Type A/B 违规：第 34 行声明无 CI/gate/commit 证据: [C-ARCH-02] Checking LocalExecutor has NO write_buffer field
+- ❌ Type A/B 违规：第 35 行声明无 CI/gate/commit 证据: [C-ARCH-03] Checking storage.insert/update/delete only in cr
+- ❌ Type A/B 违规：第 36 行声明无 CI/gate/commit 证据: [C-ARCH-04] Checking no eng.execute(raw_sql) outside parser.
+- ❌ Type A/B 违规：第 37 行声明无 CI/gate/commit 证据: [C-ARCH-05] Checking execution_engine.rs < 1600 lines... PAS
+- ❌ Type A/B 违规：第 38 行声明无 CI/gate/commit 证据: === Summary === PASSED: 5, FAILED: 0
+- ❌ Type A/B 违规：第 45 行声明无 CI/gate/commit 证据: - Draft gate 仍只表示开发入口准备，不表示实�
+- ❌ Type A/B 违规：第 14 行声明无 CI/gate/commit 证据: > "提交命令、日志、PASS/FAIL、commit、evidence_has
+- ❌ Type A/B 违规：第 38 行声明无 CI/gate/commit 证据: - **V312-24 work contribution**: 0 new errors. 9/5/6 = 20 li
+- ❌ Type A/B 违规：第 45 行声明无 CI/gate/commit 证据: - **Result**: **Exit 0 (PASS)**
+- ❌ Type A/B 违规：第 53 行声明无 CI/gate/commit 证据: - **Result**: **Exit 0 (PASS)**
+- ❌ Type A/B 违规：第 61 行声明无 CI/gate/commit 证据: - **Result**: **CHECK 1.5 V312-24 = 3 PASS lines** (sqlancer
+- ❌ Type A/B 违规：第 65 行声明无 CI/gate/commit 证据:   [PASS]   V312-24: target/sqlancer-report.json valid (itera
+- ❌ Type A/B 违规：第 66 行声明无 CI/gate/commit 证据:   [PASS]   V312-24: target/test-runner-report.json valid (to
+- ❌ Type A/B 违规：第 67 行声明无 CI/gate/commit 证据:   [PASS]   V312-24: both SQLancer + test-runner report artif
+- ❌ Type A/B 违规：第 114 行声明无 CI/gate/commit 证据: | 1 | Every tool can run + produce artifact | ✅ PASS | Gat
+- ❌ Type A/B 违规：第 115 行声明无 CI/gate/commit 证据: | 2 | 15-item disposition table with reason + replacement ga
+- ❌ Type A/B 违规：第 118 行声明无 CI/gate/commit 证据: | 5 | `crates/sql-corpus/tests/corpus_test.rs` pass_rate ≥
+- ❌ Type A/B 违规：第 121 行声明无 CI/gate/commit 证据: **5/6 PASS + 1/6 PARTIAL (with V312-31 follow-up filed)**.
+- ❌ Type A/B 违规：第 170 行声明无 CI/gate/commit 证据: **6 gate 实跑**: 5 numerical gates PASS (V312-24 work +0 e
+- ❌ Type A/B 违规：第 27 行声明无 CI/gate/commit 证据: | 5 | `bash scripts/gate/check_beta_gate.sh` B10_SQLANCER PA
+- ❌ Type A/B 违规：第 38 行声明无 CI/gate/commit 证据: | 2 FAIL in `sqlrustgo-mysql-server` (`list_threads_returns_
+- ❌ Type A/B 违规：第 69 行声明无 CI/gate/commit 证据: $ bash scripts/gate/check_beta_gate.sh 2>&1 | tee /tmp/v312_
+- ❌ Type A/B 违规：第 132 行声明无 CI/gate/commit 证据: 1. 不允许"openspec 标 done"、"报告标题写已完成"
+- ❌ Type A/B 违规：第 142 行声明无 CI/gate/commit 证据: V312-30 **不能**在 PR merge + 2 reviewer APPROVED + 6 项
+- ❌ Type A/B 违规：第 47 行声明无 CI/gate/commit 证据: **PASS — 154 tests passed, 0 failed**
+- ❌ Type A/B 违规：第 62 行声明无 CI/gate/commit 证据: - [x] graph.rs 代码存在且编译通过
+- ❌ Type A/B 违规：第 68 行声明无 CI/gate/commit 证据: **状态: PASS — 满足关闭条件**
+- ❌ Type A/B 违规：第 65 行声明无 CI/gate/commit 证据: **PASS — 154 tests passed, 0 failed**
+- ❌ Type A/B 违规：第 71 行声明无 CI/gate/commit 证据: | audit hash chain 实跑证据 | DONE | `test_hash_chain_ta
+- ❌ Type A/B 违规：第 72 行声明无 CI/gate/commit 证据: | fail-closed tamper 测试 | DONE | `test_permission_guard_
+- ❌ Type A/B 违规：第 90 行声明无 CI/gate/commit 证据: - [x] acl.rs / audit.rs 代码存在且编译通过
+- ❌ Type A/B 违规：第 97 行声明无 CI/gate/commit 证据: **状态: PASS — 满足关闭条件**
+- ❌ Type A/B 违规：第 7 行声明无 CI/gate/commit 证据: > **真实性规则**: 本计划只定义未来工作和退�
+- ❌ Type A/B 违规：第 70 行声明无 CI/gate/commit 证据: - 没有 command output、timestamp、source agent、source 
+- ❌ Type A/B 违规：第 119 行声明无 CI/gate/commit 证据: | `cargo build -p sqlrustgo_sqllogictest` | 可完成，但 
+- ❌ Type A/B 违规：第 120 行声明无 CI/gate/commit 证据: | `cargo run -p sqlrustgo_sqllogictest -- --test-dir crates/
+- ❌ Type A/B 违规：第 206 行声明无 CI/gate/commit 证据: 任何 PASS 声明都必须附 command output、timestamp、
+- ❌ Type A/B 违规：第 271 行声明无 CI/gate/commit 证据: - PASS, GA, or compliance claims without command output, tim
+- ❌ Type A/B 违规：第 321 行声明无 CI/gate/commit 证据: | `cargo run -p sqlrustgo_sqllogictest -- --test-dir crates/
+- ❌ Type A/B 违规：第 516 行声明无 CI/gate/commit 证据: - Gate script output showing PASS/FAIL with exit code.
+- ❌ Type A/B 违规：第 19 行声明无 CI/gate/commit 证据: **PASS** — pass rate 99.4% ≥ 80.0% (baseline; V312-24 pr
+- ❌ Type A/B 违规：第 46 行声明无 CI/gate/commit 证据: **PASS** — 14 个 per-subcategory guard + 2 个 meta test 
+- ❌ Type A/B 违规：第 55 行声明无 CI/gate/commit 证据: **PASS** — 5 failing cases pre-exist in baseline; pass rat
+- ❌ Type A/B 违规：第 62 行声明无 CI/gate/commit 证据: **PASS**.
+- ❌ Type A/B 违规：第 78 行声明无 CI/gate/commit 证据: V312-24 proposal §4 描述"16 subcategories / 27.3% pass ra
+- ❌ Type A/B 违规：第 82 行声明无 CI/gate/commit 证据: - 6/16 PASS → 实际是 14/14 subcategories 在 99.4% 范�
+- ❌ Type A/B 违规：第 96 行声明无 CI/gate/commit 证据: 按"以实际 gate 数字关闭"的严格要求：4/4 关闭
+- ❌ Type A/B 违规：第 23 行声明无 CI/gate/commit 证据: **PASS** — 3 个脚本实际命令中 0 个 `|| true` (bas
+- ❌ Type A/B 违规：第 40 行声明无 CI/gate/commit 证据: **PASS** — 没有 `2>/dev/null || true` 吞错；server �
+- ❌ Type A/B 违规：第 50 行声明无 CI/gate/commit 证据: **PASS** — 缺失时 fail-explicit，证据写入 `/tmp/ba
+- ❌ Type A/B 违规：第 60 行声明无 CI/gate/commit 证据: **PASS** — 缺失时 fail-explicit，stderr 含 "sysbench 
+- ❌ Type A/B 违规：第 69 行声明无 CI/gate/commit 证据: **PASS** — server 不可达时 exit 1。byte-exact 断言�
+- ❌ Type A/B 违规：第 74 行声明无 CI/gate/commit 证据: **PASS**.
+- ❌ Type A/B 违规：第 98 行声明无 CI/gate/commit 证据: 按"以实际 gate 数字关闭"的严格要求：6/6 关闭
+- ❌ Type A/B 违规：第 34 行声明无 CI/gate/commit 证据: | Every tool can run + produce artifact (sqlancer + test-run
+- ❌ Type A/B 违规：第 35 行声明无 CI/gate/commit 证据: | Every retired/deferred item has reason + replacement gate 
+- ❌ Type A/B 违规：第 41 行声明无 CI/gate/commit 证据: **Net result for this PR**: 1 of 6 acceptance criteria are P
+- ❌ Type A/B 违规：第 42 行声明无 CI/gate/commit 证据: 2 are PARTIAL (PASS in artifact terms, FAIL in gate wiring t
+- ❌ Type A/B 违规：第 98 行声明无 CI/gate/commit 证据: cli_smoke             2/2 PASS
+- ❌ Type A/B 违规：第 99 行声明无 CI/gate/commit 证据: toml_round_trip       3/3 PASS
+- ❌ Type A/B 违规：第 100 行声明无 CI/gate/commit 证据: managed_dispatch      2/2 PASS
+- ❌ Type A/B 违规：第 101 行声明无 CI/gate/commit 证据: timeout_enforced      3/3 PASS
+- ❌ Type A/B 违规：第 213 行声明无 CI/gate/commit 证据: "openspec 标 done" / "报告标题写已完成" / "PR 已�
+- ❌ Type A/B 违规：第 217 行声明无 CI/gate/commit 证据: V312-24 本身**不能**在 V312-25 ~ V312-30 全部 PASS �
+- ❌ Type A/B 违规：第 235 行声明无 CI/gate/commit 证据: | 1 | `crates/sqlancer` | **activate** | minimax | 2026-08-2
+- ❌ Type A/B 违规：第 236 行声明无 CI/gate/commit 证据: | 2 | `crates/test-runner` | **activate** | minimax | 2026-0
+- ❌ Type A/B 违规：第 237 行声明无 CI/gate/commit 证据: | 3 | `crates/test-registry` | **activate** | minimax | 2026
+- ❌ Type A/B 违规：第 246 行声明无 CI/gate/commit 证据: | 12 | `tests/e2e/e2e_beta_test.rs` 5 double-skip tests | **
+- ❌ Type A/B 违规：第 254 行声明无 CI/gate/commit 证据: **V312-24 自身关闭条件**：上表 16 项全 PASS + V31
+- ❌ Type A/B 违规：第 70 行声明无 CI/gate/commit 证据: **PASS — 154 tests passed, 0 failed**
+- ❌ Type A/B 违规：第 93 行声明无 CI/gate/commit 证据: - [x] schema/version/chunk/relation/audit/document 模块代
+- ❌ Type A/B 违规：第 99 行声明无 CI/gate/commit 证据: **状态: PASS — 满足关闭条件**
+- ❌ Type A/B 违规：第 20 行声明无 CI/gate/commit 证据: | `test_wal_entry_large_payload` | ✅ PASS |
+- ❌ Type A/B 违规：第 21 行声明无 CI/gate/commit 证据: | `test_wal_entry_serialization_roundtrip` | ✅ PASS |
+- ❌ Type A/B 违规：第 22 行声明无 CI/gate/commit 证据: | `test_wal_checkpoint_recovery` | ✅ PASS |
+- ❌ Type A/B 违规：第 23 行声明无 CI/gate/commit 证据: | `test_wal_concurrent_transactions_isolation` | ✅ PASS |
+- ❌ Type A/B 违规：第 24 行声明无 CI/gate/commit 证据: | `test_wal_mixed_operations` | ✅ PASS |
+- ❌ Type A/B 违规：第 25 行声明无 CI/gate/commit 证据: | `test_wal_recovery_after_crash` | ✅ PASS |
+- ❌ Type A/B 违规：第 26 行声明无 CI/gate/commit 证据: | `test_wal_rollback_recovery` | ✅ PASS |
+- ❌ Type A/B 违规：第 27 行声明无 CI/gate/commit 证据: | `test_wal_recovery_with_pending_transaction` | ✅ PASS |
+- ❌ Type A/B 违规：第 28 行声明无 CI/gate/commit 证据: | `test_wal_single_transaction` | ✅ PASS |
+- ❌ Type A/B 违规：第 30 行声明无 CI/gate/commit 证据: **Result**: 16/16 WAL integration tests PASS ✅
+- ❌ Type A/B 违规：第 36 行声明无 CI/gate/commit 证据: | `test_crash_recovery_reconstructs_pages` | ✅ PASS |
+- ❌ Type A/B 违规：第 37 行声明无 CI/gate/commit 证据: | `test_f26_crash_recovery` | ✅ PASS |
+- ❌ Type A/B 违规：第 39 行声明无 CI/gate/commit 证据: **Result**: 2/2 storage crash tests PASS ✅
+- ❌ Type A/B 违规：第 48 行声明无 CI/gate/commit 证据: **Result**: 6/8 tests PASS, 2 FAIL ⚠️
+- ❌ Type A/B 违规：第 60 行声明无 CI/gate/commit 证据: | `test_upgrade_gate_script_exists` | ✅ PASS |
+- ❌ Type A/B 违规：第 61 行声明无 CI/gate/commit 证据: | `test_upgrade_script_has_required_functions` | ✅ PASS |
+- ❌ Type A/B 违规：第 62 行声明无 CI/gate/commit 证据: | `test_upgrade_script_exists` | ✅ PASS |
+- ❌ Type A/B 违规：第 63 行声明无 CI/gate/commit 证据: | `test_upgrade_script_syntax` | ✅ PASS |
+- ❌ Type A/B 违规：第 65 行声明无 CI/gate/commit 证据: **Result**: 4/4 upgrade tests PASS ✅
+- ❌ Type A/B 违规：第 79 行声明无 CI/gate/commit 证据: | WAL Integration | ✅ PASS (16/16) | None |
+- ❌ Type A/B 违规：第 80 行声明无 CI/gate/commit 证据: | Storage Crash Recovery | ✅ PASS (2/2) | None |
+- ❌ Type A/B 违规：第 82 行声明无 CI/gate/commit 证据: | Upgrade Path | ✅ PASS (4/4) | None |
+- ❌ Type A/B 违规：第 28 行声明无 CI/gate/commit 证据: **PASS** — 13/13 passed including `test_vtu_guard_wraps_st
+- ❌ Type A/B 违规：第 41 行声明无 CI/gate/commit 证据: **PASS** — 旧的 `rows.len() <= 6` (accepts 0 rows) 改�
+- ❌ Type A/B 违规：第 43 行声明无 CI/gate/commit 证据: 加载好或 Q1 完全失败 — 之前是 PASS 静默吞，
+- ❌ Type A/B 违规：第 54 行声明无 CI/gate/commit 证据: **PASS** — 6 passed (5 个 e2e_XX 加上 e2e_beta_manifest
+- ❌ Type A/B 违规：第 73 行声明无 CI/gate/commit 证据: **PASS** — stale + union 全部 0。
+- ❌ Type A/B 违规：第 89 行声明无 CI/gate/commit 证据: **PASS**.
+- ❌ Type A/B 违规：第 116 行声明无 CI/gate/commit 证据: 按"以实际 gate 数字关闭"的严格要求：5/5 关闭
+- ❌ Type A/B 违规：第 16 行声明无 CI/gate/commit 证据: **v3.11.0 GA 6/6 gates PASS — v3.12.0 不继承 hidden 弱
+- ❌ Type A/B 违规：第 20 行声明无 CI/gate/commit 证据: | G1 R1-R4 RC 指标 | ✅ PASS | 否 |
+- ❌ Type A/B 违规：第 21 行声明无 CI/gate/commit 证据: | G2 Full test suite | ⚠️ 2,666 tests (2,664 PASS + 2 FA
+- ❌ Type A/B 违规：第 24 行声明无 CI/gate/commit 证据: | G5 Security audit | ✅ PASS | 否 |
+- ❌ Type A/B 违规：第 41 行声明无 CI/gate/commit 证据: | sqlrustgo-executor | 685 | ✅ PASS | 2026-08-09 18:00+080
+- ❌ Type A/B 违规：第 42 行声明无 CI/gate/commit 证据: | sqlrustgo-storage | 683 | ✅ PASS | 2026-08-09 18:00+0800
+- ❌ Type A/B 违规：第 43 行声明无 CI/gate/commit 证据: | sqlrustgo-parser | 589 (3 ignored) | ✅ PASS | 同上 |
+- ❌ Type A/B 违规：第 44 行声明无 CI/gate/commit 证据: | sqlrustgo-catalog | 183 | ✅ PASS | 同上 |
+- ❌ Type A/B 违规：第 46 行声明无 CI/gate/commit 证据: | sqlrustgo-planner | 84 | ✅ PASS | 同上 |
+- ❌ Type A/B 违规：第 47 行声明无 CI/gate/commit 证据: | sqlrustgo-common | 79 | ✅ PASS | 同上 |
+- ❌ Type A/B 违规：第 48 行声明无 CI/gate/commit 证据: | sqlrustgo-mysql-client | 79 | ✅ PASS | 同上 |
+- ❌ Type A/B 违规：第 49 行声明无 CI/gate/commit 证据: | sqlrustgo-admin | 69 | ✅ PASS | 同上 |
+- ❌ Type A/B 违规：第 50 行声明无 CI/gate/commit 证据: | sqlrustgo-cache | 10 | ✅ PASS | 同上 |
+- ❌ Type A/B 违规：第 85 行声明无 CI/gate/commit 证据: | 22/22 实跑 PASS | ✅ | ✅ | ✅ | both | both |
+- ❌ Type A/B 违规：第 91 行声明无 CI/gate/commit 证据: **Source report**: `docs/releases/v3.11.0/TPCH_SF1_22_22_PAS
+- ❌ Type A/B 违规：第 142 行声明无 CI/gate/commit 证据: | Pre-flight (home/readlink/buildroot) | ✅ PASS | — |
+- ❌ Type A/B 违规：第 159 行声明无 CI/gate/commit 证据: | **G3 覆盖率** (3 crates < 80%) | PASS (gate = tools 80.
+- ❌ Type A/B 违规：第 160 行声明无 CI/gate/commit 证据: | **G4 TPC-H zero-row correctness** | 22/22 不 OOM (PASS) |
+- ❌ Type A/B 违规：第 205 行声明无 CI/gate/commit 证据:   [A1_BUILD] PASS
+- ❌ Type A/B 违规：第 290 行声明无 CI/gate/commit 证据:   [PASS] docs/releases/v3.12.0/BLOCKER_DISPOSITION_V311.md e
+- ❌ Type A/B 违规：第 291 行声明无 CI/gate/commit 证据: --- Gap 2: GA gates PASS verification ---
+- ❌ Type A/B 违规：第 294 行声明无 CI/gate/commit 证据:   [PASS] 10 crates have test counts recorded
+- ❌ Type A/B 违规：第 296 行声明无 CI/gate/commit 证据:   [PASS]        2 crates < 80% (acceptable, tracked to V312-
+- ❌ Type A/B 违规：第 298 行声明无 CI/gate/commit 证据:   [PASS] G4 TPC-H SF=1 22/22 verified
+- ❌ Type A/B 违规：第 300 行声明无 CI/gate/commit 证据:   [PASS] SOAK 343h37m (2.04x) verified
+- ❌ Type A/B 违规：第 302 行声明无 CI/gate/commit 证据:   [PASS] All 5 remotes synced to v3.11.0-ga
+- ❌ Type A/B 违规：第 305 行声明无 CI/gate/commit 证据: PASS: 7 / 7
+- ❌ Type A/B 违规：第 308 行声明无 CI/gate/commit 证据: V312-01 blocker disposition: PASS
+- ❌ Type A/B 违规：第 312 行声明无 CI/gate/commit 证据: **Gate execution**: 7/7 PASS — v3.12.0 ALPHA promotion 入
+- ❌ Type A/B 违规：第 61 行声明无 CI/gate/commit 证据: | `test_composite_btree_index_insert` | ✅ PASS |
+- ❌ Type A/B 违规：第 62 行声明无 CI/gate/commit 证据: | `test_composite_btree_index_insert_unique` | ✅ PASS |
+- ❌ Type A/B 违规：第 63 行声明无 CI/gate/commit 证据: | `test_composite_btree_index_search` | ✅ PASS |
+- ❌ Type A/B 违规：第 64 行声明无 CI/gate/commit 证据: | `test_composite_btree_index_range_query` | ✅ PASS |
+- ❌ Type A/B 违规：第 65 行声明无 CI/gate/commit 证据: | `test_composite_btree_index_num_columns` | ✅ PASS |
+- ❌ Type A/B 违规：第 49 行声明无 CI/gate/commit 证据: | parser_fixtures | `cargo test -p sqlrustgo-parser...` | �
+- ❌ Type A/B 违规：第 66 行声明无 CI/gate/commit 证据: | R2.1-R2.3 | ✅ PASS | None |
+- ❌ Type A/B 违规：第 69 行声明无 CI/gate/commit 证据: | parser_fixtures | ✅ PASS | None |
+- ❌ Type A/B 违规：第 47 行声明无 CI/gate/commit 证据: **PASS — 154 tests passed, 0 failed**
+- ❌ Type A/B 违规：第 62 行声明无 CI/gate/commit 证据: - [x] retrieval.rs 代码存在且编译通过
+- ❌ Type A/B 违规：第 68 行声明无 CI/gate/commit 证据: **状态: PASS — 满足关闭条件**
+- ❌ Type A/B 违规：第 22 行声明无 CI/gate/commit 证据: | V312-G11 | SQLite SQLLogicTest 判定门禁 | `sqlrustgo_s
+- ❌ Type A/B 违规：第 24 行声明无 CI/gate/commit 证据: | V312-G13 | MySQL wire protocol 硬化 | COM_QUERY、COM_ST
+- ❌ Type A/B 违规：第 28 行声明无 CI/gate/commit 证据: | V312-G17 | Window/GIS/JSON 受控功能 | ROW_NUMBER/RANK/
+- ❌ Type A/B 违规：第 33 行声明无 CI/gate/commit 证据: | V312-G22 | MySQL 兼容与 SQL surface 回归 | SHOW、aut
+- ❌ Type A/B 违规：第 66 行声明无 CI/gate/commit 证据: 每个 PASS claim 必须包含：command、timestamp、sourc
+- ❌ Type A/B 违规：第 81 行声明无 CI/gate/commit 证据: - 168h mixed SOAK 未完成，或没有证据却写成 PASS�
+- ❌ Type A/B 违规：第 100 行声明无 CI/gate/commit 证据: | Alpha | `cargo build -p sqlrustgo_sqllogictest` 成功；r
+- ❌ Type A/B 违规：第 102 行声明无 CI/gate/commit 证据: | RC | curated SQLite-compatible subset 运行，并输出 P
+- ❌ Type A/B 违规：第 103 行声明无 CI/gate/commit 证据: | GA | selected SLT targets 全部通过，或每个 skipped
+- ❌ Type A/B 违规：第 118 行声明无 CI/gate/commit 证据: | `cargo run -p sqlrustgo_sqllogictest -- --test-dir crates/
+- ❌ Type A/B 违规：第 135 行声明无 CI/gate/commit 证据: | G3 coverage 口径漂移 | 单一 canonical coverage comma
+- ❌ Type A/B 违规：第 147 行声明无 CI/gate/commit 证据: | v3.6 Beta PENDING 与覆盖率/测试编译延续问题 | 
+- ❌ Type A/B 违规：第 194 行声明无 CI/gate/commit 证据: | V312-G11 | SQLite SQLLogicTest oracle | `sqlrustgo_sqllogi
+- ❌ Type A/B 违规：第 217 行声明无 CI/gate/commit 证据: Every PASS claim must include
+- ❌ Type A/B 违规：第 225 行声明无 CI/gate/commit 证据: - PASS/FAIL boundary
+- ❌ Type A/B 违规：第 240 行声明无 CI/gate/commit 证据: - 168h mixed SOAK is not completed or is described as PASS w
+- ❌ Type A/B 违规：第 252 行声明无 CI/gate/commit 证据: | RC | Curated SQLite-compatible subset runs with PASS/FAIL/
+- ❌ Type A/B 违规：第 285 行声明无 CI/gate/commit 证据: | G3 coverage口径漂移 | Single canonical coverage comman
+- ❌ Type A/B 违规：第 26 行声明无 CI/gate/commit 证据: - 禁止声明 v3.12.0 已通过 Alpha/Beta/RC/GA。
+- ❌ Type A/B 违规：第 27 行声明无 CI/gate/commit 证据: - 禁止声明 SQLLogicTest、TPC-H correctness、wire、LOA
+- ❌ Type A/B 违规：第 47 行声明无 CI/gate/commit 证据: - 数据行数：20（PASS: 11 / unsupported: 2 / deferred: 
+- ❌ Type A/B 违规：第 48 行声明无 CI/gate/commit 证据: - **PASS surface**: `alter_add_column`, `alter_drop_column`,
+- ❌ Type A/B 违规：第 28 行声明无 CI/gate/commit 证据: **PASS** — 10 unique file paths deleted in git history.
+- ❌ Type A/B 违规：第 38 行声明无 CI/gate/commit 证据: **PASS** — only `e2e_07_json_vector.sh` remains (kept for 
+- ❌ Type A/B 违规：第 46 行声明无 CI/gate/commit 证据: **PASS** — 10 retired entries added (one per retired scrip
+- ❌ Type A/B 违规：第 61 行声明无 CI/gate/commit 证据: **PASS** — 唯一引用被删脚本的代码是 `tests/bas
+- ❌ Type A/B 违规：第 75 行声明无 CI/gate/commit 证据: **PASS**.
+- ❌ Type A/B 违规：第 107 行声明无 CI/gate/commit 证据: 按"以实际 gate 数字关闭"的严格要求：5/5 关闭
+- ❌ Type A/B 违规：第 14 行声明无 CI/gate/commit 证据: **验收**: blocker disposition report、stage gate output�
+- ❌ Type A/B 违规：第 75 行声明无 CI/gate/commit 证据: **验收**: `cargo build -p sqlrustgo_sqllogictest` 成功�
+- ❌ Type A/B 违规：第 142 行声明无 CI/gate/commit 证据: **验收**: 对 GMP/生产路径相关子集给出 fixture P
+- ❌ Type A/B 违规：第 166 行声明无 CI/gate/commit 证据: 12 个 task 全完成（sqlancer / test-runner / test-regist
+- ❌ Type A/B 违规：第 193 行声明无 CI/gate/commit 证据: 2. 失败注入测试 1：`mv scripts/gate/e2e/e2e_07_fixtur
+- ❌ Type A/B 违规：第 197 行声明无 CI/gate/commit 证据: **禁止关闭条件**: 仅以"测试通过"或"无 `\|\| tr
+- ❌ Type A/B 违规：第 222 行声明无 CI/gate/commit 证据: **Baseline evidence**: `docs/releases/v3.12.0/evidence/V312-
+- ❌ Type A/B 违规：第 229 行声明无 CI/gate/commit 证据: **禁止关闭条件**: (a) 仅靠"打开了 follow-up 任�
+- ❌ Type A/B 违规：第 241 行声明无 CI/gate/commit 证据: 2. `bash scripts/gate/check_beta_gate.sh 2>&1 | grep B10_SQL
+- ❌ Type A/B 违规：第 262 行声明无 CI/gate/commit 证据:    - `bash scripts/gate/check_beta_gate.sh` B10_SQLANCER 通
+- ❌ Type A/B 违规：第 265 行声明无 CI/gate/commit 证据: **禁止关闭条件**: (a) 不允许"openspec 标 done"、"
+- ❌ Type A/B 违规：第 294 行声明无 CI/gate/commit 证据: - Evidence hashes for any PASS claim.
+- ❌ Type A/B 违规：第 409 行声明无 CI/gate/commit 证据: - GA gate report contains only evidence-backed PASS claims.
+- ❌ Type A/B 违规：第 434 行声明无 CI/gate/commit 证据: - The selected SLT corpus has PASS/FAIL/SKIP classification.
+- ❌ Type A/B 违规：第 14 行声明无 CI/gate/commit 证据: 2. Issue 评论包含 PR 编号、commit SHA、执行命令�
+- ❌ Type A/B 违规：第 150 行声明无 CI/gate/commit 证据: - **测试**: 9 PASS / 1 unsupported / 4 deferred
+- ❌ Type A/B 违规：第 35 行声明无 CI/gate/commit 证据: | demo.test | PASS | Basic SELECT |
+- ❌ Type A/B 违规：第 37 行声明无 CI/gate/commit 证据: | insert__test_insert_invalid.test | PASS | Error cases |
+- ❌ Type A/B 违规：第 38 行声明无 CI/gate/commit 证据: | delete__test_delete.test | PASS | DELETE operations |
+- ❌ Type A/B 违规：第 39 行声明无 CI/gate/commit 证据: | update__test_update.test | PASS | UPDATE operations |
+- ❌ Type A/B 违规：第 40 行声明无 CI/gate/commit 证据: | constraints__test_not_null.test | PASS | NOT NULL constrai
+- ❌ Type A/B 违规：第 26 行声明无 CI/gate/commit 证据: - 文档链接和一致性检查通过。
+- ❌ Type A/B 违规：第 44 行声明无 CI/gate/commit 证据: Draft 阶段可以移交 Hermes/OMP 进入 Alpha 开发准�
+- ❌ Type A/B 违规：第 50 行声明无 CI/gate/commit 证据: | `bash scripts/gate/check_sqllogictest_v312.sh` | PASS，4/
+- ❌ Type A/B 违规：第 51 行声明无 CI/gate/commit 证据: | `bash scripts/gate/check_alpha_v3.12.0.sh` | PASS，13/13 
+- ❌ Type A/B 违规：第 52 行声明无 CI/gate/commit 证据: | `bash scripts/gate/check_stage.sh --version v3.12.0 --dry-
+- ❌ Type A/B 违规：第 53 行声明无 CI/gate/commit 证据: | `bash scripts/gate/check_stage.sh --version v3.12.0 --stag
+- ❌ Type A/B 违规：第 54 行声明无 CI/gate/commit 证据: | `bash scripts/gate/check_stage.sh --version v3.12.0` | PAS
+- ❌ Type B 违规：门禁文档无 gate_policy_eval_id（疑似伪门禁）：DRAFT_ASSESSMENT_AND_ALPHA_GATE.md
+- ❌ Type B 违规：门禁声明 PASS 但无 gate engine 输出：DRAFT_ASSESSMENT_AND_ALPHA_GATE.md
+- ❌ Type A/B 违规：第 44 行声明无 CI/gate/commit 证据: 2. 失败时 `exit 1` (而非 `PASS=$((PASS+1))` 静默)
+- ❌ Type A/B 违规：第 83 行声明无 CI/gate/commit 证据:   PASS: sysbench ran 3s with 1 thread(s), 1402 events at 466
+- ❌ Type A/B 违规：第 85 行声明无 CI/gate/commit 证据: === E2E sysbench_smoke_test: PASS ===
+- ❌ Type A/B 违规：第 50 行声明无 CI/gate/commit 证据: **PASS — 154 tests passed, 0 failed**
+- ❌ Type A/B 违规：第 65 行声明无 CI/gate/commit 证据: - [x] vector_index/vector_search/embedding 模块代码存�
+- ❌ Type A/B 违规：第 71 行声明无 CI/gate/commit 证据: **状态: PASS — 满足关闭条件**
+- ❌ Type A/B 违规：第 47 行声明无 CI/gate/commit 证据: **PASS — 154 tests passed, 0 failed**
+- ❌ Type A/B 违规：第 62 行声明无 CI/gate/commit 证据: - [x] rag.rs 代码存在且编译通过
+- ❌ Type A/B 违规：第 68 行声明无 CI/gate/commit 证据: **状态: PASS — 满足关闭条件**
+- ❌ Type A/B 违规：第 82 行声明无 CI/gate/commit 证据: | `wire_smoke_mysql_cli.rs` | 11/11 PASS |
+- ❌ Type A/B 违规：第 83 行声明无 CI/gate/commit 证据: | Architecture invariants (C-ARCH-01~05) | 5/5 PASS |
+- ❌ Type A/B 违规：第 84 行声明无 CI/gate/commit 证据: | `check_load_data_infile.sh` | 4/4 PASS |
+- ❌ Type A/B 违规：第 99 行声明无 CI/gate/commit 证据: - C-ARCH-01~05 invariants (5/5 PASS)
+- ❌ Type A/B 违规：第 19 行声明无 CI/gate/commit 证据: **PASS** — SQLancer 部分（line 110-118）已去 `|| tru
+- ❌ Type A/B 违规：第 30 行声明无 CI/gate/commit 证据: **PASS** — baseline `check_warn` 已升级为 `check_fail`
+- ❌ Type A/B 违规：第 39 行声明无 CI/gate/commit 证据: **PASS** — 8 个 scenarios 改 4 个 (V312-25 retired 3 st
+- ❌ Type A/B 违规：第 48 行声明无 CI/gate/commit 证据: **PASS** — P16 step 2.5/3 新增，扫出 **29 个 `|| tru
+- ❌ Type A/B 违规：第 60 行声明无 CI/gate/commit 证据: **PASS**.
+- ❌ Type A/B 违规：第 99 行声明无 CI/gate/commit 证据: 按"以实际 gate 数字关闭"的严格要求：5/5 关闭
+- ❌ Type A/B 违规：第 34 行声明无 CI/gate/commit 证据: - 2026-08-09 本地基线：`cargo build -p sqlrustgo_sqllog
+- ❌ Type A/B 违规：第 94 行声明无 CI/gate/commit 证据: | `wire_load_data/V312-13-REPORT.md` | `check_v312_13_wire_l
+- ❌ Type A/B 违规：第 96 行声明无 CI/gate/commit 证据: | `mysql_compat/SURFACE_DISPOSITION.md` | `check_v312_21_mys
+- ❌ Type A/B 违规：第 101 行声明无 CI/gate/commit 证据: | 测试目标 | 通过 | 失败 |
+- ❌ Type A/B 违规：第 113 行声明无 CI/gate/commit 证据: | `scripts/gate/check_v312_13_wire_load_data.sh` | V312-13 e
+- ❌ Type A/B 违规：第 114 行声明无 CI/gate/commit 证据: | `scripts/gate/check_v312_19_release_gates.sh` | RC/GA 阻�
+- ❌ Type A/B 违规：第 163 行声明无 CI/gate/commit 证据:   alter_modify_column 全部 PASS** (5 个新增 PASS)
+- ❌ Type A/B 违规：第 165 行声明无 CI/gate/commit 证据:   4 个 fixture 之前标 `UNSUPPORTED` 但 server 静默接
+- ❌ Type A/B 违规：第 166 行声明无 CI/gate/commit 证据:   后: **4 个新增 PASS** (server 解析但语义不实现
+- ❌ Type A/B 违规：第 171 行声明无 CI/gate/commit 证据: 最终 disposition: **9 PASS / 1 unsupported / 4 deferred / 
+- ❌ Type A/B 违规：第 176 行声明无 CI/gate/commit 证据:   (600 lineitem rows / 62 KB), 8 个表全部 LOAD DATA 成�
+- ❌ Type A/B 违规：第 196 行声明无 CI/gate/commit 证据: - V312-13 / V312-19 / V312-21 gates: ALL PASS
+- ❌ Type A/B 违规：第 211 行声明无 CI/gate/commit 证据:   - 新增 PASS surface (6 个意外实现): `group_concat`,
+- ❌ Type A/B 违规：第 213 行声明无 CI/gate/commit 证据:   - 最终结果: **11 PASS / 2 unsupported / 7 deferred / 0
+- ❌ Type A/B 违规：第 271 行声明无 CI/gate/commit 证据: - 2026-08-09 local baseline: `cargo build -p sqlrustgo_sqllo
 
 ---
 
 ### 警告项（需要人工复核）
 
-- ⚠️ 警告：第 117 行 FAIL 声明可能无证据
-- ⚠️ 警告：第 120 行 FAIL 声明可能无证据
-- ⚠️ 警告：第 277 行历史版本引用可能需更新: - **诚实评估**: **v3.9.0 GA 当前不能在覆盖率维度声称 PASS**, 只能说"覆
-- ⚠️ 警告：第 291 行 FAIL 声明可能无证据
-- ⚠️ 文档可能缺少 provenance 元数据：TEST_TRUTHFULNESS_REPORT.md
-- ⚠️ 文档不存在（跳过检查）：SOAK_72H_REPORT.md
-- ⚠️ 文档不存在（跳过检查）：BETA_RELEASE_NOTES.md
-- ⚠️ 警告：第 452 行历史版本引用可能需更新: | SQLRustGo v3.9.0  | 22/22 PASS | This release   
-- ⚠️ 文档可能缺少 provenance 元数据：FEATURE_MATRIX.md
-- ⚠️ 文档可能缺少 provenance 元数据：SESSION_FINAL_STATUS_2026-06-19.md
-- ⚠️ 文档不存在（跳过检查）：PERFORMANCE_REPORT.md
-- ⚠️ 文档不存在（跳过检查）：RC_GATE_REPORT.md
-- ⚠️ 文档不存在（跳过检查）：COVERAGE_GAP_RATIONALE.md
-- ⚠️ 文档不存在（跳过检查）：TPC-H_PARTIAL_RESULT.md
-- ⚠️ 文档不存在（跳过检查）：SECURITY_AUDIT.md
-- ⚠️ 文档可能缺少 provenance 元数据：GA_GATE_REPORT.md
-- ⚠️ 文档可能缺少 provenance 元数据：Q8_PERF_ANALYSIS.md
-- ⚠️ 警告：第 70 行历史版本引用可能需更新: - newString: `> **Current dev branch**: [\`8a83e25
-- ⚠️ 警告：第 119 行历史版本引用可能需更新: - newString: `3. **Tag v3.9.0-ga-candidate** at cu
-- ⚠️ 文档可能缺少 provenance 元数据：V390_COMPREHENSIVE_DOC_AUDIT_PLAN.md
-- ⚠️ 警告：第 84 行 FAIL 声明可能无证据
-- ⚠️ 警告：第 125 行 FAIL 声明可能无证据
-- ⚠️ 文档可能缺少 provenance 元数据：RUST_1.96_UPGRADE.md
-- ⚠️ 警告：第 57 行 FAIL 声明可能无证据
-- ⚠️ 警告：第 143 行历史版本引用可能需更新: git tag -a v3.9.0-ga -m "v3.9.0 GA: 168h wall-cloc
-- ⚠️ 文档可能缺少 provenance 元数据：GA_READINESS_FINAL_2026-06-19.md
-- ⚠️ 文档不存在（跳过检查）：00-release-summary.md
-- ⚠️ 文档不存在（跳过检查）：09-ci-build-log.md
-- ⚠️ 文档不存在（跳过检查）：02-scope-definition.md
-- ⚠️ 文档不存在（跳过检查）：08-license-compliance.md
-- ⚠️ 文档不存在（跳过检查）：03-test-report.md
-- ⚠️ 文档不存在（跳过检查）：04-coverage-report.md
-- ⚠️ 文档不存在（跳过检查）：05-security-scan-report.md
-- ⚠️ 文档不存在（跳过检查）：01-release-notes.md
-- ⚠️ 文档不存在（跳过检查）：10-approval-record.md
-- ⚠️ 文档不存在（跳过检查）：06-performance-report.md
-- ⚠️ 文档不存在（跳过检查）：07-dependency-audit.md
-- ⚠️ 警告：第 153 行历史版本引用可能需更新: 3. **Tag v3.9.0-ga-candidate** at current tip (aft
-- ⚠️ 文档可能缺少 provenance 元数据：GA_GATE_STATUS_REPORT.md
-- ⚠️ 警告：第 214 行历史版本引用可能需更新: | v3.9.0-rc3 | 2026-06-12 | G1-G16 form-only + sub
-- ⚠️ 警告：第 215 行历史版本引用可能需更新: | v3.9.0-rc4 | 2026-06-12 | G1/G7/G8/G9/G13 PASS; 
-- ⚠️ 文档可能缺少 provenance 元数据：CHANGELOG.md
-- ⚠️ 文档不存在（跳过检查）：V390_TEST_PLAN_SUPPLEMENT_PERF.md
-- ⚠️ 文档不存在（跳过检查）：V390_TEST_PLAN_ROUND2_REVIEW.md
-- ⚠️ 文档不存在（跳过检查）：SPRINT4_MASTER_PLAN.md
-- ⚠️ 文档不存在（跳过检查）：V390_TEST_PLAN.md
-- ⚠️ 警告：第 318 行历史版本引用可能需更新: | v3.9.0 | RC7 | 2026-06-12 | 性能文档 + MariaDB 对比 (3
-- ⚠️ 警告：第 319 行历史版本引用可能需更新: | v3.9.0 | RC6 | 2026-06-12 | INT-2/INT-3 实质性测试 (3
-- ⚠️ 警告：第 321 行历史版本引用可能需更新: | v3.9.0 | RC4 | 2026-06-12 | G1/G7/G8/G9/G13 PASS
-- ⚠️ 警告：第 322 行历史版本引用可能需更新: | v3.9.0 | RC3 | 2026-06-12 | G1-G16 全部 PASS | — |
-- ⚠️ 文档可能缺少 provenance 元数据：INDEX.md
-- ⚠️ 文档不存在（跳过检查）：V390_VERSION_PLAN.md
-- ⚠️ 文档不存在（跳过检查）：V390_DEVELOPMENT_PLAN.md
-- ⚠️ 文档不存在（跳过检查）：TPCH_ORACLE_PLAN.md
-- ⚠️ 文档可能缺少 provenance 元数据：V390_COMPREHENSIVE_DOC_AUDIT_WORK_REPORT.md
-- ⚠️ 警告：第 112 行 FAIL 声明可能无证据
-- ⚠️ 警告：第 223 行 FAIL 声明可能无证据
-- ⚠️ 文档可能缺少 provenance 元数据：TPCH_E2E_TESTING.md
-- ⚠️ 警告：第 132 行 FAIL 声明可能无证据
-- ⚠️ 警告：第 205 行历史版本引用可能需更新: **只有全部完成**: v3.9.0 RC2 → v3.9.0 GA
-- ⚠️ 文档可能缺少 provenance 元数据：EVIDENCE_STATUS.md
-- ⚠️ 文档可能缺少 provenance 元数据：SESSION_2026-06-24_HERMES_MACMINI_STATUS.md
-- ⚠️ 文档可能缺少 provenance 元数据：V390_DOC_CORRECTION_STATUS.md
-- ⚠️ 警告：第 32 行 FAIL 声明可能无证据
-- ⚠️ 警告：第 33 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 17 行历史版本引用可能需更新: 本版本还承接 v3.6.0-v3.11.0 文档中已经�
+- ⚠️ 警告：第 36 行历史版本引用可能需更新: | v3.6.0 Beta PENDING 与 coverage/test compile �
+- ⚠️ 文档可能缺少 provenance 元数据：VERSION_PLAN.md
+- ⚠️ 警告：第 16 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：GMP_COMPLIANCE_MATRIX.md
+- ⚠️ 文档可能缺少 provenance 元数据：README.md
+- ⚠️ 警告：第 49 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：v312-09-backup-restore-report.md
+- ⚠️ 警告：第 17 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 49 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：arch-invariant-report.md
+- ⚠️ 警告：第 28 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 109 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：wire-e2e-report.md
+- ⚠️ 文档可能缺少 provenance 元数据：load-data-report.md
+- ⚠️ 警告：第 25 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 44 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 62 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：v312-03-gmp-ingestion-report.md
+- ⚠️ 文档可能缺少 provenance 元数据：window-gis-json-feature-delivery-report.md
+- ⚠️ 文档可能缺少 provenance 元数据：REVIEWER_SIGN_OFF.md
+- ⚠️ 警告：第 38 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：execution-architecture-debt-report.md
+- ⚠️ 文档可能缺少 provenance 元数据：ARCHITECTURE.md
+- ⚠️ 警告：第 14 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 117 行历史版本引用可能需更新: | 4 | `tests/baseline/ignore_registry.json` matche
+- ⚠️ 文档可能缺少 provenance 元数据：V312-30_stage_transition_report.md
+- ⚠️ 警告：第 23 行 FAIL 声明可能无证据
 - ⚠️ 警告：第 34 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 38 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 69 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 134 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：V312-30_signoff_report.md
+- ⚠️ 警告：第 47 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：v312-06-graph-projection-report.md
+- ⚠️ 警告：第 65 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：v312-08-compliance-audit-report.md
+- ⚠️ 警告：第 120 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 141 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 145 行历史版本引用可能需更新: | v3.6.0 | Beta B1-B8 曾全部 PENDING；Parser/E
+- ⚠️ 警告：第 152 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 516 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：DEVELOPMENT_PLAN.md
+- ⚠️ 文档不存在（跳过检查）：V312-11-VERIFICATION.md
+- ⚠️ 文档不存在（跳过检查）：smoke-report.md
+- ⚠️ 文档可能缺少 provenance 元数据：disabled-test-registry.md
+- ⚠️ 文档可能缺少 provenance 元数据：V312-28_corpus_activation_report.md
+- ⚠️ 警告：第 47 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：V312-26_warn_only_fix_report.md
+- ⚠️ 警告：第 42 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：V312-24_test_infra_activation_report.md
+- ⚠️ 警告：第 70 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：v312-02-gmp-schema-report.md
+- ⚠️ 警告：第 45 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 46 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 48 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：crash-recovery-upgrade-verification-report.md
+- ⚠️ 警告：第 43 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：V312-27_anti_fab_fix_report.md
+- ⚠️ 警告：第 21 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 45 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 51 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 75 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 306 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：BLOCKER_DISPOSITION_V311.md
+- ⚠️ 文档可能缺少 provenance 元数据：storage-index-wal-backlog-report.md
+- ⚠️ 文档可能缺少 provenance 元数据：sequence-executor-gap-assessment.md
 - ⚠️ 警告：第 35 行 FAIL 声明可能无证据
 - ⚠️ 警告：第 41 行 FAIL 声明可能无证据
-- ⚠️ 文档可能缺少 provenance 元数据：GA_READINESS_STATUS_2026-06-21.md
-- ⚠️ 文档可能缺少 provenance 元数据：V390_DOC_CORRECTION_PLAN.md
-- ⚠️ 文档可能缺少 provenance 元数据：WIRED-22-VERIFICATION-REPORT.md
-- ⚠️ 文档可能缺少 provenance 元数据：INSTALL.md
-- ⚠️ 警告：第 113 行历史版本引用可能需更新: | `evidence/00-release-summary.md` | "Tag v3.9.0-r
-- ⚠️ 警告：第 113 行 FAIL 声明可能无证据
-- ⚠️ 警告：第 138 行 FAIL 声明可能无证据
-- ⚠️ 警告：第 139 行 FAIL 声明可能无证据
-- ⚠️ 警告：第 140 行 FAIL 声明可能无证据
-- ⚠️ 文档可能缺少 provenance 元数据：INTEGRATION_TEST_HONEST_ASSESSMENT.md
-- ⚠️ 警告：第 35 行历史版本引用可能需更新: | 6 | `/ROADMAP.md` | v3.9.0 计划项 "MVCC 完整实现" 已完成 (
-- ⚠️ 警告：第 56 行历史版本引用可能需更新: newString: | v3.9.0-rc3 | 2026-06-12 | All 5 RC3 P
-- ⚠️ 警告：第 57 行历史版本引用可能需更新: newString: | v3.9.0-rc4 | 2026-06-12 | RC4 gate PA
-- ⚠️ 文档可能缺少 provenance 元数据：V390_GA_DOC_CORRECTION_PLAN.md
-- ⚠️ 文档可能缺少 provenance 元数据：EVALUATION_REPORT.md
-- ⚠️ 文档可能缺少 provenance 元数据：LOCAL_SHORT_SOAK_REPORT_2026-06-18.md
-- ⚠️ 警告：第 40 行 FAIL 声明可能无证据
-- ⚠️ 文档可能缺少 provenance 元数据：SOAK_72H_LIVE_STATUS_2026-06-19.md
-- ⚠️ 文档标注环境限制 (env:blocked:no-ci): README.md (无 Gitea CI, 接受本地 verification log 证据)
-- ⚠️ 文档可能缺少 provenance 元数据：README.md
-- ⚠️ 文档可能缺少 provenance 元数据：IGNORE_REGISTRY_2026-06-25.md
-- ⚠️ 文档可能缺少 provenance 元数据：LONG_STABILITY_TESTS_ANALYSIS.md
-- ⚠️ 警告：第 50 行 FAIL 声明可能无证据
-- ⚠️ 警告：第 56 行 FAIL 声明可能无证据
-- ⚠️ 文档可能缺少 provenance 元数据：COVERAGE_COMPARISON_REPORT.md
-- ⚠️ 文档标注环境限制 (env:blocked:no-ci): README.md (无 Gitea CI, 接受本地 verification log 证据)
-- ⚠️ 文档可能缺少 provenance 元数据：README.md
-- ⚠️ 文档可能缺少 provenance 元数据：DEPLOYMENT_GUIDE.md
-- ⚠️ 警告：第 65 行历史版本引用可能需更新: | **v3.9.0 启动准备度** | ✅ READY (Phase 0 完成) | 分支 + 5
-- ⚠️ 警告：第 70 行历史版本引用可能需更新: | **工程化战略** | ✅ 已批准 (v3.9.0 type) | ChatGPT 架构师 20
-- ⚠️ 警告：第 129 行历史版本引用可能需更新: | **TPC-H** | 22/22 PASS (v3.8.0 最大成就) | ✅ 完整继承, G
-- ⚠️ 警告：第 426 行历史版本引用可能需更新: - TPC-H 22/22 baseline PASS (inherited from v3.8.0
-- ⚠️ 警告：第 609 行历史版本引用可能需更新: | W0 (2026-06-05) | Phase 0 收口 | develop/v3.9.0 创建
-- ⚠️ 警告：第 803 行历史版本引用可能需更新: **v3.8.0 GA Gate 总分**: 73+/80 ≥ 56 → ✅ PASS (继承)
-- ⚠️ 警告：第 804 行历史版本引用可能需更新: **v3.9.0 形式 GA Gate 总分**: 80+/100 (G1-G16 形式全 PASS
-- ⚠️ 警告：第 805 行历史版本引用可能需更新: **v3.9.0 真实 GA Gate 总分目标**: 80+/100 (G1-G16 真实全 PA
-- ⚠️ 警告：第 836 行历史版本引用可能需更新: | 维度 | v3.8.0 评审结论 | v3.9.0 形式完成 | v3.9.0 真实评估 (校准
-- ⚠️ 警告：第 871 行历史版本引用可能需更新: - `docs/releases/v3.9.0/ga/GA_GATE_REPORT.md` (16 
-- ⚠️ 警告：第 886 行历史版本引用可能需更新: | **Single-Node Production Candidate** | ❌ NOT YET
-- ⚠️ 警告：第 1211 行历史版本引用可能需更新: **v3.9.0 RC7 综合评估: Production Readiness Release + 
-- ⚠️ 文档可能缺少 provenance 元数据：V390_COMPREHENSIVE_ASSESSMENT.md
-- ⚠️ 文档标注环境限制 (env:blocked:no-ci): ROADMAP.md (无 Gitea CI, 接受本地 verification log 证据)
-- ⚠️ 文档可能缺少 provenance 元数据：ROADMAP.md
-- ⚠️ 警告：第 318 行历史版本引用可能需更新: | v3.9.0 | RC7 | 2026-06-12 | 性能文档 + MariaDB 对比 (3
-- ⚠️ 警告：第 319 行历史版本引用可能需更新: | v3.9.0 | RC6 | 2026-06-12 | INT-2/INT-3 实质性测试 (3
-- ⚠️ 警告：第 321 行历史版本引用可能需更新: | v3.9.0 | RC4 | 2026-06-12 | G1/G7/G8/G9/G13 PASS
-- ⚠️ 警告：第 322 行历史版本引用可能需更新: | v3.9.0 | RC3 | 2026-06-12 | G1-G16 全部 PASS | — |
-- ⚠️ 文档可能缺少 provenance 元数据：INDEX.md
-- ⚠️ 警告：第 36 行历史版本引用可能需更新: | 6 | `/ROADMAP.md` | v3.9.0 计划项 "MVCC 待实现" 已过时 | 
-- ⚠️ 警告：第 83 行历史版本引用可能需更新: | 操作 7: README Latest stable v3.8.0 | ✅ PASS (1 oc
-- ⚠️ 警告：第 145 行历史版本引用可能需更新: **其他所有门禁条件 100% 完成**。等 24h 跑完即可 cut v3.9.0-rc5 (po
-- ⚠️ 文档可能缺少 provenance 元数据：V390_GA_DOC_CORRECTION_WORK_REPORT.md
-- ⚠️ 警告：第 346 行历史版本引用可能需更新: A: No — the v3.8.0 results were generated against 
-- ⚠️ 警告：第 347 行历史版本引用可能需更新: v3.9.0 fixture has 22/22 PASS with the Q7/Q8/Q9 SQ
-- ⚠️ 文档可能缺少 provenance 元数据：MIGRATION_GUIDE.md
-- ⚠️ 文档可能缺少 provenance 元数据：V390_DOC_CORRECTION_WORK_REPORT.md
-- ⚠️ 文档可能缺少 provenance 元数据：SOAK_MASTER_INDEX.md
-- ⚠️ 文档可能缺少 provenance 元数据：E2E_MIGRATION_MASTER_PLAN.md
-- ⚠️ 文档可能缺少 provenance 元数据：G11_QPS_BENCH_250.md
+- ⚠️ 警告：第 67 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 118 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：sql-corpus-invariant-reviewer-gate-report.md
+- ⚠️ 警告：第 47 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：v312-05-hybrid-retrieval-report.md
+- ⚠️ 警告：第 15 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 24 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 66 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 102 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 103 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 225 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 252 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：TEST_PLAN.md
 - ⚠️ 文档可能缺少 provenance 元数据：RELEASE_NOTES.md
-- ⚠️ 文档不存在（跳过检查）：2026-07-01-RC8-dry-run.md
-- ⚠️ 文档可能缺少 provenance 元数据：Q9-FIX-GATE-REPORT.md
-- ⚠️ 警告：第 234 行 FAIL 声明可能无证据
-- ⚠️ 文档可能缺少 provenance 元数据：Z6G4_HANDOFF.md
-- ⚠️ 文档不存在（跳过检查）：TPC_H_SHA256_BASELINE_20260612.md
-- ⚠️ 文档不存在（跳过检查）：PERFORMANCE_OVERVIEW_20260612.md
-- ⚠️ 文档不存在（跳过检查）：QPS_REPORT.md
-- ⚠️ 文档不存在（跳过检查）：FOUR_WAY_TPCH_REPORT.md
-- ⚠️ 文档不存在（跳过检查）：PERFORMANCE_REPORT.md
-- ⚠️ 文档不存在（跳过检查）：COMPATIBILITY_REPORT.md
-- ⚠️ 文档不存在（跳过检查）：SYSBENCH_MARIADB_COMPARISON_20260612.md
-- ⚠️ 文档不存在（跳过检查）：PERFORMANCE_BASELINE_QPS_20260612.md
-- ⚠️ 文档不存在（跳过检查）：CRASH_TEST_REPORT.md
-- ⚠️ 文档不存在（跳过检查）：STABILITY_REPORT.md
-- ⚠️ 文档不存在（跳过检查）：PERFORMANCE_BASELINE_REAL_2026-06-12.md
-- ⚠️ 文档不存在（跳过检查）：SYSBENCH_REPORT.md
-- ⚠️ 文档不存在（跳过检查）：PERFORMANCE_BASELINE.md
-- ⚠️ 文档不存在（跳过检查）：ALPHA1_RELEASE_NOTES.md
-- ⚠️ 文档不存在（跳过检查）：RC1_RELEASE_NOTES.md
-- ⚠️ 文档不存在（跳过检查）：RC5_RELEASE_NOTES.md
-- ⚠️ 文档不存在（跳过检查）：RC3_PLAN.md
-- ⚠️ 文档不存在（跳过检查）：RC4_RELEASE_NOTES.md
-- ⚠️ 文档不存在（跳过检查）：RC3_RELEASE_NOTES.md
-- ⚠️ 文档不存在（跳过检查）：RC1_GATE_REPORT.md
-- ⚠️ 文档不存在（跳过检查）：RC6_GATE_REPORT.md
-- ⚠️ 文档不存在（跳过检查）：RC8_RELEASE_NOTES.md
-- ⚠️ 文档不存在（跳过检查）：RC7_GATE_REPORT.md
-- ⚠️ 文档不存在（跳过检查）：RC7_RELEASE_NOTES.md
-- ⚠️ 文档不存在（跳过检查）：RC8_GATE_REPORT.md
-- ⚠️ 文档不存在（跳过检查）：RC2_GATE_REPORT.md
-- ⚠️ 文档不存在（跳过检查）：RC2_RELEASE_NOTES.md
-- ⚠️ 文档不存在（跳过检查）：RC5_GATE_REPORT.md
-- ⚠️ 文档不存在（跳过检查）：RC4_GATE_REPORT.md
-- ⚠️ 文档不存在（跳过检查）：RC3_GATE_REPORT.md
-- ⚠️ 文档不存在（跳过检查）：RC6_RELEASE_NOTES.md
-- ⚠️ 文档可能缺少 provenance 元数据：V390_EVIDENCE_INDEX.md
-- ⚠️ 文档可能缺少 provenance 元数据：SOAK_168H_MACMINI_REPORT.md
-- ⚠️ 警告：第 124 行 FAIL 声明可能无证据
-- ⚠️ 文档可能缺少 provenance 元数据：GA_READINESS_STATUS_2026-06-18.md
-- ⚠️ 文档可能缺少 provenance 元数据：V390_DOCUMENT_INCONSISTENCY_ANALYSIS.md
-- ⚠️ 文档可能缺少 provenance 元数据：SOAK_MULTI_THREAD_REPORT_2026-06-28.md
-- ⚠️ 文档可能缺少 provenance 元数据：GA_GATE_REPORT.md
-- ⚠️ 文档不存在（跳过检查）：GITEA_252_OUTAGE_20260607.md
-- ⚠️ 警告：第 171 行历史版本引用可能需更新: | SQLRustGo v3.9.0 | 22/22 PASS | This release |
-- ⚠️ 文档可能缺少 provenance 元数据：QUICK_START.md
-- ⚠️ 警告：第 287 行 FAIL 声明可能无证据
-- ⚠️ 警告：第 288 行 FAIL 声明可能无证据
-- ⚠️ 警告：第 295 行 FAIL 声明可能无证据
-- ⚠️ 文档可能缺少 provenance 元数据：CLI_USER_MANUAL.md
+- ⚠️ 文档可能缺少 provenance 元数据：V312_DAG_ANALYSIS.md
+- ⚠️ 警告：第 61 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：V312-25_e2e_retire_report.md
+- ⚠️ 警告：第 193 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 195 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 196 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 197 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 253 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 258 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 265 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 434 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：ISSUES_PLAN.md
+- ⚠️ 警告：第 14 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 16 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 118 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 140 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：v312_verification_report.md
+- ⚠️ 警告：第 36 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 41 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 42 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 43 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：sqllogictest-oracle-gate-report.md
+- ⚠️ 文档可能缺少 provenance 元数据：compliance-audit-access-control-report.md
+- ⚠️ 文档可能缺少 provenance 元数据：DRAFT_ASSESSMENT_AND_ALPHA_GATE.md
+- ⚠️ 警告：第 44 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 116 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：V312-30_reconciliation_report.md
+- ⚠️ 警告：第 50 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：v312-04-embedding-provider-report.md
+- ⚠️ 文档不存在（跳过检查）：V312-12-TPCH-CORRECTNESS.md
+- ⚠️ 文档不存在（跳过检查）：REVIEWER_SIGNOFF_V312-19_SLICE3.md
+- ⚠️ 文档不存在（跳过检查）：R2_INVARIANTS_REPORT.md
+- ⚠️ 文档不存在（跳过检查）：V312-11-VERIFICATION.md
+- ⚠️ 文档不存在（跳过检查）：smoke-report.md
+- ⚠️ 文档不存在（跳过检查）：V312-14-CRASH-RECOVERY.md
+- ⚠️ 文档不存在（跳过检查）：SURFACE_DISPOSITION.md
+- ⚠️ 文档不存在（跳过检查）：V312-21-VERIFICATION.md
+- ⚠️ 文档不存在（跳过检查）：DEFERRED_FOLLOWUPS.md
+- ⚠️ 文档不存在（跳过检查）：ALL_TARGETS_REPORT.md
+- ⚠️ 文档不存在（跳过检查）：V312-13-REPORT.md
+- ⚠️ 警告：第 23 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 47 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：v312-07-rag-evidence-bundle-report.md
+- ⚠️ 文档可能缺少 provenance 元数据：MYSQL_COMPAT_STATUS.md
+- ⚠️ 警告：第 20 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 45 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：V312-29_gate_wiring_report.md
+- ⚠️ 警告：第 34 行 FAIL 声明可能无证据
+- ⚠️ 警告：第 101 行 FAIL 声明可能无证据
+- ⚠️ 文档可能缺少 provenance 元数据：CHANGELOG.md
 
 ---
 
 ### 通过项
 
-- ✅ 状态声明有证据绑定：第 117 行
+- ✅ 无状态声明（无需证据检查）：README.md
+- ✅ 状态声明有证据绑定：第 82 行
+- ✅ 状态声明有证据绑定：第 87 行
+- ✅ 状态声明有证据绑定：第 69 行
+- ✅ 状态声明有证据绑定：第 75 行
 - ✅ 状态声明有证据绑定：第 119 行
-- ✅ 状态声明有证据绑定：第 133 行
-- ✅ 状态声明有证据绑定：第 134 行
-- ✅ 状态声明有证据绑定：第 135 行
-- ✅ 状态声明有证据绑定：第 138 行
-- ✅ 状态声明有证据绑定：第 205 行
+- ✅ 无状态声明（无需证据检查）：disabled-test-registry.md
+- ✅ 状态声明有证据绑定：第 247 行
+- ✅ 状态声明有证据绑定：第 250 行
+- ✅ 状态声明有证据绑定：第 261 行
+- ✅ 状态声明有证据绑定：第 292 行
+- ✅ 无状态声明（无需证据检查）：sequence-executor-gap-assessment.md
 - ✅ 状态声明有证据绑定：第 32 行
-- ✅ 状态声明有证据绑定：第 46 行
-- ✅ 状态声明有证据绑定：第 51 行
-- ✅ 状态声明有证据绑定：第 55 行
-- ✅ 状态声明有证据绑定：第 59 行
-- ✅ 状态声明有证据绑定：第 129 行
-- ✅ 状态声明有证据绑定：第 77 行
-- ✅ 状态声明有证据绑定：第 39 行
-- ✅ 状态声明有证据绑定：第 152 行
-- ✅ 状态声明有证据绑定：第 155 行
-- ✅ 状态声明有证据绑定：第 43 行
-- ✅ 状态声明有证据绑定：第 97 行
-- ✅ 状态声明有证据绑定：第 98 行
-- ✅ 状态声明有证据绑定：第 99 行
-- ✅ 状态声明有证据绑定：第 154 行
-- ✅ 状态声明有证据绑定：第 80 行
-- ✅ 状态声明有证据绑定：第 136 行
-- ✅ 状态声明有证据绑定：第 112 行
-- ✅ 状态声明有证据绑定：第 120 行
-- ✅ 状态声明有证据绑定：第 19 行
-- ✅ 状态声明有证据绑定：第 47 行
-- ✅ 状态声明有证据绑定：第 52 行
-- ✅ 状态声明有证据绑定：第 77 行
-- ✅ 状态声明有证据绑定：第 149 行
-- ✅ 状态声明有证据绑定：第 201 行
-- ✅ 状态声明有证据绑定：第 202 行
-- ✅ 状态声明有证据绑定：第 203 行
-- ✅ 状态声明有证据绑定：第 204 行
-- ✅ 状态声明有证据绑定：第 251 行
-- ✅ 状态声明有证据绑定：第 252 行
-- ✅ 状态声明有证据绑定：第 253 行
-- ✅ 状态声明有证据绑定：第 254 行
-- ✅ 状态声明有证据绑定：第 255 行
-- ✅ 状态声明有证据绑定：第 256 行
-- ✅ 状态声明有证据绑定：第 257 行
-- ✅ 状态声明有证据绑定：第 258 行
-- ✅ 状态声明有证据绑定：第 259 行
-- ✅ 状态声明有证据绑定：第 260 行
-- ✅ 状态声明有证据绑定：第 672 行
-- ✅ 状态声明有证据绑定：第 673 行
-- ✅ 状态声明有证据绑定：第 674 行
-- ✅ 状态声明有证据绑定：第 675 行
-- ✅ 状态声明有证据绑定：第 1124 行
-- ✅ 状态声明有证据绑定：第 80 行
-- ✅ 状态声明有证据绑定：第 84 行
-- ✅ 状态声明有证据绑定：第 94 行
-- ✅ 状态声明有证据绑定：第 36 行
-- ✅ 状态声明有证据绑定：第 59 行
-- ✅ 状态声明有证据绑定：第 39 行
-- ✅ 状态声明有证据绑定：第 68 行
-- ✅ 状态声明有证据绑定：第 78 行
-- ✅ 状态声明有证据绑定：第 28 行
+- ✅ 状态声明有证据绑定：第 33 行
 - ✅ 状态声明有证据绑定：第 34 行
-- ✅ 状态声明有证据绑定：第 35 行
-- ✅ 状态声明有证据绑定：第 41 行
-- ✅ 状态声明有证据绑定：第 32 行
-- ✅ 状态声明有证据绑定：第 46 行
-- ✅ 状态声明有证据绑定：第 51 行
-- ✅ 状态声明有证据绑定：第 55 行
-- ✅ 状态声明有证据绑定：第 59 行
-- ✅ 状态声明有证据绑定：第 129 行
+- ✅ 状态声明有证据绑定：第 226 行
+- ✅ 状态声明有证据绑定：第 256 行
+- ✅ 状态声明有证据绑定：第 25 行
+- ✅ 状态声明有证据绑定：第 26 行
+- ✅ 状态声明有证据绑定：第 27 行
+- ✅ 状态声明有证据绑定：第 28 行
+- ✅ 状态声明有证据绑定：第 29 行
+- ✅ 状态声明有证据绑定：第 30 行
+- ✅ 状态声明有证据绑定：第 31 行
+- ✅ 状态声明有证据绑定：第 36 行
+- ✅ 状态声明有证据绑定：第 44 行
+- ✅ 无状态声明（无需证据检查）：compliance-audit-access-control-report.md
+- ✅ 状态声明有证据绑定：第 139 行
+- ✅ 状态声明有证据绑定：第 157 行
+- ✅ 状态声明有证据绑定：第 15 行
+- ✅ 状态声明有证据绑定：第 134 行
 
 ---
 
@@ -714,425 +529,308 @@
 
 | 文档 | 行 | 声明内容 |
 |------|-----|----------|
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  | **Gate 脚本执行** | 🟢 **HIGH** | 16/16 PASS (form-only), 6/6 meta-gates PASS (Sprint 8 + 本会话) | 强 (script output) | |
-| - |  | **长期稳定性** | 🔴 **LOW** | G7/G13 标注 PASS 实为 SIMULATED (1,440× 时间压缩), 真实 24h/72h/168h wall-clock 未跑 | 极弱 (未跑) | |
-| - |  | "16/16 G1-G16 PASS" | 🟡 **部分可信** | gate 脚本执行完成, 但 11/16 无 oracle, **5/16 部分可信 (G4/G6/G8/G10/G15)** | |
-| - |  | "6/6 meta-gates PASS" | 🟢 **可信** | P11-P16 meta-gate detector 运行, 输出可审计 | |
-| - |  | "330+ tests PASS" | 🟡 **部分可信** | 测试执行完成, 但部分自验证, 无 oracle 对比 | |
-| - |  | INDEX.md | "G1-G16 全部 PASS" | 同上, **且未提 Coverage 缺失** | **需要添加 V9 说明** | |
-| - |  | Meta-gate 验证 | N/A | ✅ HIGH | ✅ HIGH | 6/6 P11-P16 PASS | |
-| - |  **GA 阻塞**: V4 (oracle 11 gates) + **V9 (Coverage Gate 缺失, 新发现)** + 真实 24h soak (其余 meta-gate 6/6 PASS) |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  | Multi-table join (3+) | ✅    | Q7/Q8/Q9 PASS (up to 8 tables)                     | |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  **All 4 ladder steps PASS post-WAL-fix.** Server stable for 4h wall-clock with zero leaks. |
-| - |  The work that COULD be done by Claude is DONE |
-| - |  - All 6/6 meta-gates PASS throughout |
-| - |  > **Status: 🟡 READY (gates G1-G16 PASS, 24h/72h/168h soak incomplete/interrupted)** |
-| - |  | G1 | TPC-H 22/22 (QPS-correctness) | ✅ PASS | tpch_gate_test 22/22 | |
-| - |  | G2 | INT-2 ParallelExecutor | ✅ PASS | int2_substance_parallel_test (9 tests) | |
-| - |  | G3 | INT-3 Single Expression | ✅ PASS | int3_substance_delegation_test (17 tests) | |
-| - |  | G4 | ARCH-3 VtuGuard | ✅ PASS | check_arch3_no_bypass.sh (8/8) | |
-| - |  | G5 | SEM-1 Savepoint | ✅ PASS | check_sem1_savepoint.sh (8/8) | |
-| - |  | G6 | Backup/Restore/PITR | ✅ PASS | check_backup_restore.sh (6/6, 51 e2e) | |
-| - |  | G8 | Crash Matrix | ✅ PASS | check_p12_crash_test.sh | |
-| - |  | G9 | Upgrade v3.8→v3.9 | ✅ PASS | check_p14_upgrade_test.sh (50 tests) | |
-| - |  | G10 | GMP Audit + Time Travel + Hash Chain | ✅ PASS | check_p21/22/23_*.sh | |
-| - |  | G15 | SF=0.01 TPC-H wire | ✅ PASS | tpch_sf01_22_queries_wire_test | |
-| - |  | G16 | Compatibility v3.8→v3.9 | ✅ PASS | v380_to_v390_full_upgrade_test (5 cases) | |
-| - |  **Total: 11/13 PASS, 1/13 incomplete (G11), 1/13 pending re-run (G13)** |
-| - |  | Substance tests | 41 | 41/41 PASS | |
-| - |  | TPC-H wire (G1) | 22 | 22/22 PASS | |
-| - |  | TPC-H wire SF0.01 (G15) | 22 | 22/22 PASS | |
-| - |  | Upgrade (G9, G16) | 55 | 55/55 PASS | |
-| - |  | Backup/Restore (G6) | 51 | 51/51 PASS | |
-| - |  | Crash Matrix (G8) | 129 | 129/129 PASS | |
-| - |  | Stability (G7) | 10 | 10/10 PASS | |
-| - |  | E2E SELECT (2026-07-04) | 16 | 16/16 PASS | |
-| - |  | **Total verified tests** | **346+** | **346+ / 346+ PASS** | |
-| - |  | 1h simulated | rc4 readiness | Z6G4 (rc4 binary) | ✅ PASS | |
-| - |  - [x] G1-G10 gates PASS |
-| - |  - [ ] TPC-H SF=1.0 Q1-Q22 PASS (hardware-blocked: disk) |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  **结论**: ✅ 可升级 — 编译通过，clippy 零警告，覆盖率测试可运行。 |
-| - |  | `rustup update stable` | ✅ 成功 | |
-| - |  3. 所有 `ColumnDefinition { ... }` 构造通过 `..Default::default()` 继承默认值 |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  | G15 oracle 22/22 | ✅ | 5 sub-tests PASS sequentially in 188s total (Q1:6 Q2:0 Q3:10 Q4:5 Q5:1 Q6:1 Q7:4 Q8:1 Q9:0 Q10:20 Q11:0 Q12:2 Q13:22 Q15:1 Q16:282 Q17:1 Q18:100 Q19:1 Q20:3 Q21:0 Q22:0) | |
-| - |  - **Soak**: PID 104564, in-process, 1 QPS, 3475 queries done, 0 failed |
-| - |  - [x] All pre-soak gates PASS (6/6 meta-gates + clippy + fmt + build) |
-| - |  G15 sub-tests = 5/5 PASS in 7-100s each |
-| - |  6/6 meta-gates verified PASS |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  | G1 | TPC-H 22/22 | ✅ PASS | tpch_gate_test 22/22 (sub-gate `[3/5]`) | |
-| - |  | G2 | INT-2 | ✅ PASS | int2_substance_parallel_test (9 tests) | |
-| - |  | G3 | INT-3 | ✅ PASS | int3_substance_delegation_test (17 tests) | |
-| - |  | G4 | ARCH-3 VtuGuard | ✅ PASS | check_arch3_no_bypass.sh (8/8) | |
-| - |  | G5 | SEM-1 Savepoint | ✅ PASS | check_sem1_savepoint.sh (8/8) | |
-| - |  | G6 | Backup/Restore | ✅ PASS | check_backup_restore.sh (6/6) | |
-| - |  | G8 | Crash Matrix | ✅ PASS | check_p12_crash_test.sh | |
-| - |  | G9 | Upgrade v3.8→v3.9 | ✅ PASS | check_p14_upgrade_test.sh | |
-| - |  | G10 | GMP Audit + Time Travel + Hash Chain | ✅ PASS | check_p21/22/23 (3 sub-gates) | |
-| - |  | G11 | QPS/TPS Benchmark | ✅ PASS | check_g11_qps.sh (5/5) | |
-| - |  | G13 | 24h Stability | 🟡 partial | 250: partial (843 samples before contact lost); Z6G4: never completed | |
-| - |  | G16 | Compatibility v3.8→v3.9 | ✅ PASS | check_g16_compatibility.sh (7/7) | |
-| - |  **Total: 13/13 PASS** + 1 🟡 partial (G13 24h real incomplete) + 1 deferred to post-GA (72h/168h) |
-| - |  | `tests/g2_substance_parallel_executor_test.rs` | 4 | ✅ PASS | |
-| - |  | `tests/int2_substance_parallel_test.rs` | 9 | ✅ PASS | |
-| - |  | `tests/int3_substance_delegation_test.rs` | 17 | ✅ PASS | |
-| - |  | `tests/upgrade_chain_v3_6_to_v3_9_test.rs` | 6 | ✅ PASS | |
-| - |  | 3 | 测试已通过 | ✅ Substance tests + G1-G16 all green | |
-| - |  - 8 项修改完成，12/12 复核 PASS ✅ |
-| - |  | Draft → Alpha | 架构设计, 编译通过 | ✅ Done (2026-06-05) | |
-| - |  - 13/13 核心 gates PASS |
-| - |  - 36/36 substance tests PASS |
-| - |  [L1] cargo build...           [PASS] |
-| - |  [L1] cargo test --lib...      [PASS] |
-| - |  [L1] clippy...                [PASS] |
-| - |  [L1] cargo fmt...             [PASS] |
-| - |  === Gate Result: PASSED === |
-| - |  - 本地 4 个快速 gate 全 PASS: `check_arch_invariants` (5/5), `check_arch3_no_bypass` (G4), `check_integration_gate` (4/4), `check_architecture_freeze` (A7-3 PASS) |
-| - |  bash scripts/gate/check_arch_invariants.sh:    5/5 PASS |
-| - |  bash scripts/gate/check_arch3_no_bypass.sh:    PASS |
-| - |  bash scripts/gate/check_integration_gate.sh:   PASS (4/4) |
-| - |    SGL-001 (B4 Format): PASS |
-| - |    SGL-002..005: PASS |
-| - |    WAL lifecycle (INV-1/2/3): PASS |
-| - |    A7-3 ExecutionEngine: PASS (< 1500 lines as per AD-001) |
-| - |  | **Backup/Restore 100+ 场景** | 全量/增量/时间点恢复 | 3 | ✅ RC7 PASS (G6, 51 e2e) | |
-| - |  | **Crash Matrix 100+ 场景** | kill -9 / OOM / disk full | 3 | ✅ RC7 PASS (G8, 129 scenarios) | |
-| - |  | **24h Soak Test** | 1M txns 浸泡 | 4 | ✅ RC7 PASS (simulated, 1,440× compression; real pending Z6G4) | |
-| - |  | G7 24h Soak | ✅ PASS (simulated) / ❌ INCOMPLETE (real) | Phase 4 末 | |
-| - |  > **E2E 测试**: 16/16 PASS ✅ (修复了 column_def 包 bug: org_name, length_of_fixed_fields, real_col_names) |
-| - |  | Lib Tests | 1670 PASS, 1 IGNORED | ✅ 已执行 | |
-| - |  | TPC-H | 22/22 PASS | ⚠️ 无 oracle 对比 | |
-| - |  | Corpus | 818/818 PASS | ⚠️ 无 oracle 对比 | |
-| - |  | D9 Gate | 8/8 PASS | ✅ 有独立验证 | |
-| - |  | G1 | TPC-H 22/22 | ✅ PASS | ⚠️ 无 oracle 对比 | **Q8 0.18ms** | |
-| - |  | G2 | INT-2 | ✅ PASS | ⚠️ 无 oracle 对比 | — | |
-| - |  | G3 | INT-3 | ✅ PASS | ⚠️ 无 oracle 对比 | — | |
-| - |  | G4 | ARCH-3 | ✅ PASS | ✅ 有独立验证 | — | |
-| - |  | G5 | SEM-1 | ✅ PASS | ⚠️ 无 oracle 对比 | — | |
-| - |  | G6 | Backup/Restore | ✅ PASS | ✅ 有独立验证 | — | |
-| - |  | G8 | Crash Matrix | ✅ PASS | ✅ 有独立验证 | — | |
-| - |  | G9 | Upgrade Test | ✅ PASS | ⚠️ 无 oracle 对比 | — | |
-| - |  | G10 | Audit + Time Travel | ✅ PASS | ✅ 有独立验证 | — | |
-| - |  | G11 | QPS/TPS | ✅ PASS | ⚠️ 无 oracle 对比 | — | |
-| - |  | G12 | Sysbench | ✅ PASS | ⚠️ 无 oracle 对比 | — | |
-| - |  | G14 | Real Crash | ✅ PASS | ⚠️ 部分模拟 | — | |
-| - |  | G15 | TPC-H SF0.01 | ✅ PASS | ⚠️ 无 oracle 对比 | — | |
-| - |  | G16 | Compatibility | ✅ PASS | ⚠️ 无 oracle 对比 | — | |
-| - |  | **P11-P15** | **meta-gate** (Sprint 8) | ✅ **5/5 PASS** | **V5/V6/V8/V2 全部修复** | **Sprint 8 Track B** | |
-| - |  **诚实声明**: 16/16 G1-G16 gate 脚本已执行 + 5 meta-gates (P11-P15) PASS (Sprint 8), 但 11/16 缺乏独立 oracle 对比。真实 soak 测试 infra ready (Sprint 8), run 仍 pending Z6G4。 |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  TPC-H 测试必须通过 **wire protocol**（启动 `sqlrustgo-mysql-server` + 通过 `MySqlTestClient` 发送 SQL）运行，**禁止** 直接调用 `ExecutionEngine` 或 `MemoryStorage`。 |
-| - |  - LOAD DATA LOCAL INFILE 只能通过 wire protocol 触发，in-process 调用无法走真实数据加载 |
-| - |  - `load_fixture(&mut client, dir)` — 通过 LOAD DATA 加载 .tbl |
-| - |  3. 跑 `tpch_sf01_22_queries_wire_test` (SF=0.01, 22/22 PASS) |
-| - |  5. 输出 PASS/FAIL + 证据文件 |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  | **长稳测试**     | 10% | **未验证** | Beta 72h 压缩 PASS, 24h 真实 ⏳ | |
-| - |  | **升级兼容**     | 30% | **未完成** | 23 unit PASS, 5 cases ⏳ | |
-| - |  **通过 4-way G17 验证** (perf/FOUR_WAY_TPCH_REPORT.md, 2026-06-07) |
-| - |  | G11 | QPS/TPS  | ✅ 5/5 模板 PASS    | ⏳ W12 真实测量       | ✅ | |
-| - |  | G12 | Sysbench | ✅ 7/7 模板 PASS    | ⏳ W12 真实 5 workloads | ✅ | |
-| - |  | G13 | 24h 稳定性  | ✅ Beta 72h 压缩 PASS | ⏳ **24h 真实待 Z6G4** | ✅ **卡死** | |
-| - |  | G14 | 真实崩溃    | ✅ G8 100+ PASS     | ⏳ 8 真实 cases        | ✅ **卡死** | |
-| - |  | G16 | 兼容性      | ✅ 23 unit PASS     | ⏳ 5 真实 cases        | ✅ **卡死** | |
-| - |  - 输出: PASS/FAIL/CHECKSUM-MISMATCH per query |
-| - |  - 任何 PR 22/22 TPCH PASS 才合 |
-| - |  | **P0-2** | 24h Soak PASS | ⏳ W10-W11 Z6G4 | |
-| - |  | **P0-3** | 72h Soak PASS | ⏳ W11-W12 Z6G4 | |
-| - |  | **P0-4** | 168h Soak PASS | ⏳ W12-W14 Z6G4 | |
-| - |  | **P0-5** | INT-2 PASS (升级链) | ⏳ W12-W13 Z6G4 | |
-| - |  | **P0-6** | INT-3 PASS (混合验证) | ⏳ W13-W14 Z6G4 | |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  | `check_g_all.sh` (G1-G10+G17 orchestrator) | 🟡 PASS with 3 WARN | MySQL-server compile fail not detected (gate doesn't build mysql-server) | |
-| - |  | `check_full_gate_verification.sh` (D9) | ❌ **FAIL** | 5 PASS, 3 FAIL (D1-D5, D7, D8) | |
-| - |  | `check_beta_e2e.sh` | ⚠️ PASS (informational) | 10 E2E test bins failed at runtime | |
-| - |  | P11 Gate Self-Verification | ✅ PASS | — | |
-| - |  | P14 DRIFT != PASS | ✅ PASS | — | |
-| - |  | P15 Oracle Required | ✅ PASS | 3 oracle engines, 25 oracle-aware gates | |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  - [ ] 所有修改可通过 `git checkout -- <file>` 恢复 |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  > **Status**: 22/22 row-count PASS, 21/22 cell-level MATCH (set equality, loose) |
-| - |  | Wire protocol LOAD DATA + 22 query round-trip | PASS — 0 panic, 0 error packet, 0 server crash | |
-| - |  | Wire protocol 22/22 row-count | PASS — all 22 query row-counts MATCH authoritative SQLite | |
-| - |  === Row-count: 22/22 PASS === |
-| - |  Q13 row_count PASS (11/11). Cell-level PARTIAL: 9/11 rows match, 2 differ. |
-| - |  - No "PASS" claims without actual data behind them |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  docker run --rm -p 5432:5432 -e SQLRUSTGO_PASSWORD=secret \ |
-| - |    -e SQLRUSTGO_PASSWORD=secret \ |
-| - |        SQLRUSTGO_PASSWORD: secret |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  > **Verdict**: **G11/G13 之前声称的 PASS 是错的**。需要先修 server bug 才能继续 GA。 |
-| - |  **结论**：所有"通过"的稳定性/性能 gates (G11, G13, G15) 都是**形式上通过**，实际上**没有用 mysql-server 集成后端做真实工作负载测试**。 |
-| - |  - **G11 QPS**: 之前跑的是 `qps_bench.rs` (in-process)，不通过 wire protocol → **DRIFT/FAIL** |
-| - |  1. **混淆了"测试通过"和"测试有意义"** —— 我跑了 G1-G16 gate scripts 说 PASS，但实际上 gate scripts 只是形式检查 |
-| - |  5. **过度信任 cargo gate scripts 的输出** —— `check_g11_qps.sh` 只检查 5 个 sub-checks 通过，不验证 bench 真的在测 mysql-server |
-| - |  **最关键的设计缺陷**：我把 unit test 形式通过等同于 integration 验证通过。这在 GA context 下是**严重失误**。 |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  - rc4: G1-G13 gate PASS, SHA-256 + QPS baseline |
-| - |  - Gates G1-G16 PASS, 36 substance tests PASS |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  | TPC-H in-process PASS               | 20/22      | **22/22**  | +2     | |
-| - |  | TPC-H wire round-trip PASS          | 18/22      | **22/22**  | +4     | |
-| - |  **Result**: 22/22 PASS in-process, 22/22 PASS wire round-trip, 21/22 |
-| - |  - All 22/22 row-count PASS statements are backed by actual row-count |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  | 30m (post-fix) | ✅ PASS | 16 MB | 8 | 0-1 GB (bounded) | 21 GB free | 12/5min | |
-| - |  | 1h (post-fix) | ✅ PASS | 10 MB | 8 | 0 MB | 22 GB free | 2/1h | |
-| - |  | 2h (post-fix) | ✅ PASS | 12 MB | 8 | 0 MB | 22 GB free | 80/2h | |
-| - |  | 4h (post-fix) | ✅ PASS | 9 MB | 8 | 0 MB | 23 GB free | 99/4h | |
-| - |  - The "10/10 PASS" claim was an illusion |
-| - |  - ✅ 6/6 meta-gates (P11-P16) PASS |
-| - |  - ✅ G15 wire oracle 22/22 PASS |
-| - |  5. ✅ Re-ran 30m / 1h / 2h / 4h post-fix: all PASS |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  | elapsed_s | queries_done | queries_failed | p99_latency_ms | rss_mb | leak_warn | |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  | `tpch_soak_test.rs` | 70,78,86,94 | `test_soak_5m/10m/20m/30m` | Run with `--ignored`; 5m-30m all PASS | |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  **结论**: G17 Coverage Gate (≥80% line) **当前未通过**. 主要落后 crates: |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |        GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-admin} |
-| - |  > **E2E 测试**: 16/16 PASS ✅ (MySQL column_def 包修复: org_name, length_of_fixed_fields, real_col_names) |
-| - |  > **GA Gate**: 9/11 PASS, 2 CONDITIONAL (G3 覆盖率, G4 TPC-H SF=1.0 6/10), 1 IN PROGRESS (72h soak) |
-| - |  - **✅ 关键进展**: G1-G16 门禁全部 PASS (2026-06-13) |
-| - |    - 真实覆盖率从 ~35% 提升至 ~60% (substance tests PASS) |
-| - |  | **Form-only 验证** | ✅ PASS (10/10 G1-G10) | 形式门禁全过, 真实运行待 rc3+ | |
-| - |  | **ACID / DML 主路径** | 8.5/10 | ≥ 9.0 (G4 强化) | G4 ARCH-3 form-only PASS | |
-| - |  | **跨版本债 OPEN** | 4 项 (INT-2/3, ARCH-3, SEM-1) | 0 项 (G2/G3/G4/G5) | **G2-G5 form-only PASS, 仍需真实验证** | |
-| - |  | **GMP 审计能力** | 5.0/10 | ≥ 8.0 (G10) | 5.0/10 (G10 form-only PASS) | |
-| - |  | **真实生产级覆盖率** | 60-70% | ≥ 90% | **~60% (RC7 substance PASS)** | |
-| - |  | **关注指标** | 多少 TPC-H PASS | 22/22 TPC-H + INT-1 | **Soak 24h + Crash Matrix + Backup/Restore** | |
-| - |  | **Parser** | 10/10 (18/18 PASS) | ✅ 完整继承 | |
-| - |  | **P1-1** | Backup/Restore 实现 (100+ 场景) | 40h | 待创建 | ✅ G6 form-only PASS (6/6) | G6 | |
-| - |  | **P1-2** | Crash Test Framework (100+ scenarios) | 40h | 待创建 | 🟡 G8 form-only PASS, real run pending | G8 | |
-| - |  | **P1-4** | Upgrade Test (v3.8 → v3.9) | 40h | 待创建 | ✅ G9 form-only PASS (5/5) | G9 | |
-| - |  | **P2-1** | Audit Log (审计日志 + 系统表) | 24h | 待创建 | ✅ G10 form-only PASS (1 non-blocking warn) | G10 | |
-| - |  | **G15** | 汇总报告 | 报告 | ✅ PASS (4/4) | — | 6 perf reports committed | |
-| - |  | **G16** | Compatibility v3.8 → v3.9 | 集成 | 🟡 5/7 PASS | — | TPC-H step + REPORT step pending | |
-| - |  **状态**: ✅ PASS (6/6 form-only steps) |
-| - |  **状态**: ✅ PASS (6/6) |
-| - |  **状态**: ✅ PASS (4/4) |
-| - |  **状态**: ✅ PASS (4/4) |
-| - |  - 5+ tests PASS |
-| - |  - `check_arch2_no_bypass.sh` 全部 PASS |
-| - |  **状态**: ✅ PASS (8/8) |
-| - |  - 8+ tests PASS |
-| - |  **状态**: ✅ PASS (6/6 form-only) |
-| - |  - 100+ tests PASS |
-| - |  **状态**: ✅ PASS (7/7) — **但 RC3_PLAN 揭示真实问题**: |
-| - |  - 10 soak tests PASS at 24h/72h/168h |
-| - |  **状态**: ✅ PASS (7/7 form-only) |
-| - |  - 8 类崩溃注入 × 10+ 变体 模拟通过 |
-| - |  **⚠️ RC3_PLAN 关键发现**: Crash matrix 模拟通过, real crash 8 categories pending |
-| - |  **状态**: ✅ PASS (5/5) |
-| - |  - 50+ tests PASS |
-| - |  **状态**: 🟡 PASS (7/7 + 1 sub-gate WARN non-blocking) |
-| - |  | **G15** 汇总报告 | ✅ PASS (4/4) | 6 perf reports committed | |
-| - |  **状态**: 🟡 5/7 PASS |
-| - |  | **RC5-RC7** | 2026-06-13 | ✅ | G1-G16 PASS + substance | 330+ tests | 30m soak PASS | 2026-06-13 | |
-| - |  - 16/16 sub-tasks completed (100%) |
-| - |  - 72h soak compressed-time: 10/10 tests PASS (1,440× compression) |
-| - |  - Doc gates PASS (check_docs_consistency.sh + check_docs_links.sh) |
-| - |  - G1-G10 baseline: 10/10 PASS |
-| - |  - G16 Compatibility: 5/7 PASS (TPC-H step + REPORT step pending) |
-| - |  - G1-G10: 10/10 PASS |
-| - |  - 72h Soak: 10/10 PASS (compressed) |
-| - |  - [ ] Doc gates PASS |
-| - |  - [ ] 24h real soak PASS (memory < 10%, FD = 0, lock = 0) |
-| - |  - [ ] 72h real soak PASS |
-| - |  - [ ] 168h real soak completed successfully |
-| - |  - **72h Soak (compressed)**: 10/10 PASS, memory < 10%, FD = 0, lock = 0, p99 bounded |
-| - |  | **2026-06-13** | **RC7 cut** | G1-G16 PASS + substance tests | ✅ DONE | |
-| - |  - [ ] G1: 22/22 TPC-H 保持 PASS (REAL, not form-only) |
-| - |  - [ ] G7: 24h REAL wall-clock Soak Test PASS |
-| - |  - [ ] G8: Crash Matrix 100+ REAL scenarios PASS |
-| - |  - [ ] G9: Upgrade Test PASS (v3.8 → v3.9 数据可读, REAL) |
-| - |  - [ ] G16: Compatibility v3.8 → v3.9 (full PASS) |
-| - |  - [ ] 168h real soak completed |
-| - |  | **GA (General Availability)** | ✅ PASS | ✅ TARGET | 🟡 form-only (35%) | |
-| - |  - 10/10 G1-G10 form-only PASS |
-| - |  | G16 Compatibility full PASS | 8h | P1 | (compat) | |
-| - |  ✅ G16 5/7 PASS |
-| - |  ✅ 72h Soak compressed-time 10/10 PASS |
-| - |  > **E2E 测试**: 16/16 PASS ✅ (修复了 column_def 包 bug: org_name, length_of_fixed_fields, real_col_names) |
-| - |  | Lib Tests | 1670 PASS, 1 IGNORED | ✅ 已执行 | |
-| - |  | TPC-H | 22/22 PASS | ⚠️ 无 oracle 对比 | |
-| - |  | Corpus | 818/818 PASS | ⚠️ 无 oracle 对比 | |
-| - |  | D9 Gate | 8/8 PASS | ✅ 有独立验证 | |
-| - |  | G1 | TPC-H 22/22 | ✅ PASS | ⚠️ 无 oracle 对比 | **Q8 0.18ms** | |
-| - |  | G2 | INT-2 | ✅ PASS | ⚠️ 无 oracle 对比 | — | |
-| - |  | G3 | INT-3 | ✅ PASS | ⚠️ 无 oracle 对比 | — | |
-| - |  | G4 | ARCH-3 | ✅ PASS | ✅ 有独立验证 | — | |
-| - |  | G5 | SEM-1 | ✅ PASS | ⚠️ 无 oracle 对比 | — | |
-| - |  | G6 | Backup/Restore | ✅ PASS | ✅ 有独立验证 | — | |
-| - |  | G8 | Crash Matrix | ✅ PASS | ✅ 有独立验证 | — | |
-| - |  | G9 | Upgrade Test | ✅ PASS | ⚠️ 无 oracle 对比 | — | |
-| - |  | G10 | Audit + Time Travel | ✅ PASS | ✅ 有独立验证 | — | |
-| - |  | G11 | QPS/TPS | ✅ PASS | ⚠️ 无 oracle 对比 | — | |
-| - |  | G12 | Sysbench | ✅ PASS | ⚠️ 无 oracle 对比 | — | |
-| - |  | G14 | Real Crash | ✅ PASS | ⚠️ 部分模拟 | — | |
-| - |  | G15 | TPC-H SF0.01 | ✅ PASS | ⚠️ 无 oracle 对比 | — | |
-| - |  | G16 | Compatibility | ✅ PASS | ⚠️ 无 oracle 对比 | — | |
-| - |  | **P11-P15** | **meta-gate** (Sprint 8) | ✅ **5/5 PASS** | **V5/V6/V8/V2 全部修复** | **Sprint 8 Track B** | |
-| - |  **诚实声明**: 16/16 G1-G16 gate 脚本已执行 + 5 meta-gates (P11-P15) PASS (Sprint 8), 但 11/16 缺乏独立 oracle 对比。真实 soak 测试 infra ready (Sprint 8), run 仍 pending Z6G4。 |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  > **执行结果**: ✅ 8/8 修改完成，复核 100% PASS |
-| - |  | 操作 1: CHANGELOG 阶段 RC2 → RC7 | ✅ PASS (1 occurrence) | |
-| - |  | 操作 2: CHANGELOG 版本表 rc4/rc5/rc6/rc7 | ✅ PASS (4 entries) | |
-| - |  | 操作 3: README GA 目标 2026-12-15 | ✅ PASS (1 occurrence) | |
-| - |  | 操作 4: RELEASE_NOTES Header 阶段标注 | ✅ PASS (1 occurrence) | |
-| - |  | 操作 5: root CHANGELOG RC7 status | ✅ PASS (1 occurrence) | |
-| - |  | 操作 6: ROADMAP 4.9 更新为 RC7 | ✅ PASS (1 occurrence) | |
-| - |  | 无 commit 日志内容修改 | ✅ PASS | |
-| - |  | 无功能描述/架构设计修改 | ✅ PASS | |
-| - |  | 所有引用 .md 文件存在 | ✅ PASS (no broken refs introduced) | |
-| - |  | git diff 干净 | ✅ PASS (31 insertions, 19 deletions, all in 7 files) | |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  | 问题 1 已修复：ROADMAP.md Phase 状态正确 | ✅ 通过 | |
-| - |  | 问题 2 已修复：ROADMAP.md GA 日期标注风险 | ✅ 通过 | |
-| - |  | 问题 3 已修复：ROADMAP.md 文档引用路径正确 | ✅ 通过 | |
-| - |  | 问题 4 已修复：V390_VERSION_PLAN.md W0 日期正确 | ✅ 通过 | |
-| - |  | 问题 5 已修复：V390_VERSION_PLAN.md 状态正确 | ✅ 通过 | |
-| - |  | 问题 6 已修复：V390_VERSION_PLAN.md GA 日期标注风险 | ✅ 通过 | |
-| - |  | 问题 7 已修复：CHANGELOG.md 阶段表述完整 | ✅ 通过 | |
-| - |  | 问题 8 已修复：alpha/ 目录存在 | ✅ 通过 | |
-| - |  | commit 日志内容未被修改 | ✅ 通过 | |
-| - |  | 功能描述未被修改 | ✅ 通过 | |
-| - |  | 实质性技术内容未被修改 | ✅ 通过 | |
-| - |  | alpha/ALPHA1_RELEASE_NOTES.md 已创建 | ✅ 通过 | |
-| - |  | git diff 无非预期修改 | ✅ 通过 | |
-| - |  | 所有修改可通过 `git checkout -- <file>` 恢复 | ✅ 通过 | |
-| - |  | 工作记录完整，可追溯每一步 | ✅ 通过 | |
-| - |  本次文档整改遵循 `DOC_CHECK_CORRECTION_RULES.md` 的 5 步流程，成功修复了 8 处不自洽问题： |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  > **Last update**: 2026-06-26 (corrected — Z6G4 72h soak never completed; prior claim of "RUNNING" was incorrect) |
-| - |  | **24h real wall-clock** | 24h | ❌ **INCOMPLETE** | 250: 843 samples before Z6G4 lost; Z6G4: never started | Z6G4 unreachable; 24h soak not completed | |
-| - |  - [x] 30m wall-clock PASS (post-fix, see LOCAL_SHORT_SOAK_REPORT) |
-| - |  - [x] 1h/2h/4h ladder steps PASS (see LOCAL_SHORT_SOAK_REPORT) |
-| - |  soak duration PASS marks. |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  | 4 | `tests/tpch_value_correctness_test.rs` | ExecutionEngine + 合成数据 | 数值正确性 gate | ✅ E2E (synthetic data 也通过 wire protocol) | |
-| - |  | 10 | `tests/tpch_sf01_perf baseline_test.rs` | ExecutionEngine + timing | SF=0.1 perf baseline | ✅ E2E + 通过 wire protocol 跑 sysbench-style 负载 | |
-| - |  2. **连接** 通过 `MySqlTestClient` 或真实 mysql client |
-| - |  3. **工作负载** 通过 wire protocol (COM_QUERY, COM_STMT_PREPARE, COM_STMT_EXECUTE) |
-| - |  4. **数据** 通过 wire protocol (LOAD DATA LOCAL INFILE, INSERT) |
-| - |  6. **断言** 通过 wire protocol 读回的 rows |
-| - |  12. **`tests/tpch_value_correctness_test.rs` E2E 化** (synthetic data 通过 wire) |
-| - |  - 修完后 `tpch_value_test_v2` 等会自然通过 |
-| - |  - [ ] 5-min 集成测试 PASS (A1+A2+A3) |
-| - |  - [ ] G11 E2E test 通过 (C) |
-| - |  - [ ] G13 E2E test 通过 (D) |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  Z6G4 G11 in progress as of 2026-06-12 20:35 — 3/22 done (point_select/1, /4, on /8). |
-| - |  - G11 gate (`check_g11_qps.sh`) PASSES form: qps_bench exists, registers, compiles, runs |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  benchmark PASSES in row-count (5/5) and the cell-level |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  > **Status**: PASS |
-| - |  | Root cause identified | PASS — `src/engine_select.rs:1175-1215` O(N²) hash match bookkeeping | |
-| - |  | Fix landed | PASS — `HashMap<String, Vec<(usize, &Vec<Value>)>>` O(1) 索引进哈希值 | |
-| - |  | In-process audit test | PASS — `tests/tpch_q9_audit.rs` 22 query 对比 SQLite baseline | |
-| - |  | Q9 wired result MATCH | PASS — engine=75, sqlite=75 | |
-| - |  | Other query regression | PASS — Q1, Q3-Q6, Q10-Q16 全部 MATCH SQLite (13/16) | |
-| - |  | `cargo clippy` | PASS — 未引入新警告 | |
-| - |  | `cargo fmt` | PASS | |
-| - |  | `cargo test` | PASS | |
-| - |  | Q17-22 subquery | in-process 未在 Q9 fix 验证范围 | 修复前 17/22 PASS 基线保持 | |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |      echo "✅ Coverage Gate PASS" |
-| - |  The RC8 tag can be cut based on local P0 completion (✅ done). GA tag requires Z6G4. |
-| - |  | G13 | 24h Stability (extended) | ⏳ | `check_g13_stability.sh` (template) | ⚠️ SIMULATED. Real-data: 72h soak INTERRUPTED — 4-min sample then Z6G4 unreachable (2026-06-19); never completed | |
-| - |  | **P14** | DRIFT != PASS | ✅ | V5/V6/V8 全部修复 (Sprint 8) | |
-| - |  - [x] 6/6 meta-gates PASS |
-| - |          echo "[$(date)] Run completed normally, restarting in 2s" >> "${LOG_FILE}" |
-| - |  done |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  > **State**: Pre-GA. All pre-soak gates PASS. **Ready to dispatch real wall-clock 24h+ soak to Z6G4.** |
-| - |  | P11 | Gate Self-Verification | ✅ PASS | `scripts/gate/check_gate_self_verification.sh` | |
-| - |  | P12 | No Implicit Tolerance | ✅ PASS | `scripts/gate/check_ignore_count.sh` (1 pre-existing tpch_sf1_22_vs_3engines ignore marker) | |
-| - |  | P13 | Test Count Monotonicity | ✅ PASS | active=6200, cargo=115 (matches baseline) | |
-| - |  | P14 | DRIFT != PASS | ✅ PASS | 0 anti-patterns | |
-| - |  | P15 | Oracle Required | ✅ PASS | All 8 gate oracles present | |
-| - |  | Clippy | No warnings | ✅ PASS | `cargo clippy --all-features -- -D warnings` (1 pre-existing parser unreachable pattern, unrelated) | |
-| - |  | Fmt | Clean | ✅ PASS | `cargo fmt --check` clean on changed files | |
-| - |  - 22/22 in-process: PASS (default features) |
-| - |  - 22/22 in-process: PASS (with feature on) |
-| - |  - G15 wire oracle 22/22: PASS across 5 sub-tests |
-| - |  - ✅ All pre-soak quality gates PASS |
-| - |  168h soak PASS |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  | V390_COMPREHENSIVE_ASSESSMENT.md | ✅ 10/10 form-only PASS | |
-| - |  **问题**: 同一文档内先说 "PASS"，后说 "实际未跑"，容易误导读者。 |
-| - |  - 门禁状态应明确区分 "form-only PASS" vs "REAL PASS" |
-| - |    G1: ✅ form-only PASS | ⏳ REAL pending |
-| - |    G7: ✅ compressed PASS | ⏳ 24h real pending |
-| - |  | V390_COMPREHENSIVE_ASSESSMENT.md §4.2 | ✅ PASS (6/6 form-only steps) | |
-| - |  | V390_COMPREHENSIVE_ASSESSMENT.md §3.2 | ✅ G4 form-only PASS | |
-| - |  | 同文档 §3.2 | ✅ G3 form-only PASS | |
-| - |  | 同文档 §3.2 | ✅ G2 form-only PASS | |
-| - |  | 同文档 §3.2 | ✅ G5 form-only PASS | |
-| - |  - P0 任务状态应统一为 "✅ form-only PASS | ⏳ REAL pending RC3" |
-| - |  1. 门禁状态统一格式: "✅ form-only PASS | ⏳ REAL pending" |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  - TPC-H SF=0.1: 22/22 查询通过 |
-| - |  | `tpch_sf01_inprocess_test` | 22/22 PASS | SF=0.1 完整 TPC-H | |
-| - |  | `mysql_wire_protocol_test` | 28/28 PASS | MySQL wire 协议 | |
-| - |  | `tpch_sf01_inprocess_test` | 17 tests PASS | 包含 oracle 框架 | |
-| - |  Thread 0 done: 12345 queries, 0 errors, 12345 rows |
-| - |  Thread 1 done: 12300 queries, 0 errors, 12300 rows |
-| - |  Thread 2 done: 12280 queries, 0 errors, 12280 rows |
-| - |  Thread 3 done: 12310 queries, 0 errors, 12310 rows |
-| - |  - [x] 单线程 QPS 验证通过 |
-| - |  - [x] TPC-H 22/22 查询通过 |
-| - |  > **Status: 🟡 READY (gates G1-G16 PASS, 24h/72h/168h soak incomplete/interrupted)** |
-| - |  | G1 | TPC-H 22/22 (QPS-correctness) | ✅ PASS | tpch_gate_test 22/22 | |
-| - |  | G2 | INT-2 ParallelExecutor | ✅ PASS | int2_substance_parallel_test (9 tests) | |
-| - |  | G3 | INT-3 Single Expression | ✅ PASS | int3_substance_delegation_test (17 tests) | |
-| - |  | G4 | ARCH-3 VtuGuard | ✅ PASS | check_arch3_no_bypass.sh (8/8) | |
-| - |  | G5 | SEM-1 Savepoint | ✅ PASS | check_sem1_savepoint.sh (8/8) | |
-| - |  | G6 | Backup/Restore/PITR | ✅ PASS | check_backup_restore.sh (6/6, 51 e2e) | |
-| - |  | G8 | Crash Matrix | ✅ PASS | check_p12_crash_test.sh | |
-| - |  | G9 | Upgrade v3.8→v3.9 | ✅ PASS | check_p14_upgrade_test.sh (50 tests) | |
-| - |  | G10 | GMP Audit + Time Travel + Hash Chain | ✅ PASS | check_p21/22/23_*.sh | |
-| - |  | G15 | SF=0.01 TPC-H wire | ✅ PASS | tpch_sf01_22_queries_wire_test | |
-| - |  | G16 | Compatibility v3.8→v3.9 | ✅ PASS | v380_to_v390_full_upgrade_test (5 cases) | |
-| - |  **Total: 11/13 PASS, 1/13 incomplete (G11), 1/13 pending re-run (G13)** |
-| - |  | Substance tests | 41 | 41/41 PASS | |
-| - |  | TPC-H wire (G1) | 22 | 22/22 PASS | |
-| - |  | TPC-H wire SF0.01 (G15) | 22 | 22/22 PASS | |
-| - |  | Upgrade (G9, G16) | 55 | 55/55 PASS | |
-| - |  | Backup/Restore (G6) | 51 | 51/51 PASS | |
-| - |  | Crash Matrix (G8) | 129 | 129/129 PASS | |
-| - |  | Stability (G7) | 10 | 10/10 PASS | |
-| - |  | E2E SELECT (2026-07-04) | 16 | 16/16 PASS | |
-| - |  | **Total verified tests** | **346+** | **346+ / 346+ PASS** | |
-| - |  | 1h simulated | rc4 readiness | Z6G4 (rc4 binary) | ✅ PASS | |
-| - |  - [x] G1-G10 gates PASS |
-| - |  - [ ] TPC-H SF=1.0 Q1-Q22 PASS (hardware-blocked: disk) |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |  benchmark PASS** milestone. |
-| - |  Full TPC-H 22/22 PASS. SQL92 core (DML/joins/aggregates) is |
-| - |  > - SGL-001 rustfmt drift 修复 (integration gate 4/4 PASS) |
-| - |    ✅ SOAK PASSED |
-| - |  | 0 errors | PASS | |
-| - |  | P99 < 5000ms | PASS | |
-| - |  | > 0 queries executed | PASS | |
-| - |  | Any error > 0 | WARNING (still PASS) | |
-| - |  | 0 | SOAK PASSED (all criteria met) | |
+| - |  | V312-02 | GMP schema v3.12 | P0 | schema tests PASS | |
+| - |  > 在 TPC-H correctness、SQLLogicTest、wire protocol、LOAD DATA、crash recovery、backup/restore 和 upgrade evidence 全部通过前，宣称 SQLRustGo v3.12.0 是广义 MySQL 5.7 替代品。 |
+| - |  | V312-02 | GMP schema v3.12 | P0 | Schema tests PASS | |
+| - |  本矩阵把 GMP 内审检索所需控制项映射到 SQLRustGo 的计划实现和测试证据。所有条目在真实测试和执行证据产生前，都必须保持 `PLANNED`，不得提前写成 PASS 或已完成。 |
+| - |  **PASS — 154 tests passed, 0 failed** |
+| - |  - [x] backup.rs 代码存在且编译通过 |
+| - |  **状态: PASS — 满足关闭条件** |
+| - |  `bash scripts/gate/check_arch_invariants.sh` → exit 0, 5 PASS / 0 FAIL |
+| - |  | C-ARCH-01 | LocalExecutor has NO `txn_manager` field | **PASS** | |
+| - |  | C-ARCH-02 | LocalExecutor has NO `write_buffer` field | **PASS** | |
+| - |  | C-ARCH-03 | storage.insert/update/delete only in `crates/storage` or `crates/executor` | **PASS** (info: 14 storage operations in business crates — allowed per AD-002) | |
+| - |  | C-ARCH-04 | No `eng.execute(raw_sql)` outside parser | **PASS** | |
+| - |  | C-ARCH-05 | `execution_engine.rs` < 1600 lines (SSOT: CARCH05_LIMIT, AD-001 target 1500) | **PASS** (1594 lines) | |
+| - |  PASS: C-ARCH-01 |
+| - |  PASS: C-ARCH-02 |
+| - |  PASS: C-ARCH-04 |
+| - |  PASS: C-ARCH-05 (execution_engine.rs: 1594 lines, limit 1600, AD-001 target 1500) |
+| - |  PASSED: 5 |
+| - |  Result: ALL PASS |
+| - |  | R2.6 | INT-2 + INT-3 deferred w/ plan (2 items, D7 PASS-WITH-DRIFT) | (carried — V312-22 plan) | V312-22 owner | (in plan) | |
+| - |  PASS: ALL_TARGETS_REPORT.md fresh (age=N s) |
+| - |  PASS: R2_INVARIANTS_REPORT.md fresh (age=N s) |
+| - |  PASS: signoff valid (Reviewer A=hermes-z6g4, Reviewer B=openclaw, ...) |
+| - |  PASS: signoff file is valid |
+| - |  ==> V312-19 release gate PASSED |
+| - |  | C-ARCH-01~05 | 5/5 PASS | This file (Part 1) + `scripts/gate/check_arch_invariants.sh` exit 0 | |
+| - |  | R2.1-R2.8 driver | 4 PASS / 1 stub (R2.8) / 3 fail (R2.1/R2.4/R2.6/R2.7) | This file (Part 2) + `R2_INVARIANTS_REPORT.md` | |
+| - |  | V312-19 release gates | PASS exit 0 | `check_v312_19_release_gates.sh` output | |
+| - |  **Result:** 11/11 PASS, 0 FAIL |
+| - |  | `test_wire_smoke_error_packet_structure` | PASS | ~20s | |
+| - |  | `test_wire_smoke_load_data_sf1` | PASS | ~30s | |
+| - |  | `test_wire_smoke_reset_clears_prepared_stmts` | PASS | ~25s | |
+| - |  | `test_wire_smoke_reset_connection` | PASS | ~20s | |
+| - |  | `test_wire_smoke_stmt_close` | PASS | ~25s | |
+| - |  | `test_wire_smoke_stmt_close_nonexistent` | PASS | ~20s | |
+| - |  | `test_wire_smoke_stmt_execute_after_close` | PASS | ~25s | |
+| - |  | `test_wire_smoke_stmt_prepare_execute_int` | PASS | ~25s | |
+| - |  | `test_wire_smoke_stmt_prepare_execute_varchar` | PASS | ~25s | |
+| - |  | `test_wire_smoke_stmt_prepare_invalid_sql` | PASS | ~20s | |
+| - |  | `test_wire_smoke_stmt_prepare_null` | PASS | ~25s | |
+| - |  | C-ARCH invariants | `bash scripts/gate/check_arch_invariants.sh` | 5/5 PASS | |
+| - |  | LOAD DATA INFILE | `bash scripts/gate/check_load_data_infile.sh` | 4/4 PASS (gate script) | |
+| - |  | Anti-fabrication | `bash scripts/gate/check_anti_fabrication.sh` | ERRORS=0, PASS | |
+| - |  | Wire smoke | `cargo test --test wire_smoke_mysql_cli` | 11/11 PASS | |
+| - |    [PASS] LOAD_DATA_INFILE.md |
+| - |    [PASS] LOAD DATA documented |
+| - |    [PASS] parser changes documented |
+| - |    [PASS] gate executable |
+| - |  PASS: 4, FAIL: 0 |
+| - |  Result: ALL PASS  [exit 0] |
+| - |  **Result:** PASS (with graceful fallback) |
+| - |  **PASS — 154 tests passed, 0 failed** |
+| - |  - [x] ingestion.rs 代码存在且编译通过 |
+| - |  **状态: PASS — 满足关闭条件** |
+| - |  | Tests | ✅ | 10/10 PASS | |
+| - |  **Evidence**: `cargo test -p sqlrustgo-executor window` → 10 tests PASS |
+| - |  | `cargo test -p sqlrustgo-mysql-server --test wire_smoke_mysql_cli` | 11/11 PASS | |
+| - |  | `bash scripts/gate/check_arch_invariants.sh` | 5/5 PASS | |
+| - |  | `bash scripts/gate/check_load_data_infile.sh` | 4/4 PASS | |
+| - |  PASS: ALL_TARGETS_REPORT.md fresh |
+| - |  PASS: R2_INVARIANTS_REPORT.md fresh |
+| - |  PASS: signoff file is valid |
+| - |  ==> V312-19 release gate PASSED  [exit 0] |
+| - |  [C-ARCH-01] PASS  [C-ARCH-02] PASS  [C-ARCH-03] INFO |
+| - |  [C-ARCH-04] PASS  [C-ARCH-05] PASS |
+| - |  Result: 5/5 PASS  [exit 0] |
+| - |    [1/4] ✅ PASS: 3 VtuGuard marker calls in src/execution_engine.rs |
+| - |    [2/4] ✅ PASS: 2 VtuGuard marker calls in openclaw_endpoints.rs |
+| - |    [4/4] ✅ PASS: VtuGuard::assert_path_for_dml is public |
+| - |  === G4 Gate: PASS === |
+| - |  [C-ARCH-01] Checking LocalExecutor has NO txn_manager field... PASS |
+| - |  [C-ARCH-02] Checking LocalExecutor has NO write_buffer field... PASS |
+| - |  [C-ARCH-03] Checking storage.insert/update/delete only in crates/storage or crates/executor/... PASS |
+| - |  [C-ARCH-04] Checking no eng.execute(raw_sql) outside parser... PASS |
+| - |  [C-ARCH-05] Checking execution_engine.rs < 1600 lines... PASS (1594 lines) |
+| - |  === Summary === PASSED: 5, FAILED: 0 |
+| - |  - Draft gate 仍只表示开发入口准备，不表示实现通过。 |
+| - |  > "提交命令、日志、PASS/FAIL、commit、evidence_hash" |
+| - |  - **V312-24 work contribution**: 0 new errors. 9/5/6 = 20 lib tests (sqlancer/test-registry/test-runner) PASS; 10 V312-24 integration tests PASS. |
+| - |  - **Result**: **Exit 0 (PASS)** |
+| - |  - **Result**: **Exit 0 (PASS)** |
+| - |  - **Result**: **CHECK 1.5 V312-24 = 3 PASS lines** (sqlancer 1000 iter, test-runner 14ms, both valid). Other 5 errors are pre-existing test compile failures (same root cause as Gate 1). |
+| - |    [PASS]   V312-24: target/sqlancer-report.json valid (iterations=1000) |
+| - |    [PASS]   V312-24: target/test-runner-report.json valid (total_duration_ms=14) |
+| - |    [PASS]   V312-24: both SQLancer + test-runner report artifacts present and valid |
+| - |  | 1 | Every tool can run + produce artifact | ✅ PASS | Gate 5: target/sqlancer-report.json (1000 iter) + target/test-runner-report.json (14ms) present + schema valid | |
+| - |  | 2 | 15-item disposition table with reason + replacement gate + owner + expiry | ✅ PASS | V312-24 activation report §15-item table (16 items) | |
+| - |  | 5 | `crates/sql-corpus/tests/corpus_test.rs` pass_rate ≥ 80% | ✅ PASS | 99.4% (813/818 cases) | |
+| - |  **5/6 PASS + 1/6 PARTIAL (with V312-31 follow-up filed)**. |
+| - |  **6 gate 实跑**: 5 numerical gates PASS (V312-24 work +0 errors) + 1 external gate (2 reviewer APPROVED) pending. |
+| - |  | 5 | `bash scripts/gate/check_beta_gate.sh` B10_SQLANCER PASS | ⏸ TO RUN | 需 sqlancer-report.json (binary works; 30s run) | |
+| - |  | 2 FAIL in `sqlrustgo-mysql-server` (`list_threads_returns_at_least_one`, `skip_auth_defaults_false`) | V312-17 Coverage (tracked in `docs/releases/v3.12.0/evidence/G2_test_count.txt`) | V312-17 owner | 2026-09-30 | mysql-server gate 仍 non-blocking (G2 gate 仍 PASS) | |
+| - |  $ bash scripts/gate/check_beta_gate.sh 2>&1 | tee /tmp/v312_30_step_5_beta_gate.log | grep -E "B10_SQLANCER|PASS|FAIL" | head -5 |
+| - |  1. 不允许"openspec 标 done"、"报告标题写已完成"、"PR 已合并"作为关闭证据 |
+| - |  V312-30 **不能**在 PR merge + 2 reviewer APPROVED + 6 项 gate 实测通过 之前关闭。 |
+| - |  **PASS — 154 tests passed, 0 failed** |
+| - |  - [x] graph.rs 代码存在且编译通过 |
+| - |  **状态: PASS — 满足关闭条件** |
+| - |  **PASS — 154 tests passed, 0 failed** |
+| - |  | audit hash chain 实跑证据 | DONE | `test_hash_chain_tamper_detection` 存在并 PASS | |
+| - |  | fail-closed tamper 测试 | DONE | `test_permission_guard_fail_closed` 存在并 PASS | |
+| - |  - [x] acl.rs / audit.rs 代码存在且编译通过 |
+| - |  **状态: PASS — 满足关闭条件** |
+| - |  > **真实性规则**: 本计划只定义未来工作和退出证据，不声明任何 v3.12.0 gate 已通过。 |
+| - |  - 没有 command output、timestamp、source agent、source run、evidence hash 和 output location 就宣称 PASS、GA 或 compliance。 |
+| - |  | `cargo build -p sqlrustgo_sqllogictest` | 可完成，但 `storage` 与 `executor` 依赖仍有 warning | 可作为 Alpha build evidence，但不得宣称 warning-free/clippy-clean，直到 `cargo clippy --all-features -- -D warnings` 通过 | |
+| - |  | `cargo run -p sqlrustgo_sqllogictest -- --test-dir crates/sqlrustgo_sqllogictest/testdata` | runner 可完成；smoke corpus 为 6/16 文件通过，通过率 27.3% | 必须作为失败基线 triage，不得作为 release gate PASS | |
+| - |  任何 PASS 声明都必须附 command output、timestamp、source_agent、source_run、evidence_hash 和 output location。 |
+| - |  - PASS, GA, or compliance claims without command output, timestamp, source agent, source run, evidence hash, and output location. |
+| - |  | `cargo run -p sqlrustgo_sqllogictest -- --test-dir crates/sqlrustgo_sqllogictest/testdata` | Runner completes; smoke corpus result is 6/16 files passing, 27.3% pass rate | Treat as a failing baseline to triage, not as a release gate PASS | |
+| - |  - Gate script output showing PASS/FAIL with exit code. |
+| - |  **PASS** — pass rate 99.4% ≥ 80.0% (baseline; V312-24 proposal 写的 27.3% 是 |
+| - |  **PASS** — 14 个 per-subcategory guard + 2 个 meta test 全 PASS。 |
+| - |  **PASS** — 5 failing cases pre-exist in baseline; pass rate 99.4% > 80% |
+| - |  **PASS**. |
+| - |  V312-24 proposal §4 描述"16 subcategories / 27.3% pass rate / 6/16 PASS"。 |
+| - |  - 6/16 PASS → 实际是 14/14 subcategories 在 99.4% 范围内全 PASS（5 个 failing case 散落在子目录中） |
+| - |  按"以实际 gate 数字关闭"的严格要求：4/4 关闭边界 PASS。V312-28 可关闭。 |
+| - |  **PASS** — 3 个脚本实际命令中 0 个 `|| true` (baseline 223 个)。 |
+| - |  **PASS** — 没有 `2>/dev/null || true` 吞错；server 不可达时 set -euo pipefail 触发 exit 1。 |
+| - |  **PASS** — 缺失时 fail-explicit，证据写入 `/tmp/backup_restore_evidence.txt`。 |
+| - |  **PASS** — 缺失时 fail-explicit，stderr 含 "sysbench not found"。 |
+| - |  **PASS** — server 不可达时 exit 1。byte-exact 断言替代了原 `grep -q "name"` 宽松匹配。 |
+| - |  **PASS**. |
+| - |  按"以实际 gate 数字关闭"的严格要求：6/6 关闭边界 PASS。V312-26 可关闭。 |
+| - |  | Every tool can run + produce artifact (sqlancer + test-runner + test-registry all executable) | ✅ PASS | `target/sqlancer-report.json` + `target/test-runner-report.json` + `target/test-registry.toml` all generated and validated by integration tests | — | |
+| - |  | Every retired/deferred item has reason + replacement gate + owner + expiry (15-item disposition table) | 🟡 PARTIAL | 12 items in the table are PASS (Phase 1 activation); 3 retired/deferred rows now map to V312-25 / V312-27 / V312-28 with owner + expiry; remainder is follow-up scope | V312-25 / V312-27 / V312-28 | |
+| - |  **Net result for this PR**: 1 of 6 acceptance criteria are PASS outright; |
+| - |  2 are PARTIAL (PASS in artifact terms, FAIL in gate wiring terms — gated on |
+| - |  cli_smoke             2/2 PASS |
+| - |  toml_round_trip       3/3 PASS |
+| - |  managed_dispatch      2/2 PASS |
+| - |  timeout_enforced      3/3 PASS |
+| - |  "openspec 标 done" / "报告标题写已完成" / "PR 已合并" 不允许关闭。 |
+| - |  V312-24 本身**不能**在 V312-25 ~ V312-30 全部 PASS 之前关闭。 |
+| - |  | 1 | `crates/sqlancer` | **activate** | minimax | 2026-08-25 | `cargo run -p sqlancer -- --duration 1` exit 0 + `target/sqlancer-report.json` 存在 (`cli_smoke` test PASS) | |
+| - |  | 2 | `crates/test-runner` | **activate** | minimax | 2026-08-25 | `cargo run -p test-runner -- --manifest X --max-parallel 3` exit 0 + `target/test-runner-report.json` 存在 (`managed_dispatch` test PASS) | |
+| - |  | 3 | `crates/test-registry` | **activate** | minimax | 2026-08-25 | `test-registry-cli init` 写 `test-registry.toml` + `from_toml`/`write_toml` round-trip OK (`toml_round_trip` test PASS) | |
+| - |  | 12 | `tests/e2e/e2e_beta_test.rs` 5 double-skip tests | **fix** | minimax | 2026-08-25 | V312-27 删 5 处 `is_e2e_disabled` early-return; `CI=1 cargo test --test e2e_beta_test -- --ignored` = 6 PASS | |
+| - |  **V312-24 自身关闭条件**：上表 16 项全 PASS + V312-30 sign-off 报告存在 + PR mergedAt 非空 + 2 reviewer APPROVED + evidence_hash 重新计算。 |
+| - |  **PASS — 154 tests passed, 0 failed** |
+| - |  - [x] schema/version/chunk/relation/audit/document 模块代码存在且编译通过 |
+| - |  **状态: PASS — 满足关闭条件** |
+| - |  | `test_wal_entry_large_payload` | ✅ PASS | |
+| - |  | `test_wal_entry_serialization_roundtrip` | ✅ PASS | |
+| - |  | `test_wal_checkpoint_recovery` | ✅ PASS | |
+| - |  | `test_wal_concurrent_transactions_isolation` | ✅ PASS | |
+| - |  | `test_wal_mixed_operations` | ✅ PASS | |
+| - |  | `test_wal_recovery_after_crash` | ✅ PASS | |
+| - |  | `test_wal_rollback_recovery` | ✅ PASS | |
+| - |  | `test_wal_recovery_with_pending_transaction` | ✅ PASS | |
+| - |  | `test_wal_single_transaction` | ✅ PASS | |
+| - |  **Result**: 16/16 WAL integration tests PASS ✅ |
+| - |  | `test_crash_recovery_reconstructs_pages` | ✅ PASS | |
+| - |  | `test_f26_crash_recovery` | ✅ PASS | |
+| - |  **Result**: 2/2 storage crash tests PASS ✅ |
+| - |  **Result**: 6/8 tests PASS, 2 FAIL ⚠️ |
+| - |  | `test_upgrade_gate_script_exists` | ✅ PASS | |
+| - |  | `test_upgrade_script_has_required_functions` | ✅ PASS | |
+| - |  | `test_upgrade_script_exists` | ✅ PASS | |
+| - |  | `test_upgrade_script_syntax` | ✅ PASS | |
+| - |  **Result**: 4/4 upgrade tests PASS ✅ |
+| - |  | WAL Integration | ✅ PASS (16/16) | None | |
+| - |  | Storage Crash Recovery | ✅ PASS (2/2) | None | |
+| - |  | Upgrade Path | ✅ PASS (4/4) | None | |
+| - |  **PASS** — 13/13 passed including `test_vtu_guard_wraps_storage` (no longer |
+| - |  **PASS** — 旧的 `rows.len() <= 6` (accepts 0 rows) 改为 `rows.len() > 0` |
+| - |  加载好或 Q1 完全失败 — 之前是 PASS 静默吞，现在 fail-explicit。 |
+| - |  **PASS** — 6 passed (5 个 e2e_XX 加上 e2e_beta_manifest_contains_6_scenarios |
+| - |  **PASS** — stale + union 全部 0。 |
+| - |  **PASS**. |
+| - |  按"以实际 gate 数字关闭"的严格要求：5/5 关闭边界 PASS。V312-27 可关闭。 |
+| - |  **v3.11.0 GA 6/6 gates PASS — v3.12.0 不继承 hidden 弱项**。 |
+| - |  | G1 R1-R4 RC 指标 | ✅ PASS | 否 | |
+| - |  | G2 Full test suite | ⚠️ 2,666 tests (2,664 PASS + 2 FAIL non-blocking + 3 IGNORED) | 否 | |
+| - |  | G5 Security audit | ✅ PASS | 否 | |
+| - |  | sqlrustgo-executor | 685 | ✅ PASS | 2026-08-09 18:00+0800 | |
+| - |  | sqlrustgo-storage | 683 | ✅ PASS | 2026-08-09 18:00+0800 | |
+| - |  | sqlrustgo-parser | 589 (3 ignored) | ✅ PASS | 同上 | |
+| - |  | sqlrustgo-catalog | 183 | ✅ PASS | 同上 | |
+| - |  | sqlrustgo-planner | 84 | ✅ PASS | 同上 | |
+| - |  | sqlrustgo-common | 79 | ✅ PASS | 同上 | |
+| - |  | sqlrustgo-mysql-client | 79 | ✅ PASS | 同上 | |
+| - |  | sqlrustgo-admin | 69 | ✅ PASS | 同上 | |
+| - |  | sqlrustgo-cache | 10 | ✅ PASS | 同上 | |
+| - |  | 22/22 实跑 PASS | ✅ | ✅ | ✅ | both | both | |
+| - |  **Source report**: `docs/releases/v3.11.0/TPCH_SF1_22_22_PASS_REPORT.md` |
+| - |  | Pre-flight (home/readlink/buildroot) | ✅ PASS | — | |
+| - |  | **G3 覆盖率** (3 crates < 80%) | PASS (gate = tools 80.31%) | **CARRIED** | V312-17 | |
+| - |  | **G4 TPC-H zero-row correctness** | 22/22 不 OOM (PASS) | **CARRIED** | V312-12 (PG SHA256) | |
+| - |    [A1_BUILD] PASS |
+| - |    [PASS] docs/releases/v3.12.0/BLOCKER_DISPOSITION_V311.md exists |
+| - |  --- Gap 2: GA gates PASS verification --- |
+| - |    [PASS] 10 crates have test counts recorded |
+| - |    [PASS]        2 crates < 80% (acceptable, tracked to V312-17) |
+| - |    [PASS] G4 TPC-H SF=1 22/22 verified |
+| - |    [PASS] SOAK 343h37m (2.04x) verified |
+| - |    [PASS] All 5 remotes synced to v3.11.0-ga |
+| - |  PASS: 7 / 7 |
+| - |  V312-01 blocker disposition: PASS |
+| - |  **Gate execution**: 7/7 PASS — v3.12.0 ALPHA promotion 入口通畅。 |
+| - |  | `test_composite_btree_index_insert` | ✅ PASS | |
+| - |  | `test_composite_btree_index_insert_unique` | ✅ PASS | |
+| - |  | `test_composite_btree_index_search` | ✅ PASS | |
+| - |  | `test_composite_btree_index_range_query` | ✅ PASS | |
+| - |  | `test_composite_btree_index_num_columns` | ✅ PASS | |
+| - |  | parser_fixtures | `cargo test -p sqlrustgo-parser...` | ✅ PASS (34/34) | |
+| - |  | R2.1-R2.3 | ✅ PASS | None | |
+| - |  | parser_fixtures | ✅ PASS | None | |
+| - |  **PASS — 154 tests passed, 0 failed** |
+| - |  - [x] retrieval.rs 代码存在且编译通过 |
+| - |  **状态: PASS — 满足关闭条件** |
+| - |  | V312-G11 | SQLite SQLLogicTest 判定门禁 | `sqlrustgo_sqllogictest` runner + SQLite 官方/缓存语料 | 选定目标通过，或每个排除项都关联 issue | |
+| - |  | V312-G13 | MySQL wire protocol 硬化 | COM_QUERY、COM_STMT、error、reset、TLS、compression E2E | 产生确定性的通过/失败 artifact | |
+| - |  | V312-G17 | Window/GIS/JSON 受控功能 | ROW_NUMBER/RANK/DENSE_RANK、JSON path、ST_Distance/ST_Intersects/GeoJSON fixtures | 支持范围内全 PASS；超出范围有明确错误和文档 | |
+| - |  | V312-G22 | MySQL 兼容与 SQL surface 回归 | SHOW、auth、prepared statements、ALTER、TIMESTAMP、连接池、函数、列级权限 fixtures | GMP/生产路径相关项 PASS；非目标项有 explicit unsupported/deferred 证据 | |
+| - |  每个 PASS claim 必须包含：command、timestamp、source agent、source run、evidence hash、output location 和 PASS/FAIL boundary。 |
+| - |  - 168h mixed SOAK 未完成，或没有证据却写成 PASS。 |
+| - |  | Alpha | `cargo build -p sqlrustgo_sqllogictest` 成功；runner `--help` 可用 | |
+| - |  | RC | curated SQLite-compatible subset 运行，并输出 PASS/FAIL/SKIP 分类和 issue-linked exclusions | |
+| - |  | GA | selected SLT targets 全部通过，或每个 skipped/failed group 都有 issue、owner、expiry、rationale | |
+| - |  | `cargo run -p sqlrustgo_sqllogictest -- --test-dir crates/sqlrustgo_sqllogictest/testdata` | runner 可完成；6/16 文件通过，通过率 27.3% | v3.12 必须 triage failures、分类 expected incompatibilities，并在 Beta/RC 前提升 smoke gate | |
+| - |  | G3 coverage 口径漂移 | 单一 canonical coverage command，保存输出，不混用 PASS claim | |
+| - |  | v3.6 Beta PENDING 与覆盖率/测试编译延续问题 | historical disposition + current build/test/coverage sampling，不得沿用历史 PASS claim | |
+| - |  | V312-G11 | SQLite SQLLogicTest oracle | `sqlrustgo_sqllogictest` runner + SQLite official/cached corpus | selected targets PASS or issue-linked exclusion | |
+| - |  Every PASS claim must include |
+| - |  - PASS/FAIL boundary |
+| - |  - 168h mixed SOAK is not completed or is described as PASS without evidence. |
+| - |  | RC | Curated SQLite-compatible subset runs with PASS/FAIL/SKIP classification and issue-linked exclusions | |
+| - |  | G3 coverage口径漂移 | Single canonical coverage command, stored output, no mixed PASS claims | |
+| - |  - 禁止声明 v3.12.0 已通过 Alpha/Beta/RC/GA。 |
+| - |  - 禁止声明 SQLLogicTest、TPC-H correctness、wire、LOAD DATA、recovery 或 GMP compliance 已通过。 |
+| - |  - 数据行数：20（PASS: 11 / unsupported: 2 / deferred: 7 / fail: 0） |
+| - |  - **PASS surface**: `alter_add_column`, `alter_drop_column`, `alter_modify_column`, `alter_rename`, `show_tables`, `group_concat` (意外实现), `stddev_pop` (意外实现), `with_cube` (意外实现), `with_rollup` (意外实现), `var_pop` (意外实现), `replace_into` (意外实现) |
+| - |  **PASS** — 10 unique file paths deleted in git history. |
+| - |  **PASS** — only `e2e_07_json_vector.sh` remains (kept for V312-26 to rewrite). |
+| - |  **PASS** — 10 retired entries added (one per retired script). |
+| - |  **PASS** — 唯一引用被删脚本的代码是 `tests/baseline/ignore_registry.json` 中的 10 条 retired entries（也是 V312-25 自己加的）。**没有任何 Rust test 代码引用被删的 10 个脚本**。cargo check 输出集合的差异是并行编译 race（同一 sqlrustgo test 在 A 编译失败 B 编译成功），与 V312-25 删的 shell 脚本无关。 |
+| - |  **PASS**. |
+| - |  按"以实际 gate 数字关闭"的严格要求：5/5 关闭边界 PASS。V312-25 可关闭。 |
+| - |  **验收**: blocker disposition report、stage gate output，以及所有 PASS claim 的 evidence hash。 |
+| - |  **验收**: `cargo build -p sqlrustgo_sqllogictest` 成功；本地 smoke corpus 产生报告；官方/cached SQLite corpus 有 manifest、hash、file count、exclusion policy；新增或规划 `scripts/gate/check_sqllogictest_v312.sh`。 |
+| - |  **验收**: 对 GMP/生产路径相关子集给出 fixture PASS；非目标项必须输出 explicit unsupported 或 deferred decision，不得在 release note 中无边界宣称支持。 |
+| - |  12 个 task 全完成（sqlancer / test-runner / test-registry 三套 `[[bin]]` + 主入口 + JSON artifact + TOML manifest 持久化 + JoinSet 并行 + `tokio::time::timeout` 强制），新增 4 个 integration test 文件共 10 个 test 全 PASS，lib 测试 20/20 PASS，clippy strict 0 error，fmt clean。详见 `docs/releases/v3.12.0/V312-24_test_infra_activation_report.md`。 |
+| - |  2. 失败注入测试 1：`mv scripts/gate/e2e/e2e_07_fixture.json{,.bak} 2>/dev/null; bash scripts/gate/e2e/e2e_07_json_vector.sh; echo "exit=$?"; mv scripts/gate/e2e/e2e_07_fixture.json{.bak,}` 退出码 **≠ 0**（验证 byte-exact 断言生效，不再静默 PASS）。 |
+| - |  **禁止关闭条件**: 仅以"测试通过"或"无 `\|\| true`"为依据；必须含上述 2 个失败注入的实测 log。 |
+| - |  **Baseline evidence**: `docs/releases/v3.12.0/evidence/V312-28_baseline_evidence.txt`（**实测 2026-08-09**：99.4% pass-rate / 14 subcategories / 103 .sql files / 818 cases / 5 failing — V312-24 proposal §4 写的"16 subcategories / 27.3% / 6/16 PASS"严重过时） |
+| - |  **禁止关闭条件**: (a) 仅靠"打开了 follow-up 任务"或"修了一部分 subcategory"；(b) 不接受"V312-24 proposal 27.3% 是 baseline" 之类的过时引用；(c) 14 个守护 test 必须有可识别的命名或注释才能算 PASS；(d) 无 sha256 不允许关闭。 |
+| - |  2. `bash scripts/gate/check_beta_gate.sh 2>&1 | grep B10_SQLANCER` 输出含 `check_fail`（baseline 是 `check_warn`）；`bash scripts/gate/check_beta_gate.sh` 退出 **0** 且日志含 `B10_SQLANCER PASS`。 |
+| - |     - `bash scripts/gate/check_beta_gate.sh` B10_SQLANCER 通过 |
+| - |  **禁止关闭条件**: (a) 不允许"openspec 标 done"、"报告标题写已完成"、"PR 已合并"作为关闭证据；(b) 不允许用 baseline evidence_hash 顶替关闭时重算的 hash；(c) 2 pre-existing FAIL/errors 在 mysql-server / storage 若仍未修，V312-30 必须显式列在豁免清单（带 owner + expiry）。 |
+| - |  - Evidence hashes for any PASS claim. |
+| - |  - GA gate report contains only evidence-backed PASS claims. |
+| - |  - The selected SLT corpus has PASS/FAIL/SKIP classification. |
+| - |  2. Issue 评论包含 PR 编号、commit SHA、执行命令、PASS/FAIL 摘要、evidence_hash |
+| - |  - **测试**: 9 PASS / 1 unsupported / 4 deferred |
+| - |  | demo.test | PASS | Basic SELECT | |
+| - |  | insert__test_insert_invalid.test | PASS | Error cases | |
+| - |  | delete__test_delete.test | PASS | DELETE operations | |
+| - |  | update__test_update.test | PASS | UPDATE operations | |
+| - |  | constraints__test_not_null.test | PASS | NOT NULL constraint | |
+| - |  - 文档链接和一致性检查通过。 |
+| - |  Draft 阶段可以移交 Hermes/OMP 进入 Alpha 开发准备。任何 Alpha PASS、功能完成或门禁通过声明，必须等待对应命令实跑并产生 evidence hash。 |
+| - |  | `bash scripts/gate/check_sqllogictest_v312.sh` | PASS，4/4 entry checks | 仅为 smoke baseline；本地 corpus 6/16，pass rate 27.3%；不代表官方 SQLite corpus 已集成 | |
+| - |  | `bash scripts/gate/check_alpha_v3.12.0.sh` | PASS，13/13 | 仅代表 Alpha 入口准备完成，不代表业务功能完成 | |
+| - |  | `bash scripts/gate/check_stage.sh --version v3.12.0 --dry-run` | PASS，DRAFT dry-run 可解析 | 不执行 cargo build | |
+| - |  | `bash scripts/gate/check_stage.sh --version v3.12.0 --stage ALPHA --dry-run` | PASS，ALPHA dry-run 可解析 | 不执行 ALPHA 全量 gate | |
+| - |  | `bash scripts/gate/check_stage.sh --version v3.12.0` | PASS，4/4 | DRAFT stage gate 实跑通过，含 docs links 和 `cargo build --all-features` | |
+| - |  2. 失败时 `exit 1` (而非 `PASS=$((PASS+1))` 静默) |
+| - |    PASS: sysbench ran 3s with 1 thread(s), 1402 events at 466.83 events/sec |
+| - |  === E2E sysbench_smoke_test: PASS === |
+| - |  **PASS — 154 tests passed, 0 failed** |
+| - |  - [x] vector_index/vector_search/embedding 模块代码存在且编译通过 |
+| - |  **状态: PASS — 满足关闭条件** |
+| - |  **PASS — 154 tests passed, 0 failed** |
+| - |  - [x] rag.rs 代码存在且编译通过 |
+| - |  **状态: PASS — 满足关闭条件** |
+| - |  | `wire_smoke_mysql_cli.rs` | 11/11 PASS | |
+| - |  | Architecture invariants (C-ARCH-01~05) | 5/5 PASS | |
+| - |  | `check_load_data_infile.sh` | 4/4 PASS | |
+| - |  - C-ARCH-01~05 invariants (5/5 PASS) |
+| - |  **PASS** — SQLancer 部分（line 110-118）已去 `|| true`，加 `if [[ ! -s |
+| - |  **PASS** — baseline `check_warn` 已升级为 `check_fail`，加 B10_SQLANCER_REPORT |
+| - |  **PASS** — 8 个 scenarios 改 4 个 (V312-25 retired 3 stale mirror, V312-26 |
+| - |  **PASS** — P16 step 2.5/3 新增，扫出 **29 个 `|| true` 掩盖**（在 9 个 gate |
+| - |  **PASS**. |
+| - |  按"以实际 gate 数字关闭"的严格要求：5/5 关闭边界 PASS（条件 4 校订后）。 |
+| - |  - 2026-08-09 本地基线：`cargo build -p sqlrustgo_sqllogictest` 可完成但依赖仍有 warning；本地 smoke corpus 可运行，但当前仅 6/16 文件通过，通过率 27.3%，因此这是失败基线，不是 gate PASS。 |
+| - |  | `wire_load_data/V312-13-REPORT.md` | `check_v312_13_wire_load_data.sh` | 10 步 evidence 表 (5 PASS, 4 deferred, 1 pre-existing fail from `check_load_data_infile.sh`) | |
+| - |  | `mysql_compat/SURFACE_DISPOSITION.md` | `check_v312_21_mysql_compat.sh` | 10 v3.7-v3.10 历史 surface 的 decision 表 (PASS/unsupported/deferred) | |
+| - |  | 测试目标 | 通过 | 失败 | |
+| - |  | `scripts/gate/check_v312_13_wire_load_data.sh` | V312-13 evidence | 5/5 typed-wrapper+regression PASS, 4 deferred, 1 pre-existing fail | |
+| - |  | `scripts/gate/check_v312_19_release_gates.sh` | RC/GA 阻断 gate | PASS (artifacts fresh) | |
+| - |    alter_modify_column 全部 PASS** (5 个新增 PASS) |
+| - |    4 个 fixture 之前标 `UNSUPPORTED` 但 server 静默接受语法。改成 `PASS-with-caveat` |
+| - |    后: **4 个新增 PASS** (server 解析但语义不实现, 文档化在 release notes) |
+| - |  最终 disposition: **9 PASS / 1 unsupported / 4 deferred / 0 fail** (vs slice 2: 1/5/3/4) |
+| - |    (600 lineitem rows / 62 KB), 8 个表全部 LOAD DATA 成功, 0.7s 内完成 |
+| - |  - V312-13 / V312-19 / V312-21 gates: ALL PASS |
+| - |    - 新增 PASS surface (6 个意外实现): `group_concat`, `stddev_pop`, `with_cube`, `with_rollup`, `var_pop`, `replace_into` |
+| - |    - 最终结果: **11 PASS / 2 unsupported / 7 deferred / 0 fail** |
+| - |  - 2026-08-09 local baseline: `cargo build -p sqlrustgo_sqllogictest` completes with dependency warnings; local smoke corpus runs but currently reports 6/16 files passing and 27.3% pass rate, so this is a failing baseline rather than a gate PASS. |
 
 **规则**: UnverifiedDoc 不得用于门禁判断
 
@@ -1160,14 +858,14 @@
 
 ### 问责记录
 
-- 违规次数: 424
+- 违规次数: 304
 - 违规类型: Type A（虚构执行）/ Type B（伪门禁）/ Type D（伪任务完成）
 - 处理方式: 触发 Anti-Fabrication Policy 问责机制
 
 
 ---
 
-*报告生成时间: 2026-07-11 14:19:38*
+*报告生成时间: 2026-08-10 07:49:07*
 *检查工具版本: check_evidence_binding.sh v1.0.0*
 *依据政策: Anti-Fabrication Policy v1.0.0*
 
