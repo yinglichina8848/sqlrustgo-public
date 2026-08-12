@@ -60,7 +60,7 @@ mindmap
             BufferPool
 ```
 
-![diagram](file:///tmp/mmd/b0_1d80d3cd.png)
+!diagram
 
 
 ### Why（为什么）
@@ -83,7 +83,7 @@ flowchart LR
     Execute --> Store["存储"]
 ```
 
-![diagram](file:///tmp/mmd/b1_22ab4280.png)
+!diagram
 
 
 ---
@@ -115,7 +115,7 @@ flowchart LR
     v3x -->|"智能化"| v4x
 ```
 
-![diagram](file:///tmp/mmd/b2_d8f0ae70.png)
+!diagram
 
 
 ---
@@ -176,7 +176,7 @@ flowchart TB
     Storage --> WAL
 ```
 
-![diagram](file:///tmp/mmd/b3_0b8cd1cd.png)
+!diagram
 
 
 ---
@@ -208,7 +208,7 @@ flowchart TB
     P1 --> P2 --> P3 --> P4
 ```
 
-![diagram](file:///tmp/mmd/b4_2c958ecb.png)
+!diagram
 
 
 ---
@@ -236,7 +236,7 @@ flowchart LR
     S -->|"实现"| T
 ```
 
-![diagram](file:///tmp/mmd/b5_631335a6.png)
+!diagram
 
 
 ### 2. 可扩展性
@@ -345,7 +345,7 @@ pie title 查询处理时间分布
     "其他" : 5
 ```
 
-![diagram](file:///tmp/mmd/b7_4fc83a49.png)
+!diagram
 
 
 ---
@@ -392,7 +392,7 @@ flowchart LR
     SQL --> Tokenize --> Parse --> AST
 ```
 
-![diagram](file:///tmp/mmd/b8_f636650e.png)
+!diagram
 
 
 ### Parser模块结构
@@ -418,7 +418,7 @@ graph TB
     Lexer --> Token
 ```
 
-![diagram](file:///tmp/mmd/b9_ac1f265f.png)
+!diagram
 
 
 ### 关键数据结构
@@ -505,7 +505,7 @@ flowchart TB
     CM --> PP
 ```
 
-![diagram](file:///tmp/mmd/b10_ecfd415b.png)
+!diagram
 
 
 ### Memo中间表示
@@ -531,7 +531,7 @@ graph TB
     end
 ```
 
-![diagram](file:///tmp/mmd/b11_69f2dd79.png)
+!diagram
 
 
 ### 优化规则详解
@@ -565,7 +565,7 @@ flowchart LR
     Before -->|"PredicatePushdown"| After
 ```
 
-![diagram](file:///tmp/mmd/b12_e4fce1fb.png)
+!diagram
 
 
 ---
@@ -613,7 +613,7 @@ flowchart TB
     RB --> RS
 ```
 
-![diagram](file:///tmp/mmd/b13_be6ee5ed.png)
+!diagram
 
 
 ### 算子树结构
@@ -642,7 +642,7 @@ flowchart TB
     PROJ --> SCAN
 ```
 
-![diagram](file:///tmp/mmd/b14_943bd97f.png)
+!diagram
 
 
 ### RecordBatch结构
@@ -711,7 +711,7 @@ sequenceDiagram
     Exec-->>Client: ResultSet
 ```
 
-![diagram](file:///tmp/mmd/b16_84d2dfba.png)
+!diagram
 
 
 ---
@@ -778,7 +778,7 @@ flowchart TB
     L2P4 -.-> LINK
 ```
 
-![diagram](file:///tmp/mmd/b18_b3e59f09.png)
+!diagram
 
 
 ### BufferPool管理
@@ -807,7 +807,7 @@ flowchart TB
     EVICT --> PAGES
 ```
 
-![diagram](file:///tmp/mmd/b19_fcb3aaca.png)
+!diagram
 
 
 ### WAL日志机制
@@ -841,7 +841,7 @@ sequenceDiagram
     end
 ```
 
-![diagram](file:///tmp/mmd/b20_293a3b4d.png)
+!diagram
 
 
 ---
@@ -1406,7 +1406,7 @@ graph TB
     BooleanArray --> BooleanArrayImpl
 ```
 
-![diagram](file:///tmp/mmd/b22_fee96e24.png)
+!diagram
 
 
 ---
@@ -1471,7 +1471,7 @@ graph TB
     CS2 --> MAX2["max: \"ZZZZZ\""]
 ```
 
-![diagram](file:///tmp/mmd/b23_25951651.png)
+!diagram
 
 
 ### TableStats
@@ -1555,7 +1555,7 @@ sequenceDiagram
     end
 ```
 
-![diagram](file:///tmp/mmd/b24_8e1f6102.png)
+!diagram
 
 
 ---
@@ -1594,7 +1594,7 @@ flowchart TB
     end
 ```
 
-![diagram](file:///tmp/mmd/b25_e9949b78.png)
+!diagram
 
 
 ### Join重排示例
@@ -1618,7 +1618,7 @@ flowchart LR
     Original -->|"统计信息<br/>小表先驱动"| Optimized
 ```
 
-![diagram](file:///tmp/mmd/b26_20fa0140.png)
+!diagram
 
 
 ---
@@ -1656,7 +1656,7 @@ sequenceDiagram
     Executor-->>Client: 1 row affected
 ```
 
-![diagram](file:///tmp/mmd/b27_2d556782.png)
+!diagram
 
 
 ---
@@ -1745,7 +1745,7 @@ flowchart LR
     Tree --> Pull
 ```
 
-![diagram](file:///tmp/mmd/b29_db6aa477.png)
+!diagram
 
 
 | 特性 | 描述 |
@@ -1778,7 +1778,7 @@ flowchart LR
     Vec --> Batch
 ```
 
-![diagram](file:///tmp/mmd/b30_762fedd1.png)
+!diagram
 
 
 | 特性 | 描述 |
@@ -1796,7 +1796,7 @@ pie title CPU利用率对比
     "向量化模型" : 80
 ```
 
-![diagram](file:///tmp/mmd/b31_f1015552.png)
+!diagram
 
 
 ---
@@ -1833,7 +1833,7 @@ flowchart LR
     CBO -->|"考虑数据分布"| RBO
 ```
 
-![diagram](file:///tmp/mmd/b32_05ab0fb9.png)
+!diagram
 
 
 | 优化器 | 优点 | 缺点 |
@@ -1898,7 +1898,7 @@ sequenceDiagram
     T-->>T: success
 ```
 
-![diagram](file:///tmp/mmd/b33_8779e0b7.png)
+!diagram
 
 
 ---
@@ -1919,7 +1919,7 @@ flowchart LR
     D --> E["5. 编写测试验证"]
 ```
 
-![diagram](file:///tmp/mmd/b34_17750b77.png)
+!diagram
 
 
 ### 关键文件清单
@@ -2061,7 +2061,7 @@ mindmap
             WAL
 ```
 
-![diagram](file:///tmp/mmd/b35_ecbfa01b.png)
+!diagram
 
 
 ### 学习路径

@@ -130,7 +130,7 @@
 
 ### 第3周完成的类图（简化）
 
-![类图](./week-04-OOA到OOP的实践讲解.images/week-04-OOA到OOP的实践讲解-mermaid-1.png)
+!类图
 
 #### 问题
 
