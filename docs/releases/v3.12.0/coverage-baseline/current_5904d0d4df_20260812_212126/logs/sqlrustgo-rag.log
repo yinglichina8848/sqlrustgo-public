@@ -1,0 +1,92 @@
+info: cargo-llvm-cov currently setting cfg(coverage); you can opt-out it by passing --no-cfg-coverage
+warning: /Users/liying/workspace/dev/yinglichina163/sqlrustgo/crates/tools/Cargo.toml: unused manifest key: bin.1.rand
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.12s
+     Running unittests src/lib.rs (target/llvm-cov-target/debug/deps/sqlrustgo_rag-a0585aabfbac8799)
+
+running 81 tests
+test integration_tests::test_exists_in_storage ... ok
+test integration_tests::test_drop_from_storage ... ok
+test integration_tests::test_save_empty_knowledge_base ... ok
+test integration_tests::test_storage_helpers ... ok
+test integration_tests::test_sql_query_by_source ... ok
+test integration_tests::test_delete_persistence ... ok
+test integration_tests::test_sql_count ... ok
+test integration_tests::test_save_and_load_from_storage ... ok
+test integration_tests::test_sql_like_query ... ok
+test inverted_index::tests::test_chinese_tokenization ... ok
+test inverted_index::tests::test_chinese_search ... ok
+test inverted_index::tests::test_add_and_search ... ok
+test inverted_index::tests::test_doc_count ... ok
+test integration_tests::test_update_persistence ... ok
+test inverted_index::tests::test_and_query ... ok
+test inverted_index::tests::test_empty_query ... ok
+test inverted_index::tests::test_fuzzy_search ... ok
+test inverted_index::tests::test_fuzzy_search_distance_2 ... ok
+test inverted_index::tests::test_no_match_query ... ok
+test inverted_index::tests::test_fuzzy_search_no_match ... ok
+test inverted_index::tests::test_phrase_search ... ok
+test inverted_index::tests::test_search_with_limit ... ok
+test inverted_index::tests::test_term_count ... ok
+test tests::test_document_with_metadata ... ok
+test tests::test_document_serialization ... ok
+test tests::test_inverted_index_search_returns_in_order ... ok
+test tests::test_inverted_index_term_frequency ... ok
+test tests::test_knowledge_base_add_and_get ... ok
+test tests::test_knowledge_base_delete ... ok
+test tests::test_knowledge_base_history ... ok
+test tests::test_knowledge_base_serialization ... ok
+test tests::test_knowledge_base_serialization_after_update ... ok
+test tests::test_knowledge_base_serialization_multiple_docs ... ok
+test tests::test_knowledge_base_source_filter ... ok
+test tests::test_knowledge_base_update ... ok
+test tests::test_knowledge_base_version_tracking ... ok
+test tests::test_metadata_operations ... ok
+test tests::test_openclaw_client_batch_query ... ok
+test tests::test_openclaw_client_batch_query_empty ... ok
+test tests::test_openclaw_client_consistency ... ok
+test tests::test_openclaw_client_delete ... ok
+test tests::test_openclaw_client_empty_query ... ok
+test tests::test_openclaw_client_multiple_sources ... ok
+test tests::test_openclaw_client_query ... ok
+test tests::test_openclaw_client_query_result_structure ... ok
+test tests::test_openclaw_client_rag_query ... ok
+test tests::test_openclaw_client_statistics ... ok
+test tests::test_rag_pipeline_clear ... ok
+test tests::test_rag_pipeline_chinese_content ... ok
+test tests::test_rag_pipeline_delete_nonexistent ... ok
+test tests::test_openclaw_client_update_and_query ... ok
+test tests::test_rag_pipeline_doc_count ... ok
+test tests::test_rag_pipeline_delete_document ... ok
+test tests::test_rag_pipeline_get_document ... ok
+test tests::test_rag_pipeline_empty_query ... ok
+test tests::test_rag_pipeline_is_empty ... ok
+test tests::test_rag_pipeline ... ok
+test tests::test_rag_pipeline_list_documents ... ok
+test tests::test_rag_pipeline_rebuild_index ... ok
+test tests::test_rag_pipeline_retrieve ... ok
+test tests::test_rag_pipeline_statistics ... ok
+test tests::test_rag_pipeline_update_document ... ok
+test tokenizer::tests::test_chinese_tokenizer ... ok
+test tests::test_rag_pipeline_update_rebuilds_index ... ok
+test tokenizer::tests::test_chinese_tokenizer_english ... ok
+test tokenizer::tests::test_chinese_tokenizer_empty ... ok
+test tokenizer::tests::test_chinese_tokenizer_mixed ... ok
+test tests::test_rag_pipeline_search_limit ... ok
+test tokenizer::tests::test_chinese_tokenizer_punctuation ... ok
+test tokenizer::tests::test_multilanguage_tokenizer ... ok
+test tokenizer::tests::test_multilanguage_tokenizer_dedup ... ok
+test tokenizer::tests::test_multilanguage_tokenizer_empty ... ok
+test tokenizer::tests::test_multilanguage_tokenizer_japanese ... ok
+test tokenizer::tests::test_multilanguage_tokenizer_korean ... ok
+test tokenizer::tests::test_multilanguage_tokenizer_special_chars ... ok
+test tokenizer::tests::test_simple_tokenizer ... ok
+test tokenizer::tests::test_simple_tokenizer_empty ... ok
+test tokenizer::tests::test_simple_tokenizer_numbers ... ok
+test tokenizer::tests::test_simple_tokenizer_only_stop_words ... ok
+test tokenizer::tests::test_simple_tokenizer_punctuation ... ok
+test tokenizer::tests::test_simple_tokenizer_underscore ... ok
+
+test result: ok. 81 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+    Finished report saved to docs/releases/v3.12.0/coverage-baseline/current_5904d0d4df_20260812_212126/sqlrustgo-rag.json

@@ -1,0 +1,161 @@
+info: cargo-llvm-cov currently setting cfg(coverage); you can opt-out it by passing --no-cfg-coverage
+warning: /Users/liying/workspace/dev/yinglichina163/sqlrustgo/crates/tools/Cargo.toml: unused manifest key: bin.1.rand
+warning: variable does not need to be mutable
+   --> crates/transaction/tests/deadlock_injection_test.rs:170:13
+    |
+170 |         let mut txs: Vec<TxId> = (1..=20).map(tx).collect();
+    |             ----^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: `sqlrustgo-transaction` (test "deadlock_injection_test") generated 1 warning (run `cargo fix --test "deadlock_injection_test" -p sqlrustgo-transaction` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.13s
+     Running unittests src/lib.rs (target/llvm-cov-target/debug/deps/sqlrustgo_transaction-6e043deb9e1ade7a)
+
+running 105 tests
+test deadlock::tests::test_default ... ok
+test deadlock::tests::test_deadlock_detector_new ... ok
+test deadlock::tests::test_detect_cycle_no_waiters ... ok
+test deadlock::tests::test_no_cycle ... ok
+test deadlock::tests::test_no_cycle_linear_chain ... ok
+test deadlock::tests::test_detect_cycle ... ok
+test deadlock::tests::test_complex_wait_for_graph ... ok
+test deadlock::tests::test_detect_cycle_from_different_start ... ok
+test deadlock::tests::test_partial_cycle ... ok
+test deadlock::tests::test_remove_edges_for ... ok
+test deadlock::tests::test_remove_edges_for_removes_from_holders ... ok
+test deadlock::tests::test_add_multiple_edges ... ok
+test deadlock::tests::test_self_loop ... ok
+test deadlock::tests::test_two_node_cycle ... ok
+test deadlock::tests::test_add_edge ... ok
+test deadlock::tests::test_visited_contains_current ... ok
+test deadlock::tests::test_with_timeout ... ok
+test dtc::tests::test_change_operation ... ok
+test dtc::tests::test_transaction_context_add_participant ... ok
+test dtc::tests::test_transaction_context_new ... ok
+test dtc::tests::test_transaction_state_transitions ... ok
+test dtc::tests::test_vote_serialization ... ok
+test gid::tests::test_gid_display ... ok
+test gid::tests::test_gid_equality ... ok
+test gid::tests::test_gid_generation ... ok
+test lock::tests::test_exclusive_lock ... ok
+test lock::tests::test_lock_manager_with_deadlock_detector ... ok
+test lock::tests::test_lock_release ... ok
+test lock::tests::test_lock_release_grants_to_waiter ... ok
+test lock::tests::test_lock_upgrade ... ok
+test lock::tests::test_multiple_shared_locks ... ok
+test lock::tests::test_release_all_locks ... ok
+test lock::tests::test_shared_lock ... ok
+test lock::tests::test_shared_lock_conflict ... ok
+test manager::tests::test_begin_read_only ... ok
+test manager::tests::test_begin_transaction ... ok
+test manager::tests::test_isolation_level ... ok
+test manager::tests::test_commit_transaction ... ok
+test manager::tests::test_multiple_transactions ... ok
+test lock_manager::tests::test_is_locked ... ok
+test lock_manager::tests::test_lock_conflict ... ok
+test lock_manager::tests::test_row_lock ... ok
+test lock_manager::tests::test_lock_same_gid_succeeds ... ok
+test lock_manager::tests::test_lock_acquire_release ... ok
+test lock_manager::tests::test_get_holder ... ok
+test manager::tests::test_read_committed_no_dirty_read ... ok
+test manager::tests::test_read_committed_isolation ... ok
+test manager::tests::test_rollback_transaction ... ok
+test manager::tests::test_snapshot_refresh_on_each_query ... ok
+test manager::tests::test_transaction_context ... ok
+test manager::tests::test_transaction_error_in_progress ... ok
+test manager::tests::test_transaction_error_no_transaction ... ok
+test mvcc::tests::test_row_version_is_visible_committed_after_snapshot ... ok
+test mvcc::tests::test_row_version_is_visible_deleted_before_snapshot ... ok
+test mvcc::tests::test_row_version_commit ... ok
+test mvcc::tests::test_row_version_is_visible_deleted_after_snapshot ... ok
+test mvcc::tests::test_row_version_is_visible_other_uncommitted ... ok
+test mvcc::tests::test_row_version_is_visible_committed_before_snapshot ... ok
+test mvcc::tests::test_row_version_is_visible_own_uncommitted ... ok
+test mvcc::tests::test_transaction_abort ... ok
+test mvcc::tests::test_snapshot_visibility ... ok
+test mvcc::tests::test_transaction_lifecycle ... ok
+test mvcc_storage::tests::test_mvcc_storage_delete ... ok
+test mvcc_storage::tests::test_mvcc_storage_read_write ... ok
+test savepoint::tests::test_add_undo ... ok
+test mvcc_storage::tests::test_mvcc_storage_snapshot_isolation ... ok
+test savepoint::tests::test_add_undo_update ... ok
+test savepoint::tests::test_get_savepoint_count ... ok
+test mvcc_storage::tests::test_mvcc_storage_rollback ... ok
+test savepoint::tests::test_nested_savepoints ... ok
+test savepoint::tests::test_release_nonexistent_savepoint ... ok
+test savepoint::tests::test_release_savepoint ... ok
+test savepoint::tests::test_rollback_preserves_earlier_savepoints ... ok
+test savepoint::tests::test_savepoint_create ... ok
+test savepoint::tests::test_savepoint_error_display ... ok
+test savepoint::tests::test_savepoint_new ... ok
+test savepoint::tests::test_savepoint_not_found ... ok
+test savepoint::tests::test_savepoint_override ... ok
+test ssi::tests::test_serialization_graph_cycle_detection ... ok
+test ssi::tests::test_serialization_graph_remove_tx ... ok
+test savepoint::tests::test_undo_record_insert ... ok
+test ssi::tests::test_ssi_detector_no_conflict ... ok
+test ssi::tests::test_ssi_detector_record_read ... ok
+test ssi::tests::test_ssi_detector_sync_no_conflict ... ok
+test ssi::tests::test_ssi_detector_record_write ... ok
+test ssi::tests::test_ssi_detector_sync_release ... ok
+test ssi::tests::test_ssi_detector_sync_rw_conflict ... ok
+test ssi::tests::test_ssi_error_display ... ok
+test transaction_manager::tests::test_begin_transaction ... ok
+test transaction_manager::tests::test_commit_transaction ... ok
+test transaction_manager::tests::test_get_snapshot ... ok
+test transaction_manager::tests::test_get_snapshot_none ... ok
+test transaction_manager::tests::test_isolation_level_default ... ok
+test transaction_manager::tests::test_multiple_transactions ... ok
+test transaction_manager::tests::test_record_read_write ... ok
+test transaction_manager::tests::test_rollback_transaction ... ok
+test version_chain::tests::test_version_chain_append_and_find_visible ... ok
+test version_chain::tests::test_version_chain_delete_visibility ... ok
+test version_chain::tests::test_version_chain_gc_collect_deleted ... ok
+test version_chain::tests::test_version_chain_gc_preserve_active_tx ... ok
+test version_chain::tests::test_version_chain_gc_preserve_recent ... ok
+test version_chain::tests::test_version_chain_not_found ... ok
+test version_chain::tests::test_version_chain_rollback ... ok
+test version_chain::tests::test_version_chain_stats ... ok
+test version_chain::tests::test_version_chain_uncommitted_visible_to_self ... ok
+
+test result: ok. 105 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/deadlock_injection_test.rs (target/llvm-cov-target/debug/deps/deadlock_injection_test-4953c88b4016de68)
+
+running 8 tests
+test test_detect_self_loop ... ok
+test test_detect_indirect_cycle_three_transactions ... ok
+test test_detect_multiple_independent_cycles ... ok
+test test_no_deadlock_independent_transactions ... ok
+test test_detect_direct_cycle_two_transactions ... ok
+test test_timeout_configuration ... ok
+test test_remove_edges_after_commit ... ok
+test test_concurrent_random_wait_for_graphs ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ssi_integration.rs (target/llvm-cov-target/debug/deps/ssi_integration-451b78111525432b)
+
+running 14 tests
+test test_ssi_sync_concurrent_read_no_conflict ... ok
+test test_ssi_sync_write_no_conflict ... ok
+test test_ssi_sync_rw_conflict_detection ... ok
+test test_ssi_concurrent_read_no_conflict ... ok
+test test_ssi_multiple_readers_no_conflict ... ok
+test test_ssi_read_after_write_in_same_tx ... ok
+test test_ssi_rw_conflict_detection ... ok
+test test_ssi_abort_prevents_conflict ... ok
+test test_ssi_direct_write_conflict ... ok
+test test_ssi_sync_write_skew_detection ... ok
+test test_ssi_overlapping_reads_different_writes ... ok
+test test_ssi_validation_order_matters ... ok
+test test_ssi_write_skew_detection ... ok
+test test_ssi_write_no_conflict ... ok
+
+test result: ok. 14 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+    Finished report saved to docs/releases/v3.12.0/coverage-baseline/current_5904d0d4df_20260812_212126/sqlrustgo-transaction.json

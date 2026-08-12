@@ -1,0 +1,163 @@
+info: cargo-llvm-cov currently setting cfg(coverage); you can opt-out it by passing --no-cfg-coverage
+warning: /Users/liying/workspace/dev/yinglichina163/sqlrustgo/crates/tools/Cargo.toml: unused manifest key: bin.1.rand
+warning: unused variable: `output`
+   --> crates/server/src/metrics_endpoint.rs:207:13
+    |
+207 |         let output = registry.to_prometheus_format();
+    |             ^^^^^^ help: if this is intentional, prefix it with an underscore: `_output`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: `sqlrustgo-server` (lib test) generated 1 warning (run `cargo fix --lib -p sqlrustgo-server --tests` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.31s
+     Running unittests src/lib.rs (target/llvm-cov-target/debug/deps/sqlrustgo_server-6a24298bbaabaa0a)
+
+running 66 tests
+test health::tests::test_component_health_with_latency_none ... ok
+test health::tests::test_health_status_as_str ... ok
+test health::tests::test_component_health_with_message ... ok
+test health::tests::test_health_checker_creation ... ok
+test health::tests::test_comprehensive_health_report_with_metrics ... ok
+test health::tests::test_health_report_with_degraded ... ok
+test health::tests::test_health_report_all_healthy ... ok
+test health::tests::test_health_report_with_unhealthy ... ok
+test health::tests::test_health_status_strings ... ok
+test health::tests::test_component_health ... ok
+test health::tests::test_liveness_check ... ok
+test health::tests::test_comprehensive_health_report_new ... ok
+test health::tests::test_system_health_component ... ok
+test health::tests::test_readiness_check_empty ... ok
+test health::tests::test_readiness_check_with_components ... ok
+test hybrid_rerank::tests::test_mode_weights_defaults ... ok
+test hybrid_rerank::tests::test_rerank_config_defaults ... ok
+test hybrid_endpoints::tests::test_hybrid_search_request_default_mode ... ok
+test hybrid_rerank::tests::test_single_mode_result ... ok
+test hybrid_rerank::tests::test_multi_mode_result ... ok
+test hybrid_rerank::tests::test_multi_match_bonus ... ok
+test metrics_endpoint::tests::test_metrics_registry_creation ... ok
+test hybrid_rerank::tests::test_rrf_reranking ... ok
+test metrics_endpoint::tests::test_metrics_registry_empty_format ... ok
+test metrics_endpoint::tests::test_metrics_registry_help_text_only_registered ... ok
+test hybrid_endpoints::tests::test_hybrid_search_request_vector_only ... ok
+test metrics_endpoint::tests::test_metrics_registry_clone ... ok
+test metrics_endpoint::tests::test_metrics_registry_duplicate_metric ... ok
+test metrics_endpoint::tests::test_custom_metrics_registration ... ok
+test metrics_endpoint::tests::test_multiple_custom_metrics ... ok
+test metrics_endpoint::tests::test_metrics_registry_with_help_text ... ok
+test metrics_endpoint::tests::test_metrics_registry_with_default_metrics ... ok
+test hybrid_endpoints::tests::test_health_response ... ok
+test hybrid_endpoints::tests::test_reranked_result_serialization ... ok
+test scheduler::tests::test_agent_registration ... ok
+test scheduler::tests::test_agent_status_serialization ... ok
+test scheduler::tests::test_create_task_request_deserialization ... ok
+test scheduler::tests::test_execution_history ... ok
+test scheduler::tests::test_execution_record_creation ... ok
+test scheduler::tests::test_create_workflow_request_deserialization ... ok
+test scheduler::tests::test_parallel_workflow_step ... ok
+test scheduler::tests::test_scheduler_state_create_task ... ok
+test scheduler::tests::test_scheduler_state_delete_task ... ok
+test scheduler::tests::test_scheduler_state_list_tasks ... ok
+test scheduler::tests::test_task_creation ... ok
+test scheduler::tests::test_task_status_default ... ok
+test scheduler::tests::test_workflow_creation ... ok
+test scheduler::tests::test_workflow_sequential_step ... ok
+test security_integration::tests::test_check_session_and_reset_session_cancelled ... ok
+test security_integration::tests::test_get_session_cancel_flag_nonexistent ... ok
+test security_integration::tests::test_security_integration_cleanup_idle ... ok
+test security_integration::tests::test_security_integration_is_session_cancelled ... ok
+test metrics_endpoint::tests::test_metrics_endpoint_handler ... ok
+test security_integration::tests::test_check_session_and_reset_ok ... ok
+test security_integration::tests::test_get_session_cancel_flag ... ok
+test security_integration::tests::test_create_session ... ok
+test security_integration::tests::test_ddl_logging ... ok
+test security_integration::tests::test_reset_session_query_state ... ok
+test security_integration::tests::test_security_guard ... ok
+test security_integration::tests::test_security_stats ... ok
+test security_integration::tests::test_close_session ... ok
+test security_integration::tests::test_grant_logging ... ok
+test security_integration::tests::test_security_integration_log_grant ... ok
+test security_integration::tests::test_security_integration_log_ddl ... ok
+test security_integration::tests::test_sql_execution_logging ... ok
+test security_integration::tests::test_security_integration_log_error ... ok
+
+test result: ok. 66 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/hybrid_rerank_tests.rs (target/llvm-cov-target/debug/deps/hybrid_rerank_tests-48c27aca3b767636)
+
+running 43 tests
+test test_hybrid_reranker_default_config ... ok
+test test_hybrid_reranker_new ... ok
+test test_mode_weights_clone ... ok
+test test_mode_weights_custom ... ok
+test test_hybrid_reranker_rerank_empty ... ok
+test test_mode_weights_default ... ok
+test test_hybrid_reranker_rerank_composite ... ok
+test test_hybrid_reranker_rerank_unknown_algorithm ... ok
+test test_mode_weights_debug ... ok
+test test_rerank_config_custom ... ok
+test test_hybrid_reranker_rerank_multi_source ... ok
+test test_rerank_config_clone ... ok
+test test_hybrid_reranker_rerank_rrf ... ok
+test test_hybrid_reranker_rerank_linear ... ok
+test test_rerank_config_debug ... ok
+test test_rerank_config_default ... ok
+test test_reranked_item_basic ... ok
+test test_reranked_item_clone ... ok
+test test_reranked_item_debug ... ok
+test test_reranked_item_with_metadata ... ok
+test test_score_breakdown_all_modes ... ok
+test test_score_breakdown_clone ... ok
+test test_score_breakdown_debug ... ok
+test test_score_breakdown_partial ... ok
+test test_scored_result_add_duplicate_mode ... ok
+test test_scored_result_add_mode_score ... ok
+test test_scored_result_clone ... ok
+test test_scored_result_debug ... ok
+test test_scored_result_different_result_types ... ok
+test test_scored_result_multi_match_bonus_double ... ok
+test test_scored_result_multi_match_bonus_high_bonus ... ok
+test test_scored_result_multi_match_bonus_single ... ok
+test test_scored_result_multi_match_bonus_triple ... ok
+test test_scored_result_new ... ok
+test test_scored_result_new_graph ... ok
+test test_scored_result_new_vector ... ok
+test test_scored_result_with_metadata ... ok
+test test_search_mode_copy ... ok
+test test_search_mode_debug ... ok
+test test_search_mode_graph ... ok
+test test_search_mode_hash ... ok
+test test_search_mode_sql ... ok
+test test_search_mode_vector ... ok
+
+test result: ok. 43 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/scheduler_integration_test.rs (target/llvm-cov-target/debug/deps/scheduler_integration_test-bc14c363e188e851)
+
+running 22 tests
+test test_create_and_get_workflow ... ok
+test test_list_agents ... ok
+test test_delete_task ... ok
+test test_create_and_get_task ... ok
+test test_conditional_workflow_step ... ok
+test test_execution_history ... ok
+test test_delete_workflow ... ok
+test test_create_task_with_priority ... ok
+test test_execute_workflow_request_deserialization ... ok
+test test_agent_serialization ... ok
+test test_list_tasks ... ok
+test test_parallel_workflow_step ... ok
+test test_list_workflows ... ok
+test test_register_agent_request_deserialization ... ok
+test test_register_and_get_agent ... ok
+test test_request_deserialization ... ok
+test test_sequential_workflow_step ... ok
+test test_sync_agent_status_request_deserialization ... ok
+test test_update_agent_status ... ok
+test test_task_serialization ... ok
+test test_workflow_request_deserialization ... ok
+test test_workflow_serialization ... ok
+
+test result: ok. 22 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+    Finished report saved to docs/releases/v3.12.0/coverage-baseline/current_5904d0d4df_20260812_212126/sqlrustgo-server.json

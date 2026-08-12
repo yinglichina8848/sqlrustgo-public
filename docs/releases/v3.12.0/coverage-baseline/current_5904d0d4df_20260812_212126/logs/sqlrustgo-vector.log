@@ -1,0 +1,105 @@
+info: cargo-llvm-cov currently setting cfg(coverage); you can opt-out it by passing --no-cfg-coverage
+warning: /Users/liying/workspace/dev/yinglichina163/sqlrustgo/crates/tools/Cargo.toml: unused manifest key: bin.1.rand
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.10s
+     Running unittests src/lib.rs (target/llvm-cov-target/debug/deps/sqlrustgo_vector-0c5e80966a2526d8)
+
+running 90 tests
+test batch_writer::tests::test_throughput_estimate ... ok
+test flat::tests::test_flat_index_empty_search ... ok
+test flat::tests::test_flat_index_delete ... ok
+test flat::tests::test_flat_index_dimension_mismatch ... ok
+test flat::tests::test_flat_index_delete_not_found ... ok
+test batch_writer::tests::test_flush_sync ... ok
+test batch_writer::tests::test_batch_writer_insert ... ok
+test flat::tests::test_flat_index_all_metrics ... ok
+test flat::tests::test_flat_index_is_empty ... ok
+test flat::tests::test_flat_index_insert_and_search ... ok
+test flat::tests::test_flat_index_large_k ... ok
+test batch_writer::tests::test_batch_writer_auto_flush ... ok
+test flat::tests::test_flat_index_query_dimension_mismatch ... ok
+test gpu_accel::tests::test_batch_cosine ... ok
+test gpu_accel::tests::test_cpu_simd_accelerator ... ok
+test gpu_accel::tests::test_create_accelerator ... ok
+test flat::tests::test_flat_index_1000_vectors ... ok
+test gpu_accel::tests::test_gpu_buffer ... ok
+test gpu_accel::tests::test_opencl_stub_not_available ... ok
+test hnsw::tests::test_hnsw_100k_batch_build ... ignored, HNSW vector index test (perf baseline TBD)
+test hnsw::tests::test_hnsw_100k_search_performance ... ignored, HNSW vector index test (perf baseline TBD)
+test gpu_accel::tests::test_performance_comparison ... ok
+test hnsw::tests::test_hnsw_10k_build_and_search ... ignored, HNSW vector index test (perf baseline TBD)
+test hnsw::tests::test_hnsw_1m_search_performance ... ignored, HNSW vector index test (perf baseline TBD)
+test ivf::tests::test_ivf_index_dimension_mismatch ... ok
+test ivf::tests::test_ivf_index_empty ... ok
+test ivf::tests::test_ivf_index_search_before_build ... ok
+test ivf::tests::test_ivf_index_query_dimension_mismatch ... ok
+test batch_writer::tests::test_batch_insert ... ok
+test ivfpq::tests::test_ivfpq_build_empty ... ok
+test ivf::tests::test_ivf_index_with_nlist ... ok
+test ivf::tests::test_ivf_index ... ok
+test ivfpq::tests::test_ivfpq_delete_not_found ... ok
+test ivfpq::tests::test_ivfpq_dimension_mismatch ... ok
+test ivfpq::tests::test_ivfpq_empty ... ok
+test ivfpq::tests::test_ivfpq_delete ... ok
+test hnsw::tests::test_hnsw_insert_and_search ... ok
+test ivfpq::tests::test_ivfpq_new ... ok
+test ivfpq::tests::test_ivfpq_search_before_build ... ok
+test ivfpq::tests::test_ivfpq_get_all ... ok
+test ivfpq::tests::test_ivfpq_iter_vectors ... ok
+test metrics::tests::test_compute_distance_all_metrics ... ok
+test metrics::tests::test_compute_similarity_all_metrics ... ok
+test metrics::tests::test_cosine_similarity_opposite ... ok
+test metrics::tests::test_cosine_similarity_orthogonal ... ok
+test metrics::tests::test_cosine_similarity_same ... ok
+test metrics::tests::test_cosine_similarity_zero_vector ... ok
+test metrics::tests::test_dot_product ... ok
+test metrics::tests::test_euclidean_distance ... ok
+test metrics::tests::test_euclidean_distance_3d ... ok
+test ivfpq::tests::test_ivfpq_query_dimension_mismatch ... ok
+test metrics::tests::test_euclidean_distance_same_point ... ok
+test metrics::tests::test_manhattan_distance ... ok
+test metrics::tests::test_manhattan_distance_same_point ... ok
+test parallel_knn::tests::test_parallel_knn_1m_search_performance ... ignored, Vector parallel kNN test (perf baseline TBD)
+test metrics::tests::test_metric_name ... ok
+test parallel_knn::tests::test_merge_top_k ... ok
+test parallel_knn::tests::test_parallel_knn_empty ... ok
+test parallel_knn::tests::test_parallel_knn_scale_performance ... ignored, Vector parallel kNN test (perf baseline TBD)
+test ivfpq::tests::test_ivfpq_all_metrics ... ok
+test parallel_knn::tests::test_parallel_knn_wrapper ... ok
+test parallel_knn::tests::test_batch_search ... ok
+test parallel_knn::tests::test_simd_functions ... ok
+test pq::tests::test_pq_empty_vectors ... ok
+test pq::tests::test_pq_adc_distance ... ok
+test pq::tests::test_pq_dimension_mismatch ... ok
+test pq::tests::test_pq_new ... ok
+test pq::tests::test_pq_encode_decode ... ok
+test sharded_index::tests::test_build_index ... ok
+test sharded_index::tests::test_different_shards_have_different_vectors ... ok
+test sharded_index::tests::test_hash_partitioner ... ok
+test sharded_index::tests::test_shard_stats ... ok
+test sharded_index::tests::test_sharded_vector_delete ... ok
+test sharded_index::tests::test_sharded_vector_insert_and_search ... ok
+test simd_explicit::tests::test_detect_simd_lanes ... ok
+test simd_explicit::tests::test_dot_product_simd ... ok
+test simd_explicit::tests::test_euclidean_simd ... ok
+test sql_vector_hybrid::tests::test_empty_results ... ok
+test sql_vector_hybrid::tests::test_hybrid_config_weights ... ok
+test sql_vector_hybrid::tests::test_merge_with_sql_scores ... ok
+test parallel_knn::tests::test_parallel_knn_with_config ... ok
+test sql_vector_hybrid::tests::test_rerank_with_vector ... ok
+test sql_vector_hybrid::tests::test_hybrid_search_basic ... ok
+test parallel_knn::tests::test_parallel_knn_index_basic ... ok
+test ivfpq::tests::test_ivfpq_basic ... ok
+test hnsw::tests::test_hnsw_1k_build_and_search ... ok
+test ivfpq::tests::test_ivfpq_10k_performance has been running for over 60 seconds
+test ivfpq::tests::test_ivfpq_10k_search_performance has been running for over 60 seconds
+test ivfpq::tests::test_ivfpq_1k_performance has been running for over 60 seconds
+test pq::tests::test_pq_train_and_encode has been running for over 60 seconds
+test ivfpq::tests::test_ivfpq_1k_performance ... ok
+test ivfpq::tests::test_ivfpq_10k_search_performance ... ok
+test pq::tests::test_pq_train_and_encode ... ok
+test ivfpq::tests::test_ivfpq_10k_performance ... ok
+
+test result: ok. 84 passed; 0 failed; 6 ignored; 0 measured; 0 filtered out; finished in 93.15s
+
+
+    Finished report saved to docs/releases/v3.12.0/coverage-baseline/current_5904d0d4df_20260812_212126/sqlrustgo-vector.json
