@@ -1,0 +1,24 @@
+# v3.12.0 per-crate coverage baseline
+
+- commit: `0bf1089f19`
+- generated_at: `20260812_222403`
+- command: `cargo llvm-cov -p <crate> --all-features --tests --ignore-run-fail --json --summary-only`
+
+| Crate | Line% | Lines | Functions | Test health | JSON | Log |
+|---|---:|---:|---:|---|---|---|
+| sqlrustgo-parser | 70.26% | 7391/10520 | 757/833 | report-only-failure | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/sqlrustgo-parser.json` | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/logs/sqlrustgo-parser.log` |
+| sqlrustgo-executor | 82.96% | 11783/14203 | 1379/1570 | pass-or-no-test-failure-detected | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/sqlrustgo-executor.json` | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/logs/sqlrustgo-executor.log` |
+| sqlrustgo-storage | 83.93% | 14045/16734 | 1628/1992 | pass-or-no-test-failure-detected | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/sqlrustgo-storage.json` | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/logs/sqlrustgo-storage.log` |
+| sqlrustgo-planner | 86.75% | 1322/1524 | 171/212 | pass-or-no-test-failure-detected | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/sqlrustgo-planner.json` | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/logs/sqlrustgo-planner.log` |
+| sqlrustgo-optimizer | 87.55% | 3206/3662 | 393/416 | pass-or-no-test-failure-detected | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/sqlrustgo-optimizer.json` | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/logs/sqlrustgo-optimizer.log` |
+| sqlrustgo-mysql-client | 78.81% | 1261/1600 | 125/137 | pass-or-no-test-failure-detected | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/sqlrustgo-mysql-client.json` | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/logs/sqlrustgo-mysql-client.log` |
+| sqlrustgo-mysql-server |  |  |  | report-only-failure | `` | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/logs/sqlrustgo-mysql-server.log` |
+| sqlrustgo-gmp | 80.38% | 4923/6125 | 481/626 | pass-or-no-test-failure-detected | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/sqlrustgo-gmp.json` | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/logs/sqlrustgo-gmp.log` |
+| sqlrustgo-rag | 95.67% | 1304/1363 | 161/179 | pass-or-no-test-failure-detected | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/sqlrustgo-rag.json` | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/logs/sqlrustgo-rag.log` |
+| sqlrustgo-vector | 70.60% | 2322/3289 | 316/447 | report-only-failure | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/sqlrustgo-vector.json` | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/logs/sqlrustgo-vector.log` |
+| sqlrustgo-catalog | 84.66% | 3036/3586 | 386/478 | pass-or-no-test-failure-detected | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/sqlrustgo-catalog.json` | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/logs/sqlrustgo-catalog.log` |
+| sqlrustgo-transaction | 85.41% | 1821/2132 | 257/308 | pass-or-no-test-failure-detected | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/sqlrustgo-transaction.json` | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/logs/sqlrustgo-transaction.log` |
+| sqlrustgo-tools | 81.99% | 2322/2832 | 226/256 | pass-or-no-test-failure-detected | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/sqlrustgo-tools.json` | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/logs/sqlrustgo-tools.log` |
+| sqlrustgo-admin | 83.03% | 1375/1656 | 143/170 | report-only-failure | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/sqlrustgo-admin.json` | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/logs/sqlrustgo-admin.log` |
+| sqlrustgo-server | 87.28% | 1091/1250 | 149/183 | pass-or-no-test-failure-detected | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/sqlrustgo-server.json` | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/logs/sqlrustgo-server.log` |
+| sqlrustgo-sql-corpus | 74.43% | 687/923 | 43/79 | pass-or-no-test-failure-detected | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/sqlrustgo-sql-corpus.json` | `docs/releases/v3.12.0/coverage-baseline/current_0bf1089f19_20260812_222403/logs/sqlrustgo-sql-corpus.log` |
