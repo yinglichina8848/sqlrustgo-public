@@ -6,7 +6,7 @@ license.workspace = true
 description = "MySQL wire protocol client library"
 
 [dependencies]
-sha1 = "0.10"
+sha1 = "0.11"
 
 [dev-dependencies]
 rand = "0.8"

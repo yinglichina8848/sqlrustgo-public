@@ -8,7 +8,7 @@ description = "SQLRustGo SOAK test runner — real SQL stability testing with ex
 
 [dependencies]
 clap = { version = "4.0", features = ["derive"] }
-sha1 = "0.10"
+sha1 = "0.11"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 rustyline = "14.0"
