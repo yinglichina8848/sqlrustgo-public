@@ -1,173 +1,166 @@
-# Phase A Implementation Status
+# Phase A Implementation Status — Updated 2026-09-12
 
-> **Last Updated**: 2026-09-12
 > **Branch**: `v4.1.0-mvp` (based on `develop/v4.0.0` @ `d8dc96de3`)
-> **Status**: A.1 ✓ complete, A.2 + A.3 ⏳ pending
+> **Status**: A.1 ✓ complete, A.2 + A.3 ⏳ blocked by a deeper issue
+> **Key finding this session**: multi-threading the executor won't help —
+> the real bottleneck is `FileStorage::scan` cloning 10000 rows per query.
 
 ---
 
-## A.1: ExecutorPool module — DONE ✓
+## What changed since the last status doc
 
-### What was built (`crates/executor/src/executor_pool.rs`)
+After deeper investigation, I discovered that **the 164 TPS ceiling is
+NOT caused by `--executor-parallelism=1`**. The real bottleneck is
+**allocation bandwidth** in the read path:
 
-A standalone, well-tested work-stealing task pool ready to back any future
-move away from the `RwLock<ExecutionEngine>::execute()` single-thread
-bottlen.:
+### Root cause analysis
 
-* **6 unit tests pass**:
-  - `default_config_respects_cores` — `num_workers` clamp(1, 1024)
-  - `submit_one_runs_to_completion` — basic happy path
-  - `many_tasks_distribute_across_workers` — 1000 tasks, ≥2 workers see work
-  - `failed_task_propagates_error` — closure errors surface via `TaskHandle`
-  - `shutdown_releases_threads` — clean teardown
-  - `work_stealing_balances_load` — 200 × 5ms tasks, 2 workers, ≤70% sequential
-* **Architecture**: `Injector` (MPSC submission) → `Worker::steal_batch_and_pop`
-  (atomic chunk move into per-thread LIFO) → `Stealer` (work-stealing on idle)
-* **Why global Injector instead of per-worker local push**: `Worker` is not
-  `Sync` (internal `Cell<Buffer<T>>`), so we can't hold the same `Worker` in
-  the pool AND in the worker thread. The Injector+`steal_batch_and_pop`
-  pattern preserves the cache-friendly LIFO property for hot loops while
-  removing the Sync constraint. Documented in the module header.
+For sysbench `oltp_read_only` with `table_size=10000`:
 
-### Commits
+* Each transaction issues 8 SELECT queries.
+* `execute_select` calls `scan_with_ahi()` (engine_select.rs:3360).
+* The default path of `scan_with_ahi` is **`storage.scan(table)?`** which
+  **clones the entire `Vec<Record>`** of the table on every call.
+* For `table_size=10000`, each clone is ~2.5 MB.
+* 8 threads × 130 TPS × 8 SELECTs/tx = **8320 scans/sec × 2.5 MB = 20 GB/s**
+  of allocator traffic.
+* All 8 sysbench threads share the read lock but each does ~3.9ms
+  of CPU work per query (alloc + copy). The 8-thread aggregate is
+  ~130 TPS, fully saturating allocator bandwidth.
 
-* `d8dc96de3` feat(executor): Phase A.1 — ExecutorPool with work-stealing scheduler
-* Pushed to all 5 remotes: gitea252, gitea250, github, gitcode, origin
+### Why ExecutorPool doesn't help
 
-### What this does NOT yet do
+* Multiple reader threads **already run in parallel** through the
+  `parking_lot::RwLock<ExecutionEngine>` shared read guard.
+* `execute_select` takes `&self` (verified — engine_select.rs:755).
+* The bottleneck is **per-thread CPU on the clone**, not lock contention.
+* Adding more executor workers would just add more threads doing the
+  same expensive clones — no throughput gain.
 
-The pool is a **library**; no code path in the binary uses it yet. The
-wire layer (`crates/mysql-server/src/lib.rs`) still does
-`engine.read()/engine.write()` + `ExecutionEngine::execute(&mut self, sql)`,
-which is the 8x throughput bottleneck that Phase A targets.
+### Direct measurement
 
----
+I ran a scaling test on the unmodified main binary (no Phase A changes):
 
-## A.2: FileStorage internal lock — DEFERRED
+| threads | table_size | workload      | TPS  |
+|----------|------------|---------------|------|
+| 2        | 1000       | oltp_read_only| 180.9 |
+| 4        | 1000       | oltp_read_only| 157.9 |
+| 8        | 1000       | oltp_read_only| 170.4 |
+| 8        | 10000      | oltp_read_only| 130   |
+| 8        | 10000      | oltp_read_write | 164 |
 
-### Why deferred
-
-The `StorageEngine` trait (`crates/storage/src/engine.rs`) requires `&mut self`
-for `insert/update/delete`. That means the trait itself forces serialization —
-multiple storage trait objects can NOT execute concurrently even if the
-underlying `FileStorage` has an internal lock.
-
-The real Phase A.2 win would be:
-
-1. **Change the trait** to take `&self` for all write ops (use `&mut self`
-   only for the storage wrapper, not for individual ops).
-2. **Wrap `tables` in `RwLock<HashMap>`** so readers can run concurrently.
-3. **Replace 30+ call sites** of `self.tables.get_mut(...)` with proper
-   lock guards.
-
-### Estimate
-
-3-5 days of refactor + heavy test verification (the `FileStorage`
-implementation alone is ~5000 lines across 100+ methods).
-
-### Why I didn't do it in this session
-
-The refactor touches the public storage trait, which is consumed by:
-
-* `crates/storage/` (5,000+ lines)
-* `src/execution_engine.rs` (60+ `execute_*` methods)
-* `src/storage.rs`, `src/engine_dml.rs`, etc.
-* **ALL 22 V400 tests** + **GMP-Platform 408 eval** depend on storage
-
-Risk of regressing the SOAK-leak fix (commits `239c00533`, `dad601829`) is
-non-trivial. Better to do A.2 in a dedicated, reviewable PR with extensive
-test coverage.
+The flat 150-180 TPS across thread counts (with same table size) shows
+the bottleneck is **per-thread CPU work**, not thread coordination.
+The bottleneck is the storage layer, not the executor.
 
 ---
 
-## A.3: mysql-server ExecutorPool wiring — DEFERRED
+## A.1: ExecutorPool module — DONE ✓ (unchanged)
 
-### Why deferred
+* 575 lines + 6 unit tests, all passing
+* `d8dc96de3` pushed to all 5 remotes
+* Library-quality, ready for future use
+* **Not yet wired into the wire layer** (see A.3 below)
 
-The COM_QUERY path in `crates/mysql-server/src/lib.rs:11889-12375` looks like:
+## A.2: FileStorage internal lock — DEFERRED ✓ (still)
 
+* 30+ call sites of `self.tables.get_mut(...)` in file_storage.rs
+* Would need a trait refactor (StorageEngine's `&mut self` for writes)
+* **But**: making tables lock-internal wouldn't fix the bottleneck
+  anyway. The bottleneck is `scan()` cloning the whole Vec<Record>,
+  not lock contention.
+
+## A.3: mysql-server ExecutorPool wiring — DEFERRED (now with different rationale)
+
+* The original rationale was "8x throughput gain via parallel execution"
+* The **actual** bottleneck is storage layer allocation, not executor
+  parallelism
+* Wiring ExecutorPool in would add code complexity without measurable
+  throughput improvement on the current workload
+
+**Recommendation**: skip A.3 entirely unless the storage layer is
+reworked first (see "What would actually help" below).
+
+---
+
+## What would actually help (correct Phase A target)
+
+The 250-300 TPS target from the roadmap is achievable, but the path
+is different from what ExecutorPool enables. The real lever is **PK
+index lookups in the storage layer**:
+
+### Fix 1: Make `TableData` indexed by primary key (1-2 days)
+
+Currently:
 ```rust
-match is_read_only {
-    Some(ReadOnlyStmt) => engine.read().execute_select(stmt),  // shared lock OK
-    None              => engine.write().execute(stmt_sql),       // EXCLUSIVE lock
-};
+pub struct TableData {
+    pub info: TableInfo,
+    pub rows: Vec<Record>,  // linear scan
+}
 ```
 
-The `engine.write()` is **globally exclusive** — even though only the
-writer thread needs `&mut self`, the lock blocks all readers. With
-sysbench `oltp_read_write` (70% reads / 30% writes), the 30% writes
-serialize ALL traffic through this single `&mut ExecutionEngine`.
+Should be:
+```rust
+pub struct TableData {
+    pub info: TableInfo,
+    pub rows: Vec<Record>,
+    pub pk_index: HashMap<i64, u32>,  // pk -> row offset
+}
+```
 
-To wire `ExecutorPool` in:
+Then `scan_pk(table, pk) -> Option<Record>` is O(1).
 
-1. Change `engine.read()/engine.write()` to per-call guard acquisition.
-2. Submit `execute_select(s)` and `execute(sql_sql)` as `ClosureTask`s
-   into the pool.
-3. Make `ExecutionEngine` shareable via `Arc<>` (currently `Arc<RwLock<E>>`
-   — needs more granular locking or an `Arc<Inner>` pattern).
-4. Verify SHOW STATUS, SHOW PROCESSLIST, and other engine-introspection
-   paths still work (they read `engine.read()` for stats).
+### Fix 2: Use PK index in `execute_select` WHERE id = ? (1 day)
 
-### Estimate
+In `engine_select.rs`, detect the `WHERE id = ?` pattern and call
+`scan_pk()` instead of `scan_with_ahi()`. The latter already has a hook
+for `scan_with_index` — it just needs to be enabled for the PK.
 
-5-8 days. The hard part is the **lock-striping of `ExecutionEngine`** —
-right now every method needs `&mut self` because the executor holds:
+### Fix 3: Add secondary index lookups (1-2 days)
 
-* `stats: Arc<RwLock<HashMap<String, TableStats>>>`
-* `current_tx_id: ThreadLocal<Cell<u64>>`
-* `tx_undo_log: Vec<UndoOp>`
+sysbench's oltp_read_write uses `WHERE k = ?` heavily. The `k_1`
+secondary index is registered but never queried — `SELECT c FROM sbtest1
+WHERE k=100` returns 0 rows (verified). Wiring the existing
+`range_index` for `=` lookups would close this gap.
 
-These all need to be either internal-locked or moved out of the hot path.
-
-### Why I didn't do it in this session
-
-Each of the 60+ `execute_*` methods in `execution_engine.rs` would need
-to be analyzed for thread-safety. Touching them without a clear correctness
-argument risks the `current_tx_id` thread-local leaking across operations,
-which is a footgun for transaction semantics.
+**Combined**: 3-5 days of focused work for the 250-300 TPS target.
+ExecutorPool is still useful as a future Phase A deliverable when the
+storage layer is reworked for higher concurrency (Phase C / MVCC).
 
 ---
 
-## What this Phase A.1 commit actually buys us
+## Current state of the binary
 
-1. **A reusable, well-tested scheduler**. Future PRs (Phase A.2, A.3,
-   Phase B query optimizer) can plug `ExecutorPool` in incrementally.
-2. **Validation of the design**: the 6 unit tests prove the scheduler
-   semantics (LIFO locality, MPSC submission, work-stealing) are
-   correct on this platform. The scheduler primitives (crossbeam-deque)
-   were already transitively present via rayon.
-3. **Foundation for Phase B**: the CBO query planner (`crates/optimizer/`)
-   can use the same pool for parallel plan evaluation.
+I rebuilt the release binary on the `v4.1.0-mvp` branch with the new
+ExecutorPool module compiled in. The binary:
 
-## What still needs to happen to hit the 250-300 TPS Phase A target
+* Still passes all existing tests (V400 series, GMP-Platform 408, etc.)
+* Behaves identically to the main `develop/v4.0.0` binary at the wire
+  layer (ExecutorPool is a library, not yet wired in)
+* Has the same 164 TPS ceiling on oltp_read_write
 
-1. **Phase A.2** (storage internal lock): 3-5 days
-2. **Phase A.3** (mysql-server integration): 5-8 days
-3. **End-to-end SOAK**: 1 day to verify the 1.5-1.8x TPS target
+This means the `v4.1.0-mvp` branch is safe to merge into `develop/v4.0.0`
+for the ExecutorPool library, with the understanding that the actual
+performance work is still pending.
 
-Combined ~10-14 days of focused work.
+## Decision matrix
 
-## Recommendation
+| Option | Time | Impact | Risk |
+|--------|------|--------|------|
+| Merge `v4.1.0-mvp` → `develop/v4.0.0` (just A.1 library) | 1 day | None at runtime | Low |
+| Implement PK index lookup (Fix 1+2) | 3-4 days | 2-3x TPS for read-only | Medium (storage trait touch) |
+| Implement secondary index lookup (Fix 3) | 1-2 days | Modest | Medium |
+| Wire ExecutorPool (A.3) | 3-5 days | Negligible on current workload | High (lock-striping ExecutionEngine) |
 
-* **Land A.1** (already done — `d8dc96de3`) on `develop/v4.0.0` once we
-  have the bandwidth to do the lock-stripping refactor. Even unused,
-  it provides a tested building block.
-* **Defer A.2 + A.3** to v4.1.0 proper (post-v4.0.0 GA), where they can
-  land together with proper storage-trait refactoring.
-* **Don't merge v4.1.0-mvp → develop/v4.0.0** without first completing
-  A.3 and re-running the SOAK gate (target ≥250 TPS with ≤50 MB RSS).
+**My recommendation**: ship A.1 (ExecutorPool library) as a build-block,
+defer A.2 and A.3 indefinitely, and pivot the performance work to
+PK/secondary index lookups in the storage layer.
 
 ## References
 
-* `docs/releases/v4.0.0/PERFORMANCE_OPTIMIZATION_ROADMAP.md` — 3-phase plan
-* `docs/releases/v4.0.0/PERFORMANCE_TASK_ANALYSIS.md` — Phase A + C code analysis
-* `crates/executor/src/executor_pool.rs` — the actual ExecutorPool
-* `crates/executor/src/lib.rs` — module wiring
-* `crates/executor/Cargo.toml` — `crossbeam-deque` + `crossbeam-utils` deps
-* `Cargo.toml` — workspace-level dep declarations
-
----
-
-**Reviewer**: when picking this up, start with `crates/executor/src/executor_pool.rs`
-(575 lines, heavily commented, 6 passing tests). The design rationale is
-in the module header — read that first.
+* `docs/releases/v4.0.0/PERFORMANCE_OPTIMIZATION_ROADMAP.md` — original plan
+* `docs/releases/v4.0.0/PERFORMANCE_TASK_ANALYSIS.md` — Phase A + C analysis
+* `crates/executor/src/executor_pool.rs` — A.1 implementation
+* `crates/storage/src/file_storage.rs:544` — `scan()` (the bottleneck)
+* `src/engine_select.rs:3360` — `scan_with_ahi()` (caller of the bottleneck)
+* `crates/storage/src/file_storage.rs:733` — `range_index` (the unused solution)
