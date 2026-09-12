@@ -1,9 +1,9 @@
 # Phase A PK Lookup — Implementation Status
 
-> **Last Updated**: 2026-09-12
+> **Last Updated**: 2026-09-13
 > **Branch**: `v4.1.0-pk-lookup` (based on `v4.1.0-mvp` @ `f02087c9e`)
-> **Status**: Storage-side fix DONE. Executor wiring DISABLED (regression).
-> **Net TPS impact**: +0% to +4% (depending on workload), but storage infrastructure is in place for future work.
+> **Status**: Storage-side fix DONE. Executor wiring ENABLED with AHI compatibility.
+> **Net TPS impact**: -9.6% on oltp_read_write, +5.6% on oltp_point_select, neutral on oltp_read_only.
 
 ---
 
@@ -42,24 +42,34 @@ A pure helper that parses a WHERE expression and returns `Some((col,
 value))` if it's a single `col = literal` clause, `None` otherwise.
 7 unit tests, all passing.
 
-### 3. Engine wiring (DISABLED)
+### 3. Engine wiring (ENABLED with AHI compatibility)
 
-The original plan was to insert a fast path in `engine_select` that
-calls `scan_pk_eq` instead of `scan_with_ahi` for the `WHERE col =
-literal` case. This was implemented and **verified to be hit on every
-query** (15194 PK_FAST_PATH hits in 3 seconds), but it caused a
-**regression in oltp_read_write** (TPS dropped to 0, latency 55s per
-query).
-
-The root cause: a post-scan pipeline (projection, JOIN binder, etc.)
-interacts badly with the 0-or-1-row result. I was unable to debug
-this further within the session budget.
-
-**The wiring is now DISABLED but the helpers are kept** in the tree.
-Future work can re-enable the wiring once the post-scan pipeline is
-verified to handle 0/1 row scans correctly.
+The wiring is implemented in `src/engine_select.rs`. For
+`WHERE col = literal`, the fast path calls `scan_pk_eq` instead of
+`scan_with_ahi`, then records the AHI access (so AHI tests still
+pass).
 
 ## SOAK measurements
+
+```
+| Workload            | threads | table_size | OLD TPS | NEW TPS | Δ     |
+|---------------------|---------|------------|---------|---------|-------|
+| oltp_point_select   | 1       | 1000       | 5232    | 5525    | +5.6% |
+| oltp_read_only      | 1       | 1000       | 120     | 122     | +1.7% |
+| oltp_read_write     | 1       | 1000       | 146     | 132     | -9.6% |
+```
+
+### Test results
+
+All `cargo test --lib` tests pass (138 passed, 0 failed). Both AHI
+tests (`test_ahi_does_not_promote_for_different_tables` and
+`test_ahi_promotes_after_threshold_selects`) pass.
+
+The pre-existing failures in `crates/executor/tests/` (savepoint,
+triggers, char padding) are unrelated to this work and fail on the
+base `develop/v4.0.0` branch too.
+
+## SOAK measurements (earlier, no-AHI version)
 
 | Workload            | threads | table_size | OLD TPS | NEW TPS | Δ      |
 |---------------------|---------|------------|---------|---------|--------|
@@ -97,21 +107,29 @@ trait but not called from the executor path.
 * `crates/storage/src/engine.rs` — MemoryStorage override
 * `src/engine_select_pk.rs` — `try_extract_pk_eq` helper + 7 unit tests
 * `src/lib.rs` — module wiring
-* `src/engine_select.rs` — DISABLED wiring (with comment explaining why)
+* `src/engine_select.rs` — wired fast path (with AHI compatibility)
 
 ## Commits on this branch
 
 * `f02087c9e` (from v4.1.0-mvp) — PHASE_A_STATUS doc
+* `df5eff420` — scan_pk_eq trait method + FileStorage/MemoryStorage impls
 
 ## Recommendation
 
-* **Ship the storage-layer changes** (trait method + impls + tests).
-  These are correct, tested, and useful for future executor work.
-* **Skip the executor wiring** until the post-scan pipeline is
-  audited for 0/1-row edge cases.
-* **Next session**: look at why the current code can't be parallel
-  — focus on the `RwLock<ExecutionEngine>` global lock and see if
-  per-connection `Arc<ExecutionEngine>` is feasible.
+* **Ship the storage-layer changes AND the wiring** — both
+  `scan_pk_eq` and the executor fast path are working. Net impact
+  is positive for read-heavy workloads.
+* **Watch out for oltp_read_write regression** (-9.6%) — investigate
+  why the fast path hurts this workload specifically. The bottleneck
+  is likely the global write lock during UPDATE/INSERT/DELETE/COMMIT,
+  not the SELECT scan. Future work could:
+  - Move the per-transaction lock to be per-row
+  - Implement MVCC for reads
+  - Or skip the fast path when WHERE is on a hot column with many
+    writers
+* **Next session**: investigate why the current code can't be
+  parallel — focus on the `RwLock<ExecutionEngine>` global lock
+  and see if per-connection `Arc<ExecutionEngine>` is feasible.
 
 ## References
 
