@@ -4449,6 +4449,8 @@ dependencies = [
 name = "sqlrustgo-executor"
 version = "3.12.0-fix-zombie"
 dependencies = [
+ "crossbeam-deque",
+ "crossbeam-utils",
  "log",
  "md5",
  "parking_lot",

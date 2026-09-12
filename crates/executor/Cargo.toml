@@ -20,6 +20,9 @@ serde_json.workspace = true
 thiserror.workspace = true
 log.workspace = true
 parking_lot.workspace = true
+# v4.1.0 Phase A: work-stealing scheduler primitives
+crossbeam-deque.workspace = true
+crossbeam-utils.workspace = true
 tracing.workspace = true
 reqwest = { version = "0.12", features = ["blocking", "json"] }
 md5 = "0.8"

@@ -111,6 +111,11 @@ parquet = { version = "58.1.0" }
 rust_decimal = "1.0"
 parking_lot = "0.12"
 regex = "1"
+# v4.1.0 Phase A: crossbeam-deque for ExecutorPool work-stealing scheduler
+# (see crates/executor/src/executor_pool.rs)
+crossbeam-deque = "0.8"
+# v4.1.0 Phase A: crossbeam-utils for cache-padded counters and backoff
+crossbeam-utils = "0.8"
 
 [dev-dependencies]
 

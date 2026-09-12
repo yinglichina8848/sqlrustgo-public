@@ -5,6 +5,8 @@ pub mod cancellation_token;
 pub mod execution;
 pub mod executor;
 pub mod executor_metrics;
+// v4.1.0 Phase A: multi-threaded executor with work-stealing
+pub mod executor_pool;
 pub mod expr;
 pub mod instrumentation;
 pub mod join;
