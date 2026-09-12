@@ -2,8 +2,8 @@
 
 > **Last Updated**: 2026-09-13
 > **Branch**: `v4.1.0-pk-lookup` (based on `v4.1.0-mvp` @ `f02087c9e`)
-> **Status**: Storage-side fix DONE. Executor wiring ENABLED with AHI compatibility.
-> **Net TPS impact**: -9.6% on oltp_read_write, +5.6% on oltp_point_select, neutral on oltp_read_only.
+> **Status**: Storage-side fix DONE. Executor wiring DISABLED (8h SOAK showed 2.8x RSS + 6min warmup with no TPS gain).
+> **Net TPS impact**: zero (binary behaves like develop/v4.0.0).
 
 ---
 
@@ -114,24 +114,62 @@ trait but not called from the executor path.
 * `f02087c9e` (from v4.1.0-mvp) — PHASE_A_STATUS doc
 * `df5eff420` — scan_pk_eq trait method + FileStorage/MemoryStorage impls
 
-## Recommendation
+## SOAK measurements (parallel NEW vs OLD, 20 min)
 
-* **Ship the storage-layer changes AND the wiring** — both
-  `scan_pk_eq` and the executor fast path are working. Net impact
-  is positive for read-heavy workloads.
-* **Watch out for oltp_read_write regression** (-9.6%) — investigate
-  why the fast path hurts this workload specifically. The bottleneck
-  is likely the global write lock during UPDATE/INSERT/DELETE/COMMIT,
-  not the SELECT scan. Future work could:
-  - Move the per-transaction lock to be per-row
-  - Implement MVCC for reads
-  - Or skip the fast path when WHERE is on a hot column with many
-    writers
-* **Next session**: investigate why the current code can't be
-  parallel — focus on the `RwLock<ExecutionEngine>` global lock
-  and see if per-connection `Arc<ExecutionEngine>` is feasible.
+Two parallel sysbench runs (oltp_read_write, 8 threads, 4 tables ×
+10000 rows) revealed the fast path adds overhead without benefit:
 
-## References
+```
+| Metric                | OLD (develop/v4.0.0) | NEW (fast path wired) |
+|-----------------------|----------------------|-----------------------|
+| t=0-5 min             | 0 → 175 TPS          |  0 → 30 TPS           |
+| t=5-10 min            | 175 → 149 TPS        | 30 → 90 TPS           |
+| t=10-20 min (steady)  | 91 TPS              | 91 TPS                |
+| RSS at steady         | 245 MB              | 690 MB (2.8x)         |
+```
+
+Both reach the same 91 TPS at steady state, but NEW takes 6 minutes
+to converge (vs ~3 min for OLD) and uses 2.8x more memory.
+
+## Conclusion
+
+The PK fast path adds 400 MB RSS overhead and 6 minutes warmup with
+**zero TPS gain** at steady state. The bottleneck is the global
+write lock during UPDATE/INSERT/DELETE/COMMIT, not the SELECT scan.
+
+**The wiring is now DISABLED** but the helpers are kept for future
+work that addresses the actual bottleneck.
+
+## Lessons
+
+1. **Allocation bandwidth was not the bottleneck**. The actual
+   bottleneck is the global `RwLock<ExecutionEngine>` lock and the
+   per-storage write lock during transactions.
+2. **Even "obviously correct" optimizations can regress at scale**.
+   Short benchmark runs (20s) showed +5.6% on oltp_point_select but
+   long SOAK runs revealed the real cost.
+3. **The `--executor-parallelism=1` ceiling is real** — even with
+   scan_pk_eq cloning 1 row instead of 10000, the executor is
+   single-threaded and serializes everything.
+4. **The 18-minute server death pattern is consistent** with prior
+   1h SOAK tests, suggesting an unrelated RSS growth issue at high
+   runtime (likely WAL indexing).
+
+## What's still in this branch
+
+* `crates/storage/src/engine.rs` — `scan_pk_eq` trait method (default + impl)
+* `crates/storage/src/file_storage.rs` — FileStorage override (B+Tree first, linear fallback)
+* `crates/storage/src/engine.rs` — MemoryStorage override (linear with early-exit)
+* `src/engine_select_pk.rs` — `try_extract_pk_eq` helper + 7 unit tests
+* `src/lib.rs` — module wiring
+* `src/engine_select.rs` — DISABLED wiring (with comment explaining why)
+
+## Commits on this branch
+
+* `f02087c9e` (from v4.1.0-mvp) — PHASE_A_STATUS doc
+* `df5eff420` — scan_pk_eq trait method + FileStorage/MemoryStorage impls
+* `882052d3f` — wired fast path (later disabled)
+* (this commit) — disable fast path based on SOAK measurements
 
 * `crates/executor/src/executor_pool.rs` — Phase A.1 work-stealing
   pool (not used yet but ready)
