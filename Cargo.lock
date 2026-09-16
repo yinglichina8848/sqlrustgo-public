@@ -526,12 +526,9 @@ dependencies = [
 
 [[package]]
 name = "bincode"
-version = "1.3.3"
+version = "3.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b1f45e9417d87227c7a56d22e471c6206462cba514c7590c09aff4cf6d1ddcad"
-dependencies = [
- "serde",
-]
+checksum = "fd6a120d2e16b3e1b4a24bd70f23b12d3e16b81f113364a26935f8db7245452d"
 
 [[package]]
 name = "bindgen"
@@ -4681,6 +4678,23 @@ dependencies = [
 ]
 
 [[package]]
+name = "sqlrustgo-shard-router"
+version = "0.1.0"
+dependencies = [
+ "bytes",
+ "clap 4.6.1",
+ "parking_lot",
+ "serde",
+ "sqlrustgo-parser",
+ "thiserror 1.0.69",
+ "tokio",
+ "tokio-util",
+ "tracing",
+ "tracing-subscriber",
+ "twox-hash 1.6.3",
+]
+
+[[package]]
 name = "sqlrustgo-soak"
 version = "3.12.0-fix-zombie"
 dependencies = [
@@ -5332,6 +5346,7 @@ dependencies = [
  "bytes",
  "futures-core",
  "futures-sink",
+ "futures-util",
  "pin-project-lite",
  "tokio",
 ]
