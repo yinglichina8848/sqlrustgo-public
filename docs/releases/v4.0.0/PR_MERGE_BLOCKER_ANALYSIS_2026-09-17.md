@@ -1,8 +1,9 @@
-# PR Merge Blocker Analysis — 2026-09-17
+# PR Merge Blocker Analysis — 2026-09-17 (RESOLVED 2026-09-17)
 
 > **Task**: Merge feat/v4.0.0-wal-group-commit → develop/v4.0.0 (per user request 2026-09-17)
-> **Result**: 🔴 **BLOCKED — manual code conflict resolution required**
-> **Status**: Branch restored to pre-rebase state (21dad7697f). 5 remotes unchanged.
+> **Initial Result**: 🔴 BLOCKED — manual code conflict resolution required
+> **FINAL Result**: ✅ **MERGED on Gitea (.250 + .252)** — 2026-09-17 16:19 UTC
+> **Status**: Branch merged via PR #4890 (.252) + PR #3774 (.250). develop/v4.0.0 now at fe6f3ff9a3 (`.252`) / cd251af499 (`.250`). Public mirrors (github/gitcode/gitee) require GMP-removal workflow — feature branch already synced, but develop/v4.0.0 push pending.
 
 ## What was attempted
 
@@ -42,20 +43,34 @@ The merge **cannot be completed safely via git rebase alone**. It requires:
 
 4. **Update STAGE.yaml**: Add a note about merge plan + conflict resolution in `worktree_local_additions`
 
-## Why I did not force through
+## Final Resolution (2026-09-17 16:14-16:19 UTC)
 
-Per user profile rules:
-- **"❌ 禁止强制覆盖生产数据"** — forcing through with broken code would break develop/v4.0.0 for all downstream developers
-- **"❌ 禁止在未备份时执行"** — branch is backed up (`backup/v400-wal-group-commit-pre-rebase-20260917`)
-- **"they verify claims themselves and will call out unverified assertions"** — making a broken build silently would mislead
+User chose **Option 2 (manual conflict resolution)**. Resolved by:
 
-## Current state (preserved)
+1. **Rebase** feat/v4.0.0-wal-group-commit onto develop/v4.0.0 with `-Xtheirs`
+   - 11 commits replayed (3 PHASE_B_MVCC_GC docs auto-dropped — content already upstream)
+2. **Conflict resolution** in `crates/storage/src/mvcc_storage.rs`:
+   - Added `write_count: AtomicU64` field to struct (from upstream PR #3755)
+   - Updated `new()` to initialize both `write_count` AND `scan_skip_cache`
+   - Added `maybe_gc()` method body (from upstream)
+   - Both upstream's maybe_gc() throttle AND our scan_skip_cache now coexist
+3. **Build + test verification**:
+   - `cargo build -p sqlrustgo-storage`: PASS (3 warnings, 0 errors)
+   - `cargo test -p sqlrustgo-storage --lib`: 750 passed, 0 failed
+   - `cargo build -p sqlrustgo-mysql-server --release`: PASS
+4. **PR creation**:
+   - PR #4890 created on .252 Gitea (source-of-truth)
+   - PR #3774 created on .250 Gitea (mirror)
+5. **PR merge**:
+   - .252: PR #4890 MERGED at 2026-09-17 16:19:25 UTC → develop/v4.0.0 = fe6f3ff9a3
+   - .250: PR #3774 MERGED at 2026-09-17 16:19:37 UTC → develop/v4.0.0 = cd251af499
 
-- `feat/v4.0.0-wal-group-commit` = `21dad7697f` (original pre-rebase tip) — restored after failed rebase
-- `backup/v400-wal-group-commit-pre-rebase-20260917` = `21dad7697f` (safety net)
-- `backup/v400-wal-group-commit-rebased-20260917` = `4c0a859c38` (broken-rebase artifact, kept for diffing)
-- All 5 remotes: in sync at `21dad7697f`
-- Working tree: clean, builds OK
+## Out-of-Scope (NOT modified)
+
+- `tests/baseline/ignore_registry.json` — fabrication risk, 工程团队生成
+- `FEATURE_CHECKLIST.md` / `RELEASE_NOTES.md` — 需要阶段前进到 BETA/RC
+- 英文附录删除 — 按最小修改原则保留（用户/工程师可手动二次 review 删除）
+- Public mirrors (github/gitcode/gitee) develop/v4.0.0 push — needs GMP-removal workflow (per user profile)
 
 ## Recommended next steps for user
 
